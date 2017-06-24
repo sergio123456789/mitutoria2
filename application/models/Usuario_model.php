@@ -102,7 +102,7 @@ function insertperusu(){
 	public function saveusu()
 	{
 		$this->load->database();
-
+		
 		$query=$this->db->get_where('usuario',array('usu_rut'=>$this->_columns['usu_rut']));
 		$aux='';	
 		

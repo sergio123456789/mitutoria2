@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="es">
+<head>
+	<meta charset="utf-8" />
+	<link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png" />
+	<link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+	<title>Tutorias</title>
+
+	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+
+
+    <!-- Bootstrap core CSS     -->
+    <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../assets/css/ghpages-materialize.css" type="text/css" rel="stylesheet" media="screen,projection">
+
+    <!--  Material Dashboard CSS    -->
+    <link href="../assets/css/material-dashboard.css" rel="stylesheet"/>
+
+    <!--  CSS for Demo Purpose, don't include it in your project     -->
+    <link href="../assets/css/demo.css" rel="stylesheet" />
+
+    <!--     Fonts and icons     -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+
+	<div class="wrapper">
+	    <div class="sidebar" data-color="purple" data-image="../assets/img/sidebar-1.jpg">
+
+				<div class="logo">
+				<a href="http://www.creative-tim.com" class="simple-text">
+					<img src="https://www.blumenreviews.com/images/universities/logo/logo-inacap.png" style="width: 200px; height: 50px;">
+				</a>
+			</div>
+
+	    	<div class="sidebar-wrapper">
+	            <ul class="nav">
+	            	<li>
+	                    <a href="dashboard.html">
+	                        <i class="material-icons">home</i>
+	                        <p>Inicio</p>
+	                    </a>
+	                </li>
+	                <li>
+	                    <a href="user.html">
+	                        <i class="material-icons">person</i>
+	                        <p>Mi Usuario</p>
+	                    </a>
+	                </li>
+	                <li class="active">
+	                    <a href="table.html">
+							<i class="material-icons">date_range</i>	                        
+						<p>Mi Horario</p>
+	                    </a>
+	                </li>
+	                <li>
+	                    <a href="typography.html">
+	                        <i class="material-icons">library_books</i>
+	                        <p>Mis Ramos</p>
+	                    </a>
+	                </li>
+	               
+	                <li>
+	                    <a href="notifications.html">
+	                        <i class="material-icons text-gray">notifications</i>
+	                        <p>Notificaciones</p>
+	                    </a>
+	                </li>
+	            </ul>
+	    	</div>
+		</div>
+
+	    <div class="main-panel">
+			<nav class="navbar navbar-transparent navbar-absolute">
+				<div class="container-fluid">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle" data-toggle="collapse">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand" href="#">Table List</a>
+					</div>
+					<div class="collapse navbar-collapse">
+						<ul class="nav navbar-nav navbar-right">
+							<li>
+								<a href="#pablo" class="dropdown-toggle" data-toggle="dropdown">
+									<i class="material-icons">dashboard</i>
+									<p class="hidden-lg hidden-md">Dashboard</p>
+								</a>
+							</li>
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+									<i class="material-icons">notifications</i>
+									<span class="notification">5</span>
+									<p class="hidden-lg hidden-md">Notifications</p>
+								</a>
+								<ul class="dropdown-menu">
+									<li><a href="#">Mike John responded to your email</a></li>
+									<li><a href="#">You have 5 new tasks</a></li>
+									<li><a href="#">You're now friend with Andrew</a></li>
+									<li><a href="#">Another Notification</a></li>
+									<li><a href="#">Another One</a></li>
+								</ul>
+							</li>
+							<li>
+								<a href="#pablo" class="dropdown-toggle" data-toggle="dropdown">
+	 							   <i class="material-icons">person</i>
+	 							   <p class="hidden-lg hidden-md">Profile</p>
+	 						   </a>
+							</li>
+						</ul>
+
+						<form class="navbar-form navbar-right" role="search">
+							<div class="form-group  is-empty">
+	                        	<input type="text" class="form-control" placeholder="Search">
+	                        	<span class="material-input"></span>
+							</div>
+							<button type="submit" class="btn btn-white btn-round btn-just-icon">
+								<i class="material-icons">search</i><div class="ripple-container"></div>
+							</button>
+	                    </form>
+					</div>
+				</div>
+			</nav>
+
+	        <div class="content">
+
+	        <div id='calendar' style="background-color: white;
+	        border: white 5px solid;
+	        margin: 10px 15px;
+    		border-radius: 3px;"></div>
+
+
+	         </div>
+
+	         <div id="createEventModal" class="modal fade" role="dialog">
+  				<div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal">&times;</button>
+			        <h4 class="modal-title">Añadir </h4>
+			      </div>
+			      <div class="modal-body">
+			            <div class="control-group">
+			                <label class="control-label" for="inputPatient">Ramos:</label>
+			                
+										<div class="dropdown">
+									<a href="#" class="btn btn-simple btn-danger dropdown-toggle" data-toggle="dropdown">
+    									Escoja Tutoría a Realizar
+    									<b class="caret"></b>
+									</a>
+									<ul class="dropdown-menu">
+										 <li><a href="#">ZC0213-Inglés V</a></li>
+											  <li class="divider"></li>
+										      <li><a href="#">ZC0212-Inglés IV</a></li>
+						        			
+											  <li class="divider"></li>
+										      <li><a href="#">ZC0211-Inglés III</a></li>
+
+										      <li class="divider"></li>
+										      <li><a href="#">ZC0210-Inglés II</a></li>
+									</ul>
+								</div>
+
+
+			            </div>
+
+
+			            
+			            <input type="hidden" id="startTime"/>
+			            <input type="hidden" id="endTime"/>
+			            
+			      
+				       
+				        <div class="control-group">
+				            <label class="control-label" for="when">Día:</label>
+				            <div class="controls controls-row" id="when" style="margin-top:5px;">
+				            </div>
+				        </div>
+				        
+				      </div>
+				      <div class="modal-footer">
+				        <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+				        <button type="submit" class="btn btn-primary" id="submitButton">Guardar</button>
+				    </div>
+				    </div>
+
+				  </div>
+				</div>
+
+
+				<div id="calendarModal" class="modal fade">
+						<div class="modal-dialog">
+						    <div class="modal-content">
+						        <div class="modal-header">
+						            <button type="button" class="close" data-dismiss="modal">&times;</button>
+						            <h4 class="modal-title">Ramo horario detalle</h4>
+						        </div>
+						        <div id="modalBody" class="modal-body">
+						        <h4 id="modalTitle" class="modal-title"></h4>
+						        <div id="modalWhen" style="margin-top:5px;"></div>
+						        </div>
+						        <input type="hidden" id="eventID"/>
+						        <div class="modal-footer">
+						            <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+						            <button type="submit" class="btn btn-danger" id="deleteButton">Borrar</button>
+						        </div>
+						    </div>
+						</div>
+				</div>
+	    </div>
+	</div>
+
+</body>
+	<!--   Core JS Files   -->
+	<link rel='stylesheet' href='fullcalendar/fullcalendar.css' />
+	<script src='fullcalendar/lib/jquery.min.js'></script>
+	<script src='fullcalendar/lib/moment.min.js'></script>
+	<script src='fullcalendar/fullcalendar.js'></script>
+	<script src="../assets/js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="../assets/js/material.min.js" type="text/javascript"></script>
+
+	<!--  Charts Plugin -->
+	<script src="../assets/js/chartist.min.js"></script>
+
+	<!--  Notifications Plugin    -->
+	<script src="../assets/js/bootstrap-notify.js"></script>
+
+	<!--  Google Maps Plugin    -->
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
+
+	<!-- Material Dashboard javascript methods -->
+	<script src="../assets/js/material-dashboard.js"></script>
+
+	<!-- Material Dashboard DEMO methods, don't include it in your project! -->
+	<script src="../assets/js/demo.js"></script>
+
+	<script>
+
+$(document).ready(function(){
+	
+
+        var calendar = $('#calendar').fullCalendar({
+
+  
+            header:{
+                left: 'prev,next today',
+                center: 'title',
+                right: 'agendaWeek,agendaDay'
+            },
+
+            minTime:"08:00:00",
+			maxTime:"21:00:00",
+
+            defaultView: 'agendaWeek',
+            dayName:['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'],
+            dayNamesShort:['Dom','Lun','Mar','Mier','Jue','Vie','Sab'],
+			monthNames:['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio',
+ 			'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+			monthNamesShort:['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio',
+ 			'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+			hiddenDays: [0] ,
+
+            editable: true,
+            selectable: true,
+            allDaySlot: false,
+            contentHeight: 'auto',
+            
+            events: "index.php?view=1",
+
+            timeFormat: 'H(:mm)',
+   
+            
+            eventClick:  function(event, jsEvent, view) {
+                endtime = $.fullCalendar.moment(event.end).format('HH:MM');
+                starttime = $.fullCalendar.moment(event.start).format('dddd Do, MMMM , HH:MM');
+                var mywhen = starttime + ' - ' + endtime;
+                $('#modalTitle').html(event.title);
+                $('#modalWhen').text(mywhen);
+                $('#eventID').val(event.id);
+                $('#calendarModal').modal();
+            },
+            
+            //header and other values
+            select: function(start, end, jsEvent) {
+                endtime = $.fullCalendar.moment(end).format('HH:MM');
+                starttime = $.fullCalendar.moment(start).format('dddd Do, MMMM , HH:MM');
+                var mywhen = starttime + ' - ' + endtime;
+                start = moment(start).format();
+                end = moment(end).format();
+                $('#createEventModal #startTime').val(start);
+                $('#createEventModal #endTime').val(end);
+                $('#createEventModal #when').text(mywhen);
+                $('#createEventModal').modal('toggle');
+           },
+           eventDrop: function(event, delta){
+               $.ajax({
+                   url: 'index.php',
+                   data: 'action=update&title='+event.title+'&start='+moment(event.start).format()+'&end='+moment(event.end).format()+'&id='+event.id ,
+                   type: "POST",
+                   success: function(json) {
+                   //alert(json);
+                   }
+               });
+           },
+           eventResize: function(event) {
+               $.ajax({
+                   url: 'index.php',
+                   data: 'action=update&title='+event.title+'&start='+moment(event.start).format()+'&end='+moment(event.end).format()+'&id='+event.id,
+                   type: "POST",
+                   success: function(json) {
+                       //alert(json);
+                   }
+               });
+           }
+        })
+
+               
+       $('#submitButton').on('click', function(e){
+           // We don't want this to act as a link so cancel the link action
+           e.preventDefault();
+           doSubmit();
+       });
+       
+       $('#deleteButton').on('click', function(e){
+           // We don't want this to act as a link so cancel the link action
+           e.preventDefault();
+           doDelete();
+       });
+       
+       function doDelete(){
+           $("#calendarModal").modal('hide');
+           var eventID = $('#eventID').val();
+           $.ajax({
+               url: 'index.php',
+               data: 'action=delete&id='+eventID,
+               type: "POST",
+               success: function(json) {
+                   if(json == 1)
+                        $("#calendar").fullCalendar('removeEvents',eventID);
+                   else
+                        return false;
+                    
+                   
+               }
+           });
+       }
+       function doSubmit(){
+           $("#createEventModal").modal('hide');
+           var title = $('#title').val();
+           var startTime = $('#startTime').val();
+           var endTime = $('#endTime').val();
+           
+           $.ajax({
+               url: 'index.php',
+               data: 'action=add&title='+title+'&start='+startTime+'&end='+endTime,
+               type: "POST",
+               success: function(json) {
+                   $("#calendar").fullCalendar('renderEvent',
+                   {
+                       id: json.id,
+                       title: title,
+                       start: startTime,
+                       end: endTime,
+                   },
+                   true);
+               }
+           });
+           
+       }
+    });
+
+</script>
+
+</html>
