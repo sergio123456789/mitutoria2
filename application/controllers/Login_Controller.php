@@ -82,10 +82,11 @@ class Login_Controller extends CI_Controller {
 	   if(!is_null($user)){ //si hay resultado de la consulta en la bd
 	     	$sess_array = array();
 	     	$nombres = explode(" ", $user->get('usu_nombre'));
+	     	var_dump($nombres);
 	       	$sess_array = array( //guarda los datos traidos de la bd en un array
 	         'id' => $user->get('usu_id'),
 	         'correo' => $user->get('usu_correo'),    
-	         'nombre' => $nombres[0]." ".$nombres[3],
+	         'nombre' => $nombres[0]." ".$nombres[2],
 	         'permisos' =>$user->getPermisos(),//retorna array
 	         'area' => $user->getArea()
 	       );
