@@ -38,12 +38,14 @@ public function UsuarioUploader(){
                     'usu_dv' => $dv
                      );
                $usuario = $this->usuario->create($usu);
-               $usuario->saveusu(); 
+               $ret=$usuario->saveusu(); 
+               if ($ret==1) {
                $usuario->setPermisos(array(
                 'per_usu_id' => $usuario->get('usu_id'),
                 'perf_id' => 5
                 ));  
                $usuario->insertperusu();
+               }
             if ($usuario->get('usu_id')!=0) {
 
                   $usualum = array(

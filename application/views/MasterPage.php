@@ -476,11 +476,6 @@
   </div>
   </div>
 </div>
-
-
-
-
-
             </body>
 
 <!-- Bootstrap 3.3.6 -->
@@ -507,7 +502,8 @@
       "searching": false,
       "ordering": true,
       "info": true,
-      "autoWidth": false
+      "autoWidth": false,
+      "responsive":true
     });
 
      $("#nombrered").select2({

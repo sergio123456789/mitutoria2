@@ -73,12 +73,12 @@ function insertperusu(){
 		if($this->_columns['usu_id'] == 0){
 			$this->db->insert("usuario",$this->_columns);
 			$this->_columns['usu_id'] = $this->db->insert_id();
-			return $this->db->insert_id();
+		//	$id = $this->db->insert_id();
 		}else{
 			$this->db->where('usu_id',$this->_columns['usu_id']);
 			$this->db->update('usuario',$this->_columns);
 		}
-			
+		//	return $id ;
 		} catch (Exception $e) {
 			echo"se produjo una excepcion del tipo".$e->getMessage() ;
 		}
@@ -99,7 +99,31 @@ function insertperusu(){
 		}
 		return $result;
 	}
+	public function saveusu()
+	{
+		$this->load->database();
 
+		$query=$this->db->get_where('usuario',array('usu_rut'=>$this->_columns['usu_rut']));
+		$aux='';	
+		
+			if($query->num_rows() > 0){
+				$row = $query->row_object();
+				$usuario=$this->create($row);
+				$aux=$usuario->get('usu_rut');
+
+			}
+			
+			if ($this->_columns['usu_rut']!=$aux) {
+			$this->db->insert("usuario",$this->_columns);
+			$this->_columns['usu_id'] = $this->db->insert_id();
+			
+			return 1;
+		}else{
+			$this->db->where('usu_id',$this->_columns['usu_id']);
+			$this->db->update('usuario',$this->_columns);
+
+		}
+	}
 	function findByIdpermisos($id){
 		$result=array();
 		$bit = null;
@@ -126,23 +150,13 @@ function insertperusu(){
 		}
 		return $result;
 	}
-
-	function findByRut($rut){
-		$result=null;
-		$this->db->where('usu_rut',$rut);
-		$consulta = $this->db->get('usuario');
-		foreach ($consulta->result() as $row) {
-			$result = $this->create($row);
-		}
-		return $result;
-	}
-	
 	public function cambiarcontra($id,$usu_pass){
         $data  =  array(
 			'usu_pass' => $usu_pass
 			);
         $this->db->where('usu_id', $id);
         return $this->db->update('usuario', $data);
+    
 }
 
 	public function getPermisos()
@@ -202,3 +216,28 @@ function insertperusu(){
 		return $user;
 	}
 }
+/*
+	public function saveusu()
+	{
+		$this->load->database();
+		$result = false;
+		$this->db->where('usu_rut',$this->_columns['usu_rut'] );
+		$consulta = $this->db->get('usuario');
+			
+			foreach ($consulta->result() as $row) {
+			$usu= $this->create($row);
+		}
+
+			if($usu->get('usu_rut') == 0 || $usu->get('usu_rut') == null ){
+			$this->db->insert("usuario",$this->_columns);
+			$this->_columns['usu_id'] = $this->db->insert_id();
+			
+		}else{
+			$this->db->where('usu_id',$this->_columns['usu_id']);
+			$this->db->update('usuario',$this->_columns);
+			
+		
+			
+		}
+		return $result;
+	}*/
