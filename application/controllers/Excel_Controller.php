@@ -2,13 +2,13 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Excel_Controller extends CI_Controller {
-	public function __construct()
-	{
-		parent::__construct();
+    public function __construct()
+    {
+        parent::__construct();
         $this->load->model('Usuario_model','usuario',true);
-		$this->load->model('Alumno_model','alum',true);
-		$this->load->model('Datos_model','datos',true);
-	}
+        $this->load->model('Alumno_model','alum',true);
+        $this->load->model('Datos_model','datos',true);
+    }
     function index()
     {
 $this->load->view('prueba');
@@ -17,35 +17,37 @@ public function UsuarioUploader(){
          
         if (isset($_FILES['file'])) {
             if (($gestor = fopen($_FILES['file']['tmp_name'], "r")) !== FALSE) {
-				$coun = 0 ;
+                $coun = 0 ;
+                
+
                 while (($datos = fgetcsv($gestor, 1000, ";")) !== FALSE) {
-                	if ($coun==10) {
-                        break;
-                    }
-                	if ($coun!=0) {
-                		
-                	
-                	$arid = $this->datos->Miareaacademica($datos['2']);
-                	$dato = explode('-',$datos['12']);
-                	$rut = $dato['0'];
+               
+                    if ($coun!=0) {
+                        
+                    $arid = $this->datos->Miareaacademica($datos['2']);
+                    $dato = explode('-',$datos['12']);
+                    $rut = $dato['0'];
                     $dv = $dato['1'];
-                	$usu = array(
-					'usu_nombre' => $datos['13'],
-					'usu_correo' => $datos['15'],
-					'usu_pass' => '123456',
-					'usu_estado' => '1',
-					'usu_are_id' => $arid,
-					'usu_rut' => $rut,
-					'usu_dv' => $dv
-                	 );
-
-                   
-
+                    $usu = array(
+                    'usu_nombre' => $datos['13'],
+                    'usu_correo' => $datos['15'],
+                    'usu_pass' => '123456',
+                    'usu_estado' => '1',
+                    'usu_are_id' => $arid,
+                    'usu_rut' => $rut,
+                    'usu_dv' => $dv
+                     );
                $usuario = $this->usuario->create($usu);
-             $id = $usuario->save();
+               $usuario->saveusu(); 
+               $usuario->setPermisos(array(
+                'per_usu_id' => $usuario->get('usu_id'),
+                'perf_id' => 5
+                ));  
+               $usuario->insertperusu();
+            if ($usuario->get('usu_id')!=0) {
 
                   $usualum = array(
-                        'alu_usu_id' => $id,
+                        'alu_usu_id' => $usuario->get('usu_id'),
                         'alu_inst' => $datos['1'],
                         'alu_cod_pe' => $datos['3'],
                         'alu_programa_estudio' => $datos['4'],
@@ -90,8 +92,12 @@ public function UsuarioUploader(){
                             );
                  $alumno = $this->alum->create($usualum);
                 $alumno->save();
-                var_dump($usualum);
-                var_dump($coun);
+                  //var_dump($usualum);
+                }
+                
+
+             
+              //  var_dump($coun);
                
                 }
                  $coun = $coun + 1 ;
@@ -103,10 +109,93 @@ public function UsuarioUploader(){
         }
 
  
-	}
+    }
+   public function UsuarioTutoriaPermanente(){
+         
+        if (isset($_FILES['file'])) {
+            if (($gestor = fopen($_FILES['file']['tmp_name'], "r")) !== FALSE) {
+                $coun = 0 ;
+                // alumnos de cada tutor progresion Excel
 
+                while (($datos = fgetcsv($gestor, 1000, ";")) !== FALSE) {
+               
+                    if ($coun!=0) {
+                    $dato = explode('-',$datos['0']);
 
+                    $rut = $dato['0'];
+                    $dv = $dato['1'];
+                    $nombre=$datos['1'];
+                    $area=$datos['2'];
+                    $carrera=$datos['3']; 
+                    $tutor=$datos['4']; 
+              
+                    }
+                    $coun= $coun + 1;
+                fclose($gestor);
 
+            }
+        }
+
+ 
+    }
+}
+    public function TutoresPermanentes(){
+         //listado de tutores progresion
+        if (isset($_FILES['file'])) {
+            if (($gestor = fopen($_FILES['file']['tmp_name'], "r")) !== FALSE) {
+                $coun = 0 ;
+                
+
+                while (($datos = fgetcsv($gestor, 1000, ";")) !== FALSE) {
+               
+                    if ($coun!=0) {
+                        
+                   
+                    $dato = explode('-',$datos['1']);
+
+                    $nombre=$datos['0'];
+                    $rut = $dato['0'];
+                    $dv = $dato['1'];
+
+                    $email=$datos['2'];
+                    $area=$datos['3']; 
+                    }
+                    $coun= $coun + 1;
+                fclose($gestor);
+
+                }
+            }
+        }
+
+    }
+    public function Tutores(){
+         //listado de tutores sede salas y sus datos
+        if (isset($_FILES['file'])) {
+            if (($gestor = fopen($_FILES['file']['tmp_name'], "r")) !== FALSE) {
+                $coun = 0 ;
+                
+
+                while (($datos = fgetcsv($gestor, 1000, ";")) !== FALSE) {
+               
+                    if ($coun!=0) {
+                        
+                   
+                    $dato = explode('-',$datos['9']);
+
+                  
+                    $rut = $dato['0'];
+                    $dv = $dato['1'];
+                    $tutor=$datos['10'];
+                    $asignatura=$datos['11']; 
+                    }
+                    $coun= $coun + 1;
+                fclose($gestor);
+
+                }
+            }
+        }
+
+    }
 
 }
 
