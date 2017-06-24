@@ -471,7 +471,9 @@
         <!--aqui termina la wea -->
         <div class="row">
   <div class="col-xs-12">
+    <div class="content-wrapper">
   <?php echo $content_for_layout; ?>
+  </div>
   </div>
 </div>
 
