@@ -96,7 +96,7 @@
 
                 <p>
                   <?php echo $this->session->userdata('username');?>
-                  <small>Administrador</small>
+                  <small><?=$user["nombre"]?></small>
                 </p>
               </li>
               <!-- Menu Footer-->
@@ -126,8 +126,7 @@
         </div>
         <div class="pull-left info">
           <p><?php echo $this->session->userdata('username');?></p>
-          Administrador
-         
+         <?=$user["nombre"]?>
         </div>
       </div>
       <!-- sidebar menu: : style can be found in sidebar.less -->
