@@ -112,7 +112,7 @@ function insertperusu(){
 				$aux=$usuario->get('usu_rut');
 
 			}
-			
+
 			if ($this->_columns['usu_rut']!=$aux) {
 			$this->db->insert("usuario",$this->_columns);
 			$this->_columns['usu_id'] = $this->db->insert_id();
