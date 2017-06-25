@@ -64,7 +64,7 @@ class Login_Controller extends CI_Controller {
 	   session_destroy();
 	   $this->session->unset_userdata('logged_in');
 	   //session_destroy(); //destruye la sesión, o sea el arreglo de sesión logged_in
-	   redirect('login', 'refresh');
+	   redirect('Login_Controller/index', 'refresh');
 	}
 
  	function check_database($pass)

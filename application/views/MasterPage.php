@@ -92,7 +92,7 @@
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="<?=base_url('')?>resources/images/<?=$this->session->userdata('imagen')?>"  class="img-circle" alt="User Image">
+                <img src="<?=base_url('')?>resources/images/user.png"  class="img-circle" alt="User Image">
 
                 <p>
                   <?php echo $this->session->userdata('username');?>
@@ -103,7 +103,7 @@
               <li class="user-footer">
                 <center>
                 <div class="pull" style="float: center;">
-                  <a href="<?=site_url('loginController/logoutUser')?>" class="btn btn-danger btn-flat"><i class="fa fa-power-off" aria-hidden="true"></i> Salir</a>
+                  <a href="<?=site_url('Login_Controller/logout')?>" class="btn btn-danger btn-flat"><i class="fa fa-power-off" aria-hidden="true"></i> Salir</a>
                 </div>
               </center>
               </li>
