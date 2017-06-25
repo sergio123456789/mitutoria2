@@ -12,13 +12,21 @@ class Profesor_Controller extends CI_Controller {
 	{
 		$this->layout->view('/Profesor/index.php','datos',false);
 	}
-	public function perfil()
+    public function miPerfil()
 	{
-		$this->layout->view('/Profesor/perfil.php','datos',false);
+		$this->layout->view('/Profesor/user.php','datos',false);
 	}
-	public function horario()
+    public function miHorario()
 	{
-		$this->layout->view('/Profesor/horario.php','datos',false);
+		$this->layout->view('/Profesor/mihorario.php','datos',false);
+	}
+     public function misRamos()
+	{
+		$this->layout->view('/Profesor/misramos.php','datos',false);
+	}
+      public function solReforzamientos()
+	{
+		$this->layout->view('/Profesor/solreforzamiento.php','datos',false);
 	}
 
 }?>

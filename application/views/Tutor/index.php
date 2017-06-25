@@ -5,13 +5,13 @@
                         
 	                        <div class="card" style="margin-top:5%;">
 	                            <div class="card-header" data-background-color="purple">
-	                                <h4 class="title">Clases Para Hoy</h4>
-	                                <p class="category">Acá confirmas tu asistencia a la clase</p>
+	                                <h4 class="title">Tutorías Para Hoy</h4>
+	                                <p class="category">Acá confirmas tu asistencia a la tutoría</p>
 	                            </div>
 	                            <div class="card-content table-responsive">
 	                                <table class="table" style="text-align: center;">
 	                                    <thead class="text-primary" >
-	                                    	<th style="text-align: center;">Asignatura</th>
+	                                    	<th style="text-align: center;">Tutoría</th>
 	                                    	<th style="text-align: center;">Alumno</th>
 	                                    	<th style="text-align: center;">Fecha</th>
 	                                    	<th style="text-align: center;">Inicio</th>
@@ -44,15 +44,14 @@
 
 	                                    </tbody>
 	                                </table>
-
-   												<!-- Modal de cancelar la tutoría-->
+   	<!-- Modal de cancelar la tutoría-->
 
 	                    		<div class="modal fade" id="deleteModal">
 								<div class="modal-dialog">
 								      <div class="modal-content">
 								        <div class="modal-header">
 								          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-								          <h3 class="modal-title" style="text-align:center;" >¿Estas seguro que quieres cancelar tu clase?</h3>
+								          <h3 class="modal-title" style="text-align:center;" >¿Estas seguro que quieres cancelar tu tutoría?</h3>
 								        </div>
 								        <div class="modal-body">
 										  <h5 class="text-center"><b>Ingresa el motivo</b></h5>
@@ -68,7 +67,7 @@
 								    </div><!-- /.modal-dialog -->
 								  </div><!-- /.modal -->	
 
-								  <!-- fin Modal de cancelar la clase-->
+								  <!-- fin Modal de eliminar la tutoría-->
 	                            </div>
 	                        </div>
 	                    </div>

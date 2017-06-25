@@ -17,11 +17,27 @@ class Asesor_Controller extends CI_Controller {
 	public function verAlumnos(){
 		$this->layout->view('/Asesor/VerAlumno.php');
 	}
+	public function verTutorias(){
+		$this->layout->view('/Asesor/tutorias.php');
+	}
+	public function verReforzamientos(){
+		$this->layout->view('/Asesor/reforzamiento.php');
+	}
+	public function verAyudantia(){
+		$this->layout->view('/Asesor/ayudantia.php');
+	}
+	public function Importar(){
+		$this->layout->view('/Asesor/importar.php');
+	}
+	public function Exportar(){
+		$this->layout->view('/Asesor/exportar.php');
+	}
+
 
 	public function detalleProfesor(){
 		
 	 $rut =	$this->input->post('rut');
-	 $usuario = $this->usuario-> findByRut($rut);
+	 $usuario = $this->usuario->findByRut($rut);
 	 $data = array(
 	 	'nombre' => $usuario->get('usu_nombre'),
 	 	'correo' => $usuario->get('usu_correo')

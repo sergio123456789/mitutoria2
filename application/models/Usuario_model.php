@@ -200,12 +200,22 @@ function insertperusu(){
 		return $result;
 	}
 
+	 public function findByRut($rut){
+    $query = $this ->db-> get_where('usuario',array('usu_rut'=>$rut));
+   if($query -> num_rows() >= 1)
+         {
+            $row = $query->row_object();
+            $user = $this->create($row);
+            return $user; 
+         }
+    return false;
+  }
+
 
 
 	function login($rut, $clave){
 		$datos=array();
 		$user = null;
-		
 		$result = $this->db->get_where('usuario',array('usu_rut'=>$rut));		
 		if ($result->num_rows() > 0) {
 			$row = $result->row_object();

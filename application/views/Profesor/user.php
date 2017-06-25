@@ -11,7 +11,7 @@
 	                                    <div class="row">
 	                                        <div class="col-md-5">
 												<div class="form-group label-floating">
-													<label class="control-label">Carrera</label>
+													<label class="control-label">Área </label>
 													<input type="text" class="form-control" disabled>
 												</div>
 	                                        </div>
@@ -109,32 +109,24 @@
     							</div>
 
     							<div class="content">
-    								<h6 class="category text-gray">Semestre 4</h6>
+    								
     								<h4 class="card-title">Gabriel Vega</h4>
     								<p class="card-content">
     									 <div class="card-content table-responsive">
 	                                <table class="table table-hover">
 	                                    <thead>
-	                                        <th>Asignatura</th>
-	                                    	<th>Nota Acumulado</th>
-	                                    	<th>Situación</th>
+	                                        <th>Asignaturas</th>
+	                                    	
 	                                    </thead>
 	                                    <tbody>
 	                                        <tr>
 	                                        	<td>ZC0207-Contabilidad, Costos y Presupuestos(61)</td>
-	                                        	<td>6.6</td>
-	                                        	<td>SIN RIESGO</td>
 	                                        </tr>
-	                                        <tr>
-	                                        	<td>ZC0213-Inglés V(61)</td>
-	                                        	<td>5.5</td>
-	                                        	<td>SIN RIESGO</td>
-	                                        </tr>
+	                                        
 	                                    </tbody>
 	                                </table>
 	                            </div>
-    								
-    								<a href="#pablo" class="btn btn-primary btn-round">Ayudantía</a>
+    							
     							</div>
     						</div>
 		    			</div>

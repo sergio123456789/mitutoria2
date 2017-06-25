@@ -39,7 +39,7 @@
 </style>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 2 | Data Tables</title>
+  <title>MITUTORIA</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
@@ -56,7 +56,7 @@
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="<?=base_url('resources/dist/css/skins/_all-skins.min.css')?>">
   <link rel="stylesheet" href="<?=base_url('resources/select2-4.0.3/dist/css/select2.min.css')?>">
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="<?=base_url('resources/js/jquery.min.js')?>"></script>
     <?php $user = $this->session->userdata('logged_in');?>
 </head>
 <body class="hold-transition skin-red sidebar-mini">
@@ -340,7 +340,7 @@
 
                 <li class="treeview">
                   <a href="<?=site_url()?>/Tutor_Controller/solReforzamientos">
-                    <i class="fa fa-graduation-cap""></i>
+                    <i class="fa fa-graduation-cap"></i>
                     <span>Solicitar Reforzamientos</span>
                     <span class="pull-right-container">
                       <span class="label label-primary pull-right"></span>
@@ -397,7 +397,7 @@
 
                 <li class="treeview">
                   <a href="<?=site_url()?>/Profesor_Controller/solReforzamientos">
-                    <i class="fa fa-graduation-cap""></i>
+                    <i class="fa fa-graduation-cap"></i>
                     <span>Solicitar Reforzamientos</span>
                     <span class="pull-right-container">
                       <span class="label label-primary pull-right"></span>
@@ -443,7 +443,7 @@
                   </a>
                 </li>
                        <li class="treeview">
-                  <a href="<?=site_url()?>/Alumno_Controller/misRamos">
+                  <a href="<?=site_url()?>/Alumno_Controller/historialTutorias">
                     <i class="fa fa-history"></i>
                     <span>Historial de tutorías</span>
                     <span class="pull-right-container">

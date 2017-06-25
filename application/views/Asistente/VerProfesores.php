@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="<?=base_url('resources/bootstrap/css/style.css')?>">
+          
     
 				<div class="container-fluid">
 					<div class="row">
@@ -6,8 +7,8 @@
 							 <div class="col-md-12">
 	                        <div class="card">
 	                            <div class="card-header" data-background-color="purple">
-	                                <h4 class="title">Buscar Alumno</h4>
-	                                <p class="category">Acá puedes buscar alumnos por su rut</p>
+	                                <h4 class="title">Buscar Profesor</h4>
+	                                <p class="category">Acá puedes buscar profesores por su rut</p>
 	                            </div>
 	                            <div class="card-content table-responsive" style="float: center;">
 	                                    <div class="row">
@@ -43,7 +44,7 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
                     </button>
-                    <h4 class="modal-title" >Alumno</h4>
+                    <h4 class="modal-title" >Profesor</h4>
                 </div>
                     <div class="modal-body text-center">
                      <center>
@@ -55,7 +56,7 @@
 
               <h3 class="profile-username text-center"><div id="name"></div></h3>
 
-              <p class="text-muted text-center">Alumno</p>
+              <p class="text-muted text-center">Profesor</p>
 
               <ul class="list-group list-group-unbordered">
                 <li class="list-group-item">
@@ -74,7 +75,7 @@
                 </li>
               </ul>
 
-              <a href="#" class="btn btn-primary btn-block"><b>Ver Perfil</b></a>
+              <a href="#" class="btn btn-primary btn-block"><b>Horario Disponibilidad</b></a>
             </div>
             <!-- /.box-body -->
           </div>
