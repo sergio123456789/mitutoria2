@@ -133,7 +133,7 @@ class Alumno_Controller extends CI_Controller {
 	public function historialTutorias()
     {
 		$user=$this->session->userdata('logged_in');
-       	$tutorias= $this->horario->mistutoriasporestadolista($user['id'],"3");
+       	$tutorias= $this->horario->mistutoriasporestadohorario($user['id'],"3");
        	$datos["tutoria"]=$tutorias;
  		$this->layout->view('/Alumnos/historialtutorias.php',$datos,false);
     }
