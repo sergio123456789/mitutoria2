@@ -100,18 +100,37 @@ public function get($key){
 	}
 
 	public function misProxAsig($id_asi){
-	$result = null;
-	$this->load->database();
-	$this->db->select('*');
-	$this->db->from('horario');
-	$this->db->join('usuario',  'horario.hor_usu_id = usuario.usu_id');
-	$this->db->join('asignatura',  'horario.hor_asig_id = asignatura.asig_id');
-	$this->db->where('asignatura.asig_id', $id_asi);
-	$this->db->where('hor_estado', '1');
-	$res= $this->db->get();
-	return $res->result_array();
-
+		$res = null;
+		$this->load->database();
+		$this->db->select('*');
+		$this->db->from('horario');
+		$this->db->join('usuario',  'horario.hor_usu_id = usuario.usu_id');
+		$this->db->join('asignatura',  'horario.hor_asig_id = asignatura.asig_id');
+		$this->db->where('asignatura.asig_id', $id_asi);
+		$this->db->where('hor_estado', '1');
+		$res= $this->db->get();
+		return $res->result_array();
 	}
+	public function miasignaturas($id_usu){
+		$result = null;
+		$this->load->database();
+		$this->db->select('*');
+		$this->db->from('asignatura a');
+		$this->db->join('carrera c',  'a.asig_car_id = c.car_id');
+		$this->db->join('area ar',  'ar.ar_carr_id = c.car_id');
+		$this->db->join('usuario u ',  'u.usu_are_id = ar.ar_id');
+		$this->db->where('u.usu_id', $id_usu);
+		$res= $this->db->get();
+			if ($res->num_rows() > 0) {
+			foreach ($res->result() as $value) {
+				$result[] = $this->create($value);
+			}
+		}
+	return $result;
+	}
+	
+
+
 }
 
 

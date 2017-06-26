@@ -1,5 +1,37 @@
-<link rel="stylesheet" href="<?=base_url('resources/bootstrap/css/style.css')?>"><div class="container-fluid">
+<link rel="stylesheet" href="<?=base_url('resources/bootstrap/css/style.css')?>">
+<div class="container-fluid">
+
 	                <div class="row">
+	                <!-- MENSAJES DE OPERACIONES -->
+                              <div class="messages">
+                 <?php $notice = $this->session->flashdata('notice');
+                       $alert = $this->session->flashdata('alert'); 
+                       $info = $this->session->flashdata('info'); 
+                  ?>
+                    <?php if($notice){?>
+                        <div class="alert alert-success alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <h4><i class="icon fa fa-check"></i> Éxito!</h4>
+                  <?=$notice?>
+              </div>
+                     <?php } ?>
+                      <?php if($alert){ ?>
+                        <div class="alert alert-danger alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <h4><i class="icon fa fa-ban"></i> Error!</h4>
+                            <?=$alert?>
+                                     </div> 
+                     <?php } ?>
+                      <?php if($info){ ?>
+                        <div class="alert alert-info alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <h4><i class="icon fa fa-info"></i> Información!</h4>
+                            <?=$info?>
+                </div>
+                     <?php } ?>
+
+                </div>
+            <!-- FIN MENSAJES DE OPERACIONES -->
 	                    <div class="col-md-8">
 	                        <div class="card">
 	                            <div class="card-header" data-background-color="purple">
@@ -22,24 +54,21 @@
 												</div>
 	                                        </div>
 	                                          <div class="col-md-3">
-												<div class="form-group label-floating">
-													<label class="control-label">Clave </label>
-													<input type="text" value="<?=$usuario->get('usu_pass') ?> " class="form-control" disabled>
-												</div>
+												
 	                                        </div>
 	                                    </div>
 
 	                                    <div class="row">
 	                                        <div class="col-md-6">
 												<div class="form-group label-floating">
-													<label class="control-label">Nombre</label>
+													<label class="control-label">Nombre completo</label>
 													<input type="text" value="<?=$usuario->get('usu_nombre') ?> " class="form-control" disabled>
 												</div>
 	                                        </div>
-	                                        <div class="col-md-6">
+	                                        <div class="col-md-4">
 												<div class="form-group label-floating">
-													<label class="control-label">Apellido</label>
-													<input type="text" value="<?=$usuario->get('usu_nombre') ?> " class="form-control" disabled>
+													<label class="control-label">rut</label>
+													<input type="text" value="<?=$usuario->get('usu_rut') ?>-<?=$usuario->get('usu_dv') ?>  " class="form-control" disabled>
 												</div>
 	                                        </div>
 	                                    </div>
@@ -78,18 +107,18 @@
 	                            </div>
 
 	                              <div class="card-content">
-	                                <form>
+	                                <form action="<?=site_url('Alumno_Controller/cambiarContra')?>" method="post">
 	                                    <div class="row">
 	                                        <div class="col-md-4">
 												<div class="form-group label-floating">
 													<label class="control-label">Nueva Contraseña</label>
-													<input type="text" value="<?=$usuario->get('usu_pass') ?> " class="form-control" >
+													<input type="text" name="pass" value="" class="form-control" >
 												</div>
 	                                        </div>
 	                                        <div class="col-md-4">
 												<div class="form-group label-floating">
 													<label class="control-label">Confirmar Contraseña</label>
-													<input type="text"  class="form-control" >
+													<input type="text" name="cpass" class="form-control" >
 												</div>
 	                                        </div>
 	                                    </div>
@@ -120,16 +149,14 @@
 	                                    	<th>Situación</th>
 	                                    </thead>
 	                                    <tbody>
+	                                    <?php foreach ($asignaturas as $value): ?>
 	                                        <tr>
-	                                        	<td>ZC0207-Contabilidad, Costos y Presupuestos(61)</td>
+	                                        	<td><?=$value->get('asig_cod') ?> <br> <?=$value->get('asig_nombre') ?></td>
 	                                        	<td>6.6</td>
-	                                        	<td>SIN RIESGO</td>
+	                                        	<td><?=$value->get('asig_estado') ?></td>
 	                                        </tr>
-	                                        <tr>
-	                                        	<td>ZC0213-Inglés V(61)</td>
-	                                        	<td>5.5</td>
-	                                        	<td>SIN RIESGO</td>
-	                                        </tr>
+	                                         <?php endforeach ?>
+	                                       
 	                                    </tbody>
 	                                </table>
 	                            </div>
@@ -140,3 +167,15 @@
 		    			</div>
 	                </div>
 	            </div>
+
+
+<script type="text/javascript">
+	
+ $(function () {
+        setTimeout(function() {
+            $(".messages").fadeOut(3000);
+        },3000);
+
+    });
+
+</script>

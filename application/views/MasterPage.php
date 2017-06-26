@@ -452,15 +452,7 @@
                   </a>
                 </li>
                    
-                  <li class="treeview">
-                  <a href="<?=site_url()?>/Alumno_Controller/Notificaciones">
-                    <i class="fa fa-bell"></i>
-                    <span>Notificaciones</span>
-                    <span class="pull-right-container">
-                      <span class="label label-primary pull-right"></span>
-                    </span>
-                  </a>
-                </li>
+                 
                     <?php } ?>
         </ul>
     </section>

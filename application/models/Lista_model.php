@@ -86,11 +86,12 @@ function insert(){
 		return $prod;
     }
 
-    function eliminar($id)
+    public function eliminar($id)
 	{
 		$this->db->where('lis_id',$id);
 		return $this->db->delete('lista');
 	}
+
 	public function findhorarioByIdLista($lis_id)
 	{
 		$this->load->database();

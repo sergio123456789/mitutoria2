@@ -13,7 +13,9 @@ class Alumno_Controller extends CI_Controller {
 		$this->load->model('Horario_model','horario',true);
 		$this->load->model('Asignatura_model','asignatura',true);
 		$this->load->model('Lista_model','lista',true);
+		$this->load->model('Notas_model','notas',true);
 		$this->load->model('Tutoria_model','tutoria',true);
+		$this->load->library('session');
 
 		}else{
 			redirect('login');
@@ -96,10 +98,34 @@ class Alumno_Controller extends CI_Controller {
 		$user=$this->session->userdata('logged_in');
 		$usuario = $this->usuario->findById($user['id']);
 		$alumno = $this->alumno->findByName('alu_usu_id',$user['id']);
+		$asignaturas = $this->asignatura->miasignaturas($user['id']);
+		$notas = $this->notas->Ponderar("70","25");
+		print_r($notas);
+		break;
 		$datos['usuario'] = $usuario;
 		$datos['alumno'] = $alumno;
+		$datos['asignaturas'] = $asignaturas;
 
 		$this->layout->view('/Alumnos/user.php',$datos,false);
+	}
+	public function cambiarContra()
+	{
+		if ((!empty($_POST['pass']))|| (!empty($_POST['pass'])) ) {
+		
+			if ($_POST['pass'] == $_POST['cpass']) {
+				$pass = $_POST['pass'];
+				$user=$this->session->userdata('logged_in');
+				$this->usuario->cambiarcontra($user['id'],$pass);
+
+				echo "contraseña actualizada";
+				$this->session->set_flashdata('notice', 'contraseña actualizada');
+				redirect('/Alumno_Controller/miPerfil','refresh');
+			}
+			$this->session->set_flashdata('alert', 'contraseña no coinciden');
+			redirect('/Alumno_Controller/miPerfil','refresh');
+		}
+		$this->session->set_flashdata('alert', 'Los campos están vacíos');
+		redirect('/Alumno_Controller/miPerfil','refresh');
 	}
 
 	public function misRamos()
@@ -110,6 +136,7 @@ class Alumno_Controller extends CI_Controller {
     {
         $this->layout->view('/Alumnos/historialtutorias.php','datos',false);
     }
+ 
 }
 /* End of file Alumno_Controller.php */
 /* Location: ./application/controllers/Alumno_Controller.php */

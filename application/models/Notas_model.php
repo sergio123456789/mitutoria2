@@ -6,7 +6,9 @@ class Notas_model extends CI_Model {
 	private $columns = array(
      'not_id' =>0,
      'not_nota' =>0,
-     'not_asig_id' =>0
+     'not_asig_id' =>0,
+     'not_ponderacion ' =>0,
+     'not_usu_id' =>0
 	);
 
 	public function __construct()
@@ -45,6 +47,12 @@ function insert(){
 
 	}
 
+	public function Ponderar($nota,$ponderacion)
+	{
+		$resultado = ($nota * $ponderacion)/100;
+		return $resultado;
+	}
+
     public function save(){
 		try {
 			$this->load->database();
@@ -79,15 +87,30 @@ function insert(){
 	}
 
 	public function create($row){
-		$prod =  new Contacto_model();
+		$prod =  new Notas_model();
 		$prod->setColumns($row);
 		return $prod;
     }
 
-    function eliminar($id)
+    public function eliminar($id)
 	{
 		$this->db->where('not_id',$id);
 		return $this->db->delete('notas');
+	}
+	  public function findNotasByAsig($id_usu = null,$id_asig = null){
+		$this->load->database();
+		$this->db->select('*');
+		$this->db->from('notas n');
+		$this->db->join('usuario u ',  'u.usu_id = n.not_usu_id');
+		$this->db->where('n.not_asig_id', $id_asig);
+		$this->db->where('u.usu_id', $id_usu);
+		 $res=$this->db->get();
+		if ($res->num_rows() > 0) {
+			foreach ($res->result() as $value) {
+				$result[] = $this->create($value);
+			}
+		}
+		return $result;
 	}
 
 }

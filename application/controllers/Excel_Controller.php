@@ -70,7 +70,7 @@ public function UsuarioUploader(){
                         'alu_ciudad_familia' => $datos['22'],
                         'alu_region_familia' => $datos['23'],
                         'alu_ingreso_familiar' => $datos['24'],
-                        'alu_direccion' => $datos['25'],
+                        'alu_direccion' => $datos['26'],
                         'alu_ciudad' => $datos['28'],
                         'alu_region' => $datos['29'],
                         'alu_plan' => $datos['30'],
