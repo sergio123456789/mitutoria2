@@ -128,7 +128,11 @@ class Alumno_Controller extends CI_Controller {
 
 	public function misRamos()
     {
-        $this->layout->view('/Alumnos/misramos.php','datos',false);
+    		$user=$this->session->userdata('logged_in');
+    	 	$asignaturas= $this->asignatura->miasignaturasproarea($user['id'],$user['area']);
+    	 $datos['asignaturas']=$asignaturas;
+
+        $this->layout->view('/Alumnos/misramos.php',$datos,false);
     }
 	public function historialTutorias()
     {
@@ -137,7 +141,10 @@ class Alumno_Controller extends CI_Controller {
        	$datos["tutoria"]=$tutorias;
  		$this->layout->view('/Alumnos/historialtutorias.php',$datos,false);
     }
- 
+    public function ayudante()
+    {
+    	 redirect('Alumno_Controller/index');
+    }
 }
 /* End of file Alumno_Controller.php */
 /* Location: ./application/controllers/Alumno_Controller.php */

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-06-2017 a las 09:10:12
+-- Tiempo de generación: 26-06-2017 a las 10:16:21
 -- Versión del servidor: 10.1.21-MariaDB
 -- Versión de PHP: 5.6.30
 
@@ -6136,16 +6136,18 @@ CREATE TABLE `asignatura` (
   `asig_cod` varchar(50) NOT NULL,
   `asig_nombre` varchar(40) NOT NULL,
   `asig_car_id` int(11) NOT NULL,
-  `asig_estado` int(11) DEFAULT NULL COMMENT '1 : Comun , 2: Maya'
+  `asig_situacion` int(11) NOT NULL COMMENT '0:reprobado,1:sin riesgo,2:en riesgo',
+  `asig_estado` int(11) DEFAULT NULL COMMENT '0 : nula , 1 : Comun , 2: Maya'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `asignatura`
 --
 
-INSERT INTO `asignatura` (`asig_id`, `asig_cod`, `asig_nombre`, `asig_car_id`, `asig_estado`) VALUES
-(1, 'mate1', 'MATEMATICA', 1, 1),
-(2, 'ingles1', 'INGLES', 1, 1);
+INSERT INTO `asignatura` (`asig_id`, `asig_cod`, `asig_nombre`, `asig_car_id`, `asig_situacion`, `asig_estado`) VALUES
+(1, 'mate1', 'MATEMATICA', 1, 0, 1),
+(2, 'ingles1', 'INGLES', 1, 0, 1),
+(3, 'net13', 'networking', 1, 0, 2);
 
 -- --------------------------------------------------------
 
@@ -6202,7 +6204,7 @@ CREATE TABLE `horario` (
 --
 
 INSERT INTO `horario` (`hor_id`, `hor_dia`, `hor_inicio`, `hor_termino`, `hor_fechasis`, `hor_usu_id`, `hor_sala`, `hor_asig_id`, `hor_estado`) VALUES
-(1, 'LUNES', '12:00:00', '15:00:00', '2017-06-01', 5974, 'Sala N°1', 1, 0);
+(1, 'LUNES', '12:00:00', '15:00:00', '2017-06-01', 5974, 'Sala N°1', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -6212,7 +6214,7 @@ INSERT INTO `horario` (`hor_id`, `hor_dia`, `hor_inicio`, `hor_termino`, `hor_fe
 
 CREATE TABLE `lista` (
   `lis_id` int(11) NOT NULL,
-  `lis_fecha` datetime NOT NULL,
+  `lis_fecha` date NOT NULL,
   `lis_usu_id` int(11) DEFAULT NULL,
   `lis_usu_asistido` tinyint(4) DEFAULT NULL COMMENT '1 : asistio, 0: no asistio',
   `lis_estado` tinyint(4) DEFAULT NULL COMMENT '0 : no valida , 1 : valida',
@@ -6224,20 +6226,20 @@ CREATE TABLE `lista` (
 --
 
 INSERT INTO `lista` (`lis_id`, `lis_fecha`, `lis_usu_id`, `lis_usu_asistido`, `lis_estado`, `lis_comentario`) VALUES
-(17, '0000-00-00 00:00:00', 5603, 0, 3, 'hola'),
-(18, '0000-00-00 00:00:00', 5603, 0, 3, ''),
-(19, '0000-00-00 00:00:00', 5603, 0, 3, ''),
-(20, '0000-00-00 00:00:00', 5603, 0, 3, ''),
-(21, '0000-00-00 00:00:00', 5603, 0, 3, ''),
-(22, '0000-00-00 00:00:00', 5603, 0, 3, ''),
-(23, '0000-00-00 00:00:00', 5603, 0, 3, ''),
-(24, '0000-00-00 00:00:00', 5603, 0, 3, ''),
-(25, '0000-00-00 00:00:00', 5603, 0, 3, ''),
-(26, '0000-00-00 00:00:00', 5603, 0, 3, ''),
-(27, '0000-00-00 00:00:00', 5603, 0, 3, ''),
-(28, '0000-00-00 00:00:00', 5603, 0, 3, 'hrethehearthfbrstfherdth'),
-(29, '0000-00-00 00:00:00', 5603, 0, 3, 'fgewfe'),
-(30, '0000-00-00 00:00:00', 5603, 1, 1, '');
+(17, '0000-00-00', 5603, 0, 3, 'hola'),
+(18, '0000-00-00', 5603, 0, 3, ''),
+(19, '0000-00-00', 5603, 0, 3, ''),
+(20, '0000-00-00', 5603, 0, 3, ''),
+(21, '0000-00-00', 5603, 0, 3, ''),
+(22, '0000-00-00', 5603, 0, 3, ''),
+(23, '0000-00-00', 5603, 0, 3, ''),
+(24, '0000-00-00', 5603, 0, 3, ''),
+(25, '0000-00-00', 5603, 0, 3, ''),
+(26, '0000-00-00', 5603, 0, 3, ''),
+(27, '0000-00-00', 5603, 0, 3, ''),
+(28, '0000-00-00', 5603, 0, 3, 'hrethehearthfbrstfherdth'),
+(29, '0000-00-00', 5603, 0, 3, 'fgewfe'),
+(30, '0000-00-00', 5603, 0, 3, '');
 
 -- --------------------------------------------------------
 
@@ -18466,7 +18468,7 @@ ALTER TABLE `area`
 -- AUTO_INCREMENT de la tabla `asignatura`
 --
 ALTER TABLE `asignatura`
-  MODIFY `asig_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `asig_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `calificacion`
 --

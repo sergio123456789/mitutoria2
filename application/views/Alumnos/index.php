@@ -30,9 +30,7 @@
 	                                        	<td><?=$value->get('lis_fecha')?></td>
 	                                        	<td><?=$value->get('hor_inicio')?></td>
 	                                        	<td><?=$value->get('hor_termino')?></td>
-	                   
-												
-												<td>
+	                                        	<td>
 												<button type="button" rel="tooltip" title="Cancelar" id="<?=$value->get('lis_id')?>" href="#deleteModal" data-toggle="modal" class="btn btn-danger btn-simple btn-xs cancelar">
                     							<i class="fa fa-times"></i>
                     							</button>
@@ -67,9 +65,7 @@
 	                        </div>
 	                    </div>
 	                   	    <!-- Fin Modal tutorías comunes -->
-
 	                    	<!-- Modal de cancelar la tutoría-->
-
 	                    		<div class="modal fade" id="deleteModal">
 								<div class="modal-dialog">
 								      <div class="modal-content">
@@ -176,6 +172,7 @@
                     },
                     success: function(data) {
                         $('#myModal').modal('show').fadeIn(800);
+                         $("#nommodal").append('<h3 id="nombre" class="modal-title text-center"> Horarios de '+JSONVAL.asig_nombre+'</h3>');
                         if(data.estado) {
                             $.each( data.equipo, function( key, value ) {
                                  var JSONVAL =  JSON.parse(value);

@@ -141,7 +141,15 @@
     								<h6 class="category text-gray">Semestre 4</h6>
     								<h4 class="card-title">Gabriel Vega</h4>
     								<p class="card-content">
-    									 <div class="card-content table-responsive">
+									 <div class="card-content table-responsive">
+    								<div class="panel panel-default">
+							          <div class="panel-heading">
+							            <h4 class="panel-title">
+							              <a data-toggle="collapse" data-parent="#accordion"  data-target="#notas">Indicadores de alumno</a>
+							            </h4>
+							          </div>
+							          <div id="notas" data-parent="#accordion" class="panel-collapse collapse" 		>
+							          	
 	                                <table class="table table-hover">
 	                                    <thead>
 	                                        <th>Asignatura</th>
@@ -159,10 +167,22 @@
 	                                       
 	                                    </tbody>
 	                                </table>
+							          </div>
 	                            </div>
-    								
-    								<a href="#pablo" class="btn btn-primary btn-round">Ayudantía</a>
     							</div>
+
+    								<?php if ($this->session->userdata('permisos') == 6): ?>
+    								<a href="<?=site_url('Alumno_Controller/ayudante') ?>" class="btn btn-primary btn-round">Ayudantía</a>
+    								<?php endif ?>
+
+    							</div>
+
+    							</div>
+
+
+
+
+
     						</div>
 		    			</div>
 	                </div>

@@ -414,7 +414,7 @@
                   </a>
                 </li>
                     <?php } ?>
-                    <?php if ((in_array(5, $user['permisos'])) ) { ?>
+                    <?php if ((in_array(5, $user['permisos']))|| in_array(6, $user['permisos']))  { ?>
                               <li class="treeview">
                   <a href="<?=site_url()?>/Alumno_Controller/index">
                     <i class="fa fa-home"></i>
