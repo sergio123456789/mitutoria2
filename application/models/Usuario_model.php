@@ -141,15 +141,16 @@ function insertperusu(){
 		return  $user->num_rows() == 1;
 	}
 
-	function findById($id){
-		$result=array();
-		$this->db->where('usu_id',$id);
-		$consulta = $this->db->get('usuario');
-		if ($res->num_rows() == 1) {
+    public function findById($id = null){
+		$id = intval($id);
+		$this->load->database();
+		$res = $this->db->get_where('usuario',array('usu_id' =>$id));
+		$result = null;
+			if ($res->num_rows() == 1) {
 				$result = $this->create($res->row_object());
 			}
 			return $result;
-				}
+	}
 	public function cambiarcontra($id,$usu_pass){
         $data  =  array(
 			'usu_pass' => $usu_pass
