@@ -24,7 +24,7 @@ class Alumno_Controller extends CI_Controller {
 	public function index()
 	{
 		$user=$this->session->userdata('logged_in');
-       	$tutorias= $this->horario->mistutorias($user['id']);
+       	$tutorias= $this->horario->mistutoriasporestado($user['id'],"1");
        	$asignatura= $this->asignatura->findAllBy('asig_estado',"1");
        	$datos["tutoria"]=$tutorias;
        	$datos["asignaturas"]=$asignatura;
@@ -46,6 +46,7 @@ class Alumno_Controller extends CI_Controller {
 	public function solicitar($id_hor)
 	{
 	$user=$this->session->userdata('logged_in');
+	//ESTA MIERDA GUARDA UNA NUEVA LISTA A CADA RATO 
 	  $row = array( 
 	 'lis_id' => 0,
      'lis_fecha' =>'',
@@ -70,7 +71,6 @@ class Alumno_Controller extends CI_Controller {
 	 $tuto->save();
       redirect('Alumno_Controller/index');
 	}
-
 
     public function cancelar(){
     	$user=$this->session->userdata('logged_in');
@@ -99,9 +99,7 @@ class Alumno_Controller extends CI_Controller {
 		$usuario = $this->usuario->findById($user['id']);
 		$alumno = $this->alumno->findByName('alu_usu_id',$user['id']);
 		$asignaturas = $this->asignatura->miasignaturas($user['id']);
-		$notas = $this->notas->Ponderar("70","25");
-		print_r($notas);
-		break;
+		
 		$datos['usuario'] = $usuario;
 		$datos['alumno'] = $alumno;
 		$datos['asignaturas'] = $asignaturas;
@@ -134,7 +132,12 @@ class Alumno_Controller extends CI_Controller {
     }
 	public function historialTutorias()
     {
-        $this->layout->view('/Alumnos/historialtutorias.php','datos',false);
+		$user=$this->session->userdata('logged_in');
+       	$tutorias= $this->horario->mistutoriasporestado($user['id'],"3");
+       	$asignatura= $this->asignatura->findAllBy('asig_estado',"1");
+       	$datos["tutoria"]=$tutorias;
+       	$datos["asignaturas"]=$asignatura;
+ 		$this->layout->view('/Alumnos/index.php',$datos,false);
     }
  
 }
