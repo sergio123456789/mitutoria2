@@ -24,7 +24,7 @@ class Alumno_Controller extends CI_Controller {
 	public function index()
 	{
 		$user=$this->session->userdata('logged_in');
-       	$tutorias= $this->horario->mistutoriasporestado($user['id'],"1");
+       	$tutorias= $this->horario->mistutoriasporestadolista($user['id'],"1");
        	$asignatura= $this->asignatura->findAllBy('asig_estado',"1");
        	$datos["tutoria"]=$tutorias;
        	$datos["asignaturas"]=$asignatura;
@@ -133,11 +133,9 @@ class Alumno_Controller extends CI_Controller {
 	public function historialTutorias()
     {
 		$user=$this->session->userdata('logged_in');
-       	$tutorias= $this->horario->mistutoriasporestado($user['id'],"3");
-       	$asignatura= $this->asignatura->findAllBy('asig_estado',"1");
+       	$tutorias= $this->horario->mistutoriasporestadolista($user['id'],"3");
        	$datos["tutoria"]=$tutorias;
-       	$datos["asignaturas"]=$asignatura;
- 		$this->layout->view('/Alumnos/index.php',$datos,false);
+ 		$this->layout->view('/Alumnos/historialtutorias.php',$datos,false);
     }
  
 }

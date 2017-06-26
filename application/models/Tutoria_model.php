@@ -99,22 +99,22 @@ class Tutoria_model extends CI_Model {
 		$this->db->where('tuto_id',$id);
 		return $this->db->delete('tutoria');
 	}
-		public function misTutoiaDeasignatura($id_usu){
-		$result = null;
-		$this->load->database();
-		$this->db->select('*');
-		$this->db->from('asignatura a');
-		$this->db->join('carrera c',  'a.asig_car_id = c.car_id');
-		$this->db->join('area ar',  'ar.ar_carr_id = c.car_id');
-		$this->db->join('usuario u ',  'u.usu_are_id = ar.ar_id');
-		$this->db->where('u.usu_id', $id_usu);
-		$res= $this->db->get();
-			if ($res->num_rows() > 0) {
-			foreach ($res->result() as $value) {
-				$result[] = $this->create($value);
+	public function misTutoiaDeasignatura($id_usu){
+			$result = null;
+			$this->load->database();
+			$this->db->select('*');
+			$this->db->from('asignatura a');
+			$this->db->join('carrera c',  'a.asig_car_id = c.car_id');
+			$this->db->join('area ar',  'ar.ar_carr_id = c.car_id');
+			$this->db->join('usuario u ',  'u.usu_are_id = ar.ar_id');
+			$this->db->where('u.usu_id', $id_usu);
+			$res= $this->db->get();
+				if ($res->num_rows() > 0) {
+				foreach ($res->result() as $value) {
+					$result[] = $this->create($value);
+				}
 			}
-		}
-	return $result;
+		return $result;
 	}
 	
 }

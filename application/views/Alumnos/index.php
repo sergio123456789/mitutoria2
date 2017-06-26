@@ -26,7 +26,7 @@
 	                                       <?php foreach ($tutoria as $key => $value) { ?>
 	                                        <tr>
 	                                        	<td><?=$value->get('asig_nombre')?></td>
-<td rowspan="2"><a href="#pablo"><img class="img" src="../../resources/images/marc.jpg" style="width: 42px; height: 42px;border-radius: 50%;" />  											</a> <?=$value->get('usu_nombre')?> esta tabla corre los datos </td>
+<td><a href="#pablo"><img class="img" src="../../resources/images/marc.jpg" style="width: 42px; height: 42px;border-radius: 50%;" />  											</a> <?=$value->get('usu_nombre')?> esta tabla corre los datos </td>
 	                                        	<td><?=$value->get('lis_fecha')?></td>
 	                                        	<td><?=$value->get('hor_inicio')?></td>
 	                                        	<td><?=$value->get('hor_termino')?></td>

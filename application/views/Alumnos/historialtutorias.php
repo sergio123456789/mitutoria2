@@ -18,25 +18,19 @@
 	                                    	<th style="text-align: center;">Término</th>
 											
 	                                    </thead>
-	                                    <tbody>
+	                                  <tbody>
+	                                    <?php if (!empty($tutoria)): ?>
+	                                       <?php foreach ($tutoria as $key => $value) { ?>
 	                                        <tr>
-	                                        	<td>Inglés</td>
-	                                        	<td rowspan="1"><a href="#pablo">
-    									<img class="img" src="../../resources/images/marc.jpg" style="width: 42px; height: 42px; border-radius: 50%;" />
-    								    </a>  Américo Pérez  </td>
-    								    <td>01/06/17</td>
-    								    <td>10:15</td>
-    								    <td>12:30</td>
+	                                        	<td><?=$value->get('asig_nombre')?></td>
+												<td ><a href="#pablo"><img class="img" src="../../resources/images/marc.jpg" style="width: 42px; height: 42px;border-radius: 50%;"/></a> <?=$value->get('usu_nombre')?> </td>
+	                                        	<td><?=$value->get('lis_fecha')?></td>
+	                                        	<td><?=$value->get('hor_inicio')?></td>
+	                                        	<td><?=$value->get('hor_termino')?></td>
+	         
 	                                        </tr>
-	                                        <tr>
-	                                        	<td>Matemática</td>
-	                                        	<td rowspan="1"><a href="#pablo">
-    									<img class="img" src="../../resources/images/marc.jpg" style="width: 42px; height: 42px; border-radius: 50%;" />
-    								    </a>  Javier Miles  </td>
-    								    <td>01/04/17</td>
-    								    <td>12:30</td>
-    								    <td>13:15</td>
-	                                        </tr>
+											<?php } ?>
+										<?php endif ?>
 	                                    </tbody>
 	                                </table>
 	                                
@@ -45,10 +39,3 @@
 	                        </div>
 	                    </div>
 						</div>
-							<div class="row">
-							<div class="col-md-12" >
-
-					
-                                </div>
-                                </div>
-                                </div>
