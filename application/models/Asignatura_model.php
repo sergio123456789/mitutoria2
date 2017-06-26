@@ -1,36 +1,24 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Horario_model extends CI_Model {
-	private $columns = array(
-     'hor_id' =>0,
-     'hor_dia' =>'',
-     'hor_inicio' =>'',
-     'hor_termino' =>'',
-     'hor_fechasis' =>'',
-     'hor_usu_id' =>0,
-     'hor_sala' =>'',
-     'hor_asig_id' =>0,
-     'hor_estado' =>0
-	);
+class Asignatura_model extends CI_Model {
 
 	public function __construct()
 	{
 		parent::__construct();
-		//Do your magic here
+		
 	}
-
-	public function get($key){
-		return $this->columns[$key];
-	}	
-
-	public function set($colum , $value){
-	 $this->columns[$colum] = $value;
-	}
+	private $columns = array(
+     'asig_id' =>0,
+     'asig_cod' =>'',
+     'asig_nombre' =>'',
+     'asig_car_id' =>0,
+     'asig_estado' =>0
+	);
 
 	public function findAll(){
 	$this->load->database();
-	$res = $this->db->get('horario');
+	$res = $this->db->get('asignatura');
 	if ($res->num_rows() > 0) {
 		foreach ($res->result() as $value) {
 			$result[] = $this->create($value);
@@ -41,7 +29,7 @@ class Horario_model extends CI_Model {
 
     public function findAllBy($column = null, $value =""){
 		$this->load->database();
-		$res = $this->db->get_where('horario',array($column =>$value));
+		$res = $this->db->get_where('asignatura',array($column =>$value));
 		if ($res->num_rows() > 0) {
 			foreach ($res->result() as $value) {
 				$result[] = $this->create($value);
@@ -49,20 +37,22 @@ class Horario_model extends CI_Model {
 		}
 		return $result;
     }
-function insert(){
-		$this->db->insert('horario',$this->columns);
+	function insert(){
+		$this->db->insert('asignatura',$this->columns);
 
 	}
-
+public function get($key){
+		return $this->columns[$key];
+	}
     public function save(){
 		try {
 			$this->load->database();
-		if($this->columns['hor_id'] == 0){
-			$this->db->insert("horario",$this->columns);
-			$this->columns['hor_id'] = $this->db->insert_id();
+		if($this->columns['asig_id'] == 0){
+			$this->db->insert("asignatura",$this->columns);
+			$this->columns['asig_id'] = $this->db->insert_id();
 		}else{
-			$this->db->where('hor_id',$this->columns['hor_id']);
-			$this->db->update('horario',$this->columns);
+			$this->db->where('asig_id',$this->columns['asig_id']);
+			$this->db->update('asignatura',$this->columns);
 		}
 			
 		} catch (Exception $e) {
@@ -72,7 +62,7 @@ function insert(){
 
 	public function findByName($column = null, $value = ''){
 		$this->load->database();
-		$res = $this->db->get_where('horario',array($column =>$value));
+		$res = $this->db->get_where('asignatura',array($column =>$value));
 		$result = null;
 			if ($res->num_rows() == 1) {
 				$result = $this->create($res->row_object());
@@ -89,7 +79,7 @@ function insert(){
     public function findById($id = null){
 		$id = intval($id);
 		$this->load->database();
-		$res = $this->db->get_where('horario',array('hor_id' =>$id));
+		$res = $this->db->get_where('asignatura',array('asig_id' =>$id));
 		$result = null;
 			if ($res->num_rows() == 1) {
 				$result = $this->create($res->row_object());
@@ -98,38 +88,32 @@ function insert(){
 	}
 
 	public function create($row){
-		$prod =  new Horario_model();
+		$prod =  new Asignatura_model();
 		$prod->setColumns($row);
 		return $prod;
     }
 
     function eliminar($id)
 	{
-		$this->db->where('hor_id',$id);
-		return $this->db->delete('horario');
+		$this->db->where('asig_id',$id);
+		return $this->db->delete('asignatura');
 	}
-	public function mistutorias($id_alum){
+
+	public function misProxAsig($id_asi){
 	$result = null;
 	$this->load->database();
 	$this->db->select('*');
 	$this->db->from('horario');
-	$this->db->join('tutoria',  'tutoria.tuto_hor_id = horario.hor_id');
-	$this->db->join('lista',  'tutoria.tuto_lis_id = lista.lis_id');
 	$this->db->join('usuario',  'horario.hor_usu_id = usuario.usu_id');
 	$this->db->join('asignatura',  'horario.hor_asig_id = asignatura.asig_id');
-	$this->db->where('lista.lis_usu_id', $id_alum);
-	$this->db->where('lista.lis_estado ', '1');
-	$this->db->order_by('horario.hor_fechasis', "DESC");
+	$this->db->where('asignatura.asig_id', $id_asi);
+	$this->db->where('hor_estado', '1');
 	$res= $this->db->get();
-	if ($res->num_rows() > 0) {
-			foreach ($res->result() as $value) {
-				$result[] = $this->create($value);
-			}
-		}
-		return $result;	
-	}
+	return $res->result_array();
 
+	}
 }
 
-/* End of file Horario_model.php */
-/* Location: ./application/models/Horario_model.php */
+
+/* End of file Asignatura_model.php */
+/* Location: ./application/models/Asignatura_model.php */

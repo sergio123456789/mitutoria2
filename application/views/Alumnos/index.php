@@ -10,39 +10,38 @@
 	                                <p class="category">Acá confirmas tu asistencia a la tutoría pedida</p>
 	                            </div>
 	                            <div class="card-content table-responsive">
-	                                <table class="table" style="text-align: center;">
+	                                <table class="table" id="example1" style="text-align: center;">
 	                                    <thead class="text-primary" >
 	                                    	<th style="text-align: center;">Tutoría</th>
 	                                    	<th style="text-align: center;">Profesor</th>
 	                                    	<th style="text-align: center;">Fecha</th>
 	                                    	<th style="text-align: center;">Inicio</th>
 	                                    	<th style="text-align: center;">Término</th>
-											<th style="text-align: center;">Confirmar</th>
+	                                        	
+											
 											<th style="text-align: center;">Cancelar</th>
 	                                    </thead>
 	                                    <tbody>
+	                                    <?php if (!empty($tutoria)): ?>
+	                                       <?php foreach ($tutoria as $key => $value) { ?>
 	                                        <tr>
-	                                        	<td>Matemática</td>
+	                                        	<td><?=$value->get('asig_nombre')?></td>
 	                                        	<td rowspan="2"><a href="#pablo">
-    									<img class="img" src="../../resources/images/marc.jpg" style="width: 42px; height: 42px; border-radius: 50%;" />
-    								</a>  Américo Pérez  </td>
-    								<td>01/06/17</td>
-    								<td>10:15</td>
-    								<td>12:30</td>
-												<td>
-												<button type="button" rel="tooltip" title="Confirmar" href="#" data-toggle="modal" class="btn btn-success btn-simple btn-xs">
-                    							<i class="fa fa-check"></i>
-                    							</button>
-												</td>
+    											<img class="img" src="../../resources/images/marc.jpg" style="width: 42px; height: 42px;border-radius: 50%;" />
+    											</a> <?=$value->get('usu_nombre')?> </td>
+	                                        	<td><?=$value->get('lis_fecha')?></td>
+	                                        	<td><?=$value->get('hor_inicio')?></td>
+	                                        	<td><?=$value->get('hor_termino')?></td>
+	                   
 												
 												<td>
-												<button type="button" rel="tooltip" title="Cancelar" id="openBtn" href="#deleteModal" data-toggle="modal" class="btn btn-danger btn-simple btn-xs">
+												<button type="button" rel="tooltip" title="Cancelar" id="<?=$value->get('lis_id')?>" href="#deleteModal" data-toggle="modal" class="btn btn-danger btn-simple btn-xs cancelar">
                     							<i class="fa fa-times"></i>
                     							</button>
 												</td>
-
 	                                        </tr>
-
+											<?php } ?>
+										<?php endif ?>
 	                                    </tbody>
 	                                </table>
 
@@ -62,10 +61,9 @@
 	                            <div class="card-content table-responsive">
 	                              <div id="links" class="section scrollspy">
            						 <div class="collection">
-           						   <a href="#myModal" data-toggle="modal" class="collection-item">Matemática</a>
-           						   <a href="#myModal" data-toggle="modal" class="collection-item ">Inglés</a>
-           						   <a href="#myModal" data-toggle="modal" class="collection-item">Networking I</a>
-           						   <a href="#myModal" data-toggle="modal" class="collection-item">Taller de programación III</a>
+           						   <?php foreach ($asignaturas as $key => $value) { ?>
+           						   <a href="#myModal" id="<?=$value->get('asig_id') ?>" data-toggle="modal" class="Mostrar collection-item"><?=$value->get('asig_nombre') ?></a>
+           						   <?php } ?>
            						 </div>
 	                            </div>
 	                        </div>
@@ -82,15 +80,16 @@
 								          <h3 class="modal-title" style="text-align:center;" >¿Estas seguro que quieres cancelar tu tutoría?</h3>
 								        </div>
 								        <div class="modal-body">
+								         <form method="post" action="<?=site_url('Alumno_Controller/cancelar')?>">
+								         <input type="text" hidden="visible" name="id" id="eliminar_empresa">
 										  <h5 class="text-center"><b>Ingresa el motivo</b></h5>
-										  <div class="form-group is-empty"><textarea class="form-control" rows="5"></textarea><span class="material-input"></span></div>
+										  <div class="form-group is-empty"><textarea name="motivo" class="form-control" rows="5"></textarea><span class="material-input"></span></div>
 										</div>
-								        <div class="modal-footer">
-								        <button type="button" class="btn btn-primary">Enviar</button>
-								        <button type="button" class="btn btn-default " data-dismiss="modal">Cancelar</button>  
+								        <div class="modal-footer" id="cansel">
+								        <button type="submit" class="btn btn-primary">Enviar</button>
+								        <button type="button" class="btn btn-default " data-dismiss="modal">Cancelar</button>
+								         </form>  
 								        </div>
-												
-
 								      </div><!-- /.modal-content -->
 								    </div><!-- /.modal-dialog -->
 								  </div><!-- /.modal -->	
@@ -103,7 +102,9 @@
 								      <div class="modal-content">
 								        <div class="modal-header">
 								          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-								          <h3 class="modal-title text-center"> Horarios de Matemática</h3>
+								          <div id="nommodal">
+
+								          </div>
 								        </div>
 								        <div class="modal-body">
 										  <div class="navbar-form navbar-right">
@@ -114,41 +115,19 @@
 													<div class="ripple-container"></div>
 													
 												</div>
-								          <table class="table table-striped" id="tblGrid">
+								          <table class="table table-striped">
 								            <thead id="tblHead">
 								              <tr>
 								                <th>Profesor</th>
 								                <th>Sala</th>
-								                <th>Fecha</th>
+								                <th>Día</th>
 								                <th>Inicio</th>
 								                <th>Término</th>
 								              </tr>
 								            </thead>
-								            <tbody>
+								            <tbody id="tblGrid">
 
-								              <tr>
-								              <td>
-								              <img src="../../resources/images/marc.jpg" style="border-radius: 50%;" alt="" width="42px" height="42"> Raúl Silva </td> 
-								              <td>A213</td> 
-								              <td>29/05/17</td> 
-								              <td>10:15</td> <td>12:30</td>
-								              <td><input type="button" class="btn btn-warning btn-sm pull-right" value="Solicitar"></td>
-								              </tr>
-
-								              <tr>
-								              <td><img class="img" src="../../resources/images/marc.jpg" style="width: 42px; height: 42px; border-radius: 50%;"> Javier Miles</td>
-								              <td>A315</td>
-								              <td>29/05/17</td>
-								              <td>15:15</td> <td>16:30</td> 
-								              <td><input type="button" class="btn btn-warning btn-sm pull-right" value="Solicitar"></td>
-								              </tr>
-
-								               <tr><td><img class="img" src="../../resources/images/marc.jpg" style="width: 42px; height: 42px; border-radius: 50%;"> Américo Peréz</td>
-								              <td>B303</td>
-								              <td>03/06/17</td>
-								              <td>10:15</td> <td>12:30</td> 
-								              <td><input type="button" class="btn btn-warning btn-sm pull-right" value="Solicitar"></td>
-								              </tr>
+								              
 								            </tbody>
 								          </table>
 								          <div class="form-group">
@@ -183,5 +162,39 @@
 								</div>
 							</div>
 						</div>
+					</div>
+				</div>
+			<script type="text/javascript">
+				$(".Mostrar").click(function(){
+					 var id = $(this).attr('id');
+                $.ajax({
+                    type: 'POST',
+                    url: "<?=site_url('/Alumno_Controller/Cargarprofesjson')?>",
+                    dataType: 'json',
+                    data: {"id" : id},
+                    beforeSend: function () {;
+                    	 $('#nombre').remove();
+                         $("#tblGrid").text("");
+                    },
+                    success: function(data) {
+                        $('#myModal').modal('show').fadeIn(800);
+                        if(data.estado) {
+                            $.each( data.equipo, function( key, value ) {
+                                 var JSONVAL =  JSON.parse(value);
+                                $("#nommodal").append('<h3 id="nombre" class="modal-title text-center"> Horarios de '+JSONVAL.asig_nombre+'</h3>');
+                                 $("#tblGrid").append('<tr><td><img src='+JSONVAL.usu_foto+' style="border-radius: 50%;" alt="" width="42px" height="42"> '+JSONVAL.usu_nombre+'</td><td>'+JSONVAL.hor_sala+'</td><td>'+JSONVAL.hor_dia+'</td>      <td>'+JSONVAL.hor_inicio+'</td> <td>'+JSONVAL.hor_termino+'</td>	<td><a href="<?=site_url('Alumno_Controller/solicitar/')?>'+JSONVAL.hor_id+'"><button type="button"  class="btn btn-warning btn-sm pull-right" >Solicitar</button></a> </td> </tr>');
+                             });
+                        }else{
+                            alert("Lo sentimos ocurrio un error");
+                        }
+                    },
+                    complete: function(xhr, status) {
+                    }
+                });
+				});
 
-		</div></div>
+				$(".cancelar").click(function(){
+					var id = $(this).attr('id');
+					$("#eliminar_empresa").val(id);
+				});
+			</script>

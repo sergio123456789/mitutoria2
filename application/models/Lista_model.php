@@ -81,7 +81,7 @@ function insert(){
 	}
 
 	public function create($row){
-		$prod =  new Contacto_model();
+		$prod =  new Lista_model();
 		$prod->setColumns($row);
 		return $prod;
     }
@@ -91,6 +91,22 @@ function insert(){
 		$this->db->where('lis_id',$id);
 		return $this->db->delete('lista');
 	}
+	public function findhorarioByIdLista($lis_id)
+	{
+		$this->load->database();
+		$this->db->select('*');
+		$this->db->from('horario');
+		$this->db->join('tutoria',  'tutoria.tuto_hor_id = horario.hor_id');
+		$this->db->join('lista',  'tutoria.tuto_lis_id = lista.lis_id');
+		$this->db->where('lista.lis_id', $lis_id);
+		$res= $this->db->get();
+		$result = null;
+			if ($res->num_rows() == 1) {
+				$result = $this->create($res->row_object());
+			}
+			return $result;
+	}
+	
 	
 
 }

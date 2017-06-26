@@ -13,7 +13,7 @@ class Datos_model extends CI_Model {
 	{
 		$IDAR=0;
 			if ($dato=="Agropecuaria y Agroindustrial") {
-						$IDAR=1 ;
+					$IDAR=1 ;
 					}else if ($dato=="Construcción") {
 					$IDAR=2;
 					}else if ($dato=="Electricidad y Electrónica") {

@@ -4,7 +4,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Tutoria_model extends CI_Model {
 	private $columns = array(
      'tuto_id' =>0,
-     'tuto_hor_id' =>0
+     'tuto_hor_id' =>0,
+     'tuto_lis_id' =>0
 	);
 
 	public function __construct()
@@ -38,6 +39,7 @@ class Tutoria_model extends CI_Model {
 		}
 		return $result;
     }
+
 function insert(){
 		$this->db->insert('tutoria',$this->columns);
 
@@ -87,7 +89,7 @@ function insert(){
 	}
 
 	public function create($row){
-		$prod =  new Contacto_model();
+		$prod =  new Tutoria_model();
 		$prod->setColumns($row);
 		return $prod;
     }
