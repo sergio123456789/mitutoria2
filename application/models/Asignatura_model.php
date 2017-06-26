@@ -107,7 +107,7 @@ class Asignatura_model extends CI_Model {
 		$this->db->join('usuario',  'horario.hor_usu_id = usuario.usu_id');
 		$this->db->join('asignatura',  'horario.hor_asig_id = asignatura.asig_id');
 		$this->db->where('asignatura.asig_id', $id_asi);
-		$this->db->where('hor_estado', '1');
+		$this->db->where('hor_estado', 0);
 		$res= $this->db->get();
 		return $res->result_array();
 	}

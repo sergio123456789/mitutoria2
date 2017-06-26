@@ -65,7 +65,7 @@ class Alumno_Controller extends CI_Controller {
      'tuto_lis_id' => $lista->get("lis_id")
 	 	);
 	$horario = $this->horario->findById($id_hor);
-	 $horario->set('hor_estado' , 0);
+	 $horario->set('hor_estado' , 1);
 	 $horario->save();
 	 $tuto = $this->tutoria->create($rowTuto);
 	 $tuto->save();
@@ -86,13 +86,14 @@ class Alumno_Controller extends CI_Controller {
 	     );
      $id_lista = $this->lista->findhorarioByIdLista($id);	
 	 $horario = $this->horario->findById($id_lista->get("hor_id"));
-	 $horario->set('hor_estado' , 1);
+	 $horario->set('hor_estado' , 0);
 	 $horario->save();
 
     	$lista = $this->lista->create($row);
       	$lista->save();
       	redirect('Alumno_Controller/index');
     }
+
 	public function miPerfil()
 	{
 		$user=$this->session->userdata('logged_in');
@@ -106,6 +107,7 @@ class Alumno_Controller extends CI_Controller {
 
 		$this->layout->view('/Alumnos/user.php',$datos,false);
 	}
+
 	public function cambiarContra()
 	{
 		if ((!empty($_POST['pass']))|| (!empty($_POST['pass'])) ) {
@@ -134,6 +136,7 @@ class Alumno_Controller extends CI_Controller {
 
         $this->layout->view('/Alumnos/misramos.php',$datos,false);
     }
+
 	public function historialTutorias()
     {
 		$user=$this->session->userdata('logged_in');
