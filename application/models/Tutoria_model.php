@@ -40,7 +40,7 @@ class Tutoria_model extends CI_Model {
 		return $result;
     }
 
-function insert(){
+	public function insert(){
 		$this->db->insert('tutoria',$this->columns);
 
 	}

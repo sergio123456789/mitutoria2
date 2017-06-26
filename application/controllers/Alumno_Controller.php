@@ -9,6 +9,7 @@ class Alumno_Controller extends CI_Controller {
 		if ($this->session->userdata('logged_in')) {
 		$this->layout->setLayout('/MasterPage',false);
 		$this->load->model('Usuario_model','usuario',true);
+		$this->load->model('alumno_model','alumno',true);
 		$this->load->model('Horario_model','horario',true);
 		$this->load->model('Asignatura_model','asignatura',true);
 		$this->load->model('Lista_model','lista',true);
@@ -25,7 +26,6 @@ class Alumno_Controller extends CI_Controller {
        	$asignatura= $this->asignatura->findAllBy('asig_estado',"1");
        	$datos["tutoria"]=$tutorias;
        	$datos["asignaturas"]=$asignatura;
-
  		$this->layout->view('/Alumnos/index.php',$datos,false);
 	}
 
@@ -69,19 +69,6 @@ class Alumno_Controller extends CI_Controller {
       redirect('Alumno_Controller/index');
 	}
 
-	public function miPerfil()
-	{
-		$this->layout->view('/Alumnos/user.php','datos',false);
-	}
-
-	public function misRamos()
-    {
-        $this->layout->view('/Alumnos/misramos.php','datos',false);
-    }
-	public function historialTutorias()
-    {
-        $this->layout->view('/Alumnos/historialtutorias.php','datos',false);
-    }
 
     public function cancelar(){
     	$user=$this->session->userdata('logged_in');
@@ -104,7 +91,25 @@ class Alumno_Controller extends CI_Controller {
       	$lista->save();
       	redirect('Alumno_Controller/index');
     }
+	public function miPerfil()
+	{
+		$user=$this->session->userdata('logged_in');
+		$usuario = $this->usuario->findById($user['id']);
+		$alumno = $this->alumno->findByName('alu_usu_id',$user['id']);
+		$datos['usuario'] = $usuario;
+		$datos['alumno'] = $alumno;
 
+		$this->layout->view('/Alumnos/user.php',$datos,false);
+	}
+
+	public function misRamos()
+    {
+        $this->layout->view('/Alumnos/misramos.php','datos',false);
+    }
+	public function historialTutorias()
+    {
+        $this->layout->view('/Alumnos/historialtutorias.php','datos',false);
+    }
 }
 /* End of file Alumno_Controller.php */
 /* Location: ./application/controllers/Alumno_Controller.php */

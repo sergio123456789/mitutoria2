@@ -12,19 +12,19 @@
 	                                        <div class="col-md-5">
 												<div class="form-group label-floating">
 													<label class="control-label">Carrera</label>
-													<input type="text" class="form-control" disabled>
+													<input type="text" value="<?=$alumno->get('alu_programa_estudio') ?> " class="form-control" disabled>
 												</div>
 	                                        </div>
 	                                        <div class="col-md-4">
 												<div class="form-group label-floating">
 													<label class="control-label">Inacap Mail</label>
-													<input type="email" class="form-control" disabled>
+													<input type="email" value="<?=$usuario->get('usu_correo') ?> "  class="form-control" disabled>
 												</div>
 	                                        </div>
 	                                          <div class="col-md-3">
 												<div class="form-group label-floating">
 													<label class="control-label">Clave </label>
-													<input type="text" class="form-control" disabled>
+													<input type="text" value="<?=$usuario->get('usu_pass') ?> " class="form-control" disabled>
 												</div>
 	                                        </div>
 	                                    </div>
@@ -33,13 +33,13 @@
 	                                        <div class="col-md-6">
 												<div class="form-group label-floating">
 													<label class="control-label">Nombre</label>
-													<input type="text" class="form-control" disabled>
+													<input type="text" value="<?=$usuario->get('usu_nombre') ?> " class="form-control" disabled>
 												</div>
 	                                        </div>
 	                                        <div class="col-md-6">
 												<div class="form-group label-floating">
 													<label class="control-label">Apellido</label>
-													<input type="text" class="form-control" disabled>
+													<input type="text" value="<?=$usuario->get('usu_nombre') ?> " class="form-control" disabled>
 												</div>
 	                                        </div>
 	                                    </div>
@@ -48,7 +48,7 @@
 	                                        <div class="col-md-12">
 												<div class="form-group label-floating">
 													<label class="control-label">Dirección</label>
-													<input type="text" class="form-control" disabled>
+													<input type="text" value="<?=$alumno->get('alu_direccion') ?> " class="form-control" disabled>
 												</div>
 	                                        </div>
 	                                    </div>
@@ -57,19 +57,19 @@
 	                                        <div class="col-md-4">
 												<div class="form-group label-floating">
 													<label class="control-label">Ciudad</label>
-													<input type="text" class="form-control" disabled>
+													<input type="text" value="<?=$alumno->get('alu_ciudad') ?> " class="form-control" disabled>
 												</div>
 	                                        </div>
 	                                        <div class="col-md-4">
 												<div class="form-group label-floating">
 													<label class="control-label">Comuna</label>
-													<input type="text" class="form-control" disabled>
+													<input type="text" value="<?=$alumno->get('alu_comuna') ?> " class="form-control" disabled>
 												</div>
 	                                        </div>
 	                                        <div class="col-md-4">
 												<div class="form-group label-floating">
 													<label class="control-label">Número</label>
-													<input type="text" class="form-control" disabled>
+													<input type="text" value="<?=$alumno->get('alu_celular') ?> " class="form-control" disabled>
 												</div>
 	                                        </div>
 	                                    </div>
@@ -83,13 +83,13 @@
 	                                        <div class="col-md-4">
 												<div class="form-group label-floating">
 													<label class="control-label">Nueva Contraseña</label>
-													<input type="text" class="form-control" >
+													<input type="text" value="<?=$usuario->get('usu_pass') ?> " class="form-control" >
 												</div>
 	                                        </div>
 	                                        <div class="col-md-4">
 												<div class="form-group label-floating">
 													<label class="control-label">Confirmar Contraseña</label>
-													<input type="text" class="form-control" >
+													<input type="text"  class="form-control" >
 												</div>
 	                                        </div>
 	                                    </div>

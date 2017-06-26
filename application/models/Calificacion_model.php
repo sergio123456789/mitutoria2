@@ -88,7 +88,7 @@ function insert(){
 	}
 
 	public function create($row){
-		$prod =  new Contacto_model();
+		$prod =  new Calificacion_model();
 		$prod->setColumns($row);
 		return $prod;
     }

@@ -145,11 +145,11 @@ function insertperusu(){
 		$result=array();
 		$this->db->where('usu_id',$id);
 		$consulta = $this->db->get('usuario');
-		foreach ($consulta->result() as $row) {
-			$result[] = $this->create($row);
-		}
-		return $result;
-	}
+		if ($res->num_rows() == 1) {
+				$result = $this->create($res->row_object());
+			}
+			return $result;
+				}
 	public function cambiarcontra($id,$usu_pass){
         $data  =  array(
 			'usu_pass' => $usu_pass
