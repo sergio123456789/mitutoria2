@@ -99,6 +99,34 @@ function insert(){
 		return $this->db->delete('calificacion');
 	}
 	
+	function calificacionesDelProfe($usu_id,$asig_id){
+		$result = array();
+		$resultado = 0;
+		$this->db->select('*');
+		$this->db->from('calificacion');
+		$this->db->join('horario', 'horario.hor_id = calificacion.cal_hor_id');
+		$this->db->where('hor_asig_id', $asig_id);
+		$this->db->where('hor_usu_id', $usu_id);
+		$res = $this->db->get();
+		if ($res->num_rows() > 0) {
+			foreach ($res->result() as $value) {
+				$result[] = $this->create($value);
+			}
+			$resultado = Calificacion_model::promedio($result);
+		}
+
+	return $resultado;
+	}
+
+	function promedio($array){
+		$notas = 0;
+		$cantidad = count($array);
+		foreach ($array as $key => $value) {
+			$notas = $notas + $value->get('cal_nota');
+		}
+		$resultado = $notas / $cantidad;
+		return $resultado;
+	}
 
 }
 

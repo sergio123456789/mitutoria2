@@ -1,6 +1,10 @@
 <link rel="stylesheet" href="<?=base_url('resources/bootstrap/css/style.css')?>">
 <div class="container-fluid">
 
+<a href="#_" class="lightbox" id="pablo">
+<img src="<?=$usuario->get('usu_foto')?>">
+</a> 
+
 	                <div class="row">
 	                <!-- MENSAJES DE OPERACIONES -->
                               <div class="messages">
@@ -133,13 +137,13 @@
     						<div class="card card-profile">
     							<div class="card-avatar">
     								<a href="#pablo">
-    									<img class="img" src="../../resources/images/marc.jpg" />
+    									<img class="img" src="<?=$usuario->get('usu_foto') ?>" />
     								</a>
     							</div>
 
     							<div class="content">
-    								<h6 class="category text-gray">Semestre 4</h6>
-    								<h4 class="card-title">Gabriel Vega</h4>
+    								<h6 class="category text-gray">Semestre <?=$alumno->get('alu_semestre') ?></h6>
+    								<h4 class="card-title"><?=$usuario->get('usu_nombre') ?></h4>
     								<p class="card-content">
 									 <div class="card-content table-responsive">
     								<div class="panel panel-default">
@@ -161,7 +165,15 @@
 	                                        <tr>
 	                                        	<td><?=$value->get('asig_cod') ?> <br> <?=$value->get('asig_nombre') ?></td>
 	                                        	<td>6.6</td>
-	                                        	<td><?=$value->get('asig_estado') ?></td>
+	                                        	<td>
+											<?php if ($value->get('asig_situacion') == 0 ){ ?>
+												Reprobado
+											<?php } elseif ($value->get('asig_situacion') == 1) { ?>
+												En riesgo
+											<?php }elseif ($value->get('asig_situacion')== 2) {?>
+											Sin riesgos
+											<?php } ?> 
+											</td>
 	                                        </tr>
 	                                         <?php endforeach ?>
 	                                       
@@ -176,19 +188,46 @@
     								<?php endif ?>
 
     							</div>
-
     							</div>
-
-
-
-
-
-    						</div>
+							</div>
 		    			</div>
 	                </div>
 	            </div>
+<style type="text/css">
+.thumbnail {
+  max-width: 40%;
+}
+  .lightbox {
+  / Default lightbox to hidden */
+  display: none;
 
+  / Position and style */
+  position: fixed;
+  z-index: 999;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  top: 0;
+  left: 0;
+  background: rgba(0,0,0,0.8);
+}
 
+.lightbox img {
+  / Pad the lightbox image */
+  max-width: 45%;
+  max-height: 45%;
+  margin-top: 8%;
+
+}
+
+.lightbox:target {
+  / Remove default browser outline */
+  outline: none;
+
+  / Unhide lightbox /
+  display: block;
+}
+</style>
 <script type="text/javascript">
 	
  $(function () {

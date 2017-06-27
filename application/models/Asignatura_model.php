@@ -149,7 +149,22 @@ class Asignatura_model extends CI_Model {
 	return $result;
 	}
 
+	public function asignaturaProfe($usu_id){
+		$result = array();
+		$this->db->select('*');
+		$this->db->from('asignatura');
+		$this->db->join('profesor', 'profesor.prof_asig_id = asignatura.asig_id');
+		$this->db->join('usuario', 'usuario.usu_id = prof_usu_id');
+		$this->db->where('usu_id', $usu_id);
+		$res= $this->db->get();
+			if ($res->num_rows() > 0) {
+			foreach ($res->result() as $value) {
+				$result[] = $this->create($value);
+			}
+		}
+	return $result;
 
+	}
 }
 
 

@@ -88,7 +88,7 @@ public function UsuarioUploader(){
                         'alu_semestre_ingreso' => $datos['42'],
                         'alu_reincorporado' => $datos['44'],
                         'alu_num_asignatura' => $datos['50'],
-                        'alu_semestre' => $datos['47'],
+                        'alu_semestre' => $datos['52'],
                         'alu_pagare' => $datos['49'],
                         'alu_cupones' => $datos['48'],
                             );

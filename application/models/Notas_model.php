@@ -113,6 +113,8 @@ function insert(){
 		return $result;
 	}
 
+	
+
 }
 
 /* End of file Notas_model.php */

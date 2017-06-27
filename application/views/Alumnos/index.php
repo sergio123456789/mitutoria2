@@ -7,7 +7,7 @@
 	                        <div class="card" style="margin-top:5%;">
 	                            <div class="card-header" data-background-color="purple">
 	                                <h4 class="title">Últimas Tutorías</h4>
-	                                <p class="category">Acá confirmas tu asistencia a la tutoría pedida</p>
+	                                <p class="category">Acá se muestran tus últimas tutoría pedida</p>
 	                            </div>
 	                            <div class="card-content table-responsive">
 	                                <table class="table" id="example1" style="text-align: center;">
@@ -26,7 +26,7 @@
 	                                       <?php foreach ($tutoria as $key => $value) { ?>
 	                                        <tr>
 	                                        	<td><?=$value->get('asig_nombre')?></td>
-<td><a href="#pablo"><img class="img" src="../../resources/images/marc.jpg" style="width: 42px; height: 42px;border-radius: 50%;" />  											</a> <?=$value->get('usu_nombre')?> esta tabla corre los datos </td>
+<td><a target="_blank" href="<?=site_url('/Alumno_Controller/mostrarProfe/'.$value->get('usu_id'))?>"><img class="img" src="<?=$value->get('usu_foto')?>" style="width: 42px; height: 42px;border-radius: 50%;" /> </a> <?=$value->get('usu_nombre')?> </td>
 	                                        	<td><?=$value->get('lis_fecha')?></td>
 	                                        	<td><?=$value->get('hor_inicio')?></td>
 	                                        	<td><?=$value->get('hor_termino')?></td>
@@ -176,10 +176,17 @@
                         	var nombre;
                             $.each( data.equipo, function( key, value ) {
                                  var JSONVAL =  JSON.parse(value);
+                                
                                  nombre = JSONVAL.asig_nombre;
-                                 $("#tblGrid").append('<tr><td><img src='+JSONVAL.usu_foto+' style="border-radius: 50%;" alt="" width="42px" height="42"> '+JSONVAL.usu_nombre+'</td><td>'+JSONVAL.hor_sala+'</td><td>'+JSONVAL.hor_dia+'</td>      <td>'+JSONVAL.hor_inicio+'</td> <td>'+JSONVAL.hor_termino+'</td>	<td><a href="<?=site_url('Alumno_Controller/solicitar/')?>'+JSONVAL.hor_id+'"><button type="button"  class="btn btn-warning btn-sm pull-right" >Solicitar</button></a> </td> </tr>');
+                                 $("#tblGrid").append('<tr><td><a target="_blank" href="<?=site_url('/Alumno_Controller/mostrarProfe/')?>'+JSONVAL.usu_id+'<img class="img" src="'+JSONVAL.usu_foto+'" style="width: 42px; height: 42px;border-radius: 50%;" /> </a> '+JSONVAL.usu_nombre+'</td><td>'+JSONVAL.hor_sala+'</td><td>'+JSONVAL.hor_dia+'</td>      <td>'+JSONVAL.hor_inicio+'</td> <td>'+JSONVAL.hor_termino+'</td>	<td><a href="<?=site_url('Alumno_Controller/solicitar/')?>'+JSONVAL.hor_id+'"><button type="button"  class="btn btn-warning btn-sm pull-right" >Solicitar</button></a> </td> </tr>');
+                             
                              });
-                              $("#nommodal").append('<h3 id="nombre" class="modal-title text-center"> Horarios de '+nombre+'</h3>');
+                             if (typeof(nombre) == "undefined") {
+                             	$("#nommodal").append('<h3 id="nombre" class="modal-title text-center">TUTORIAS NO DISPONIBLES</h3>');
+                        	}
+                        	else{
+                             $("#nommodal").append('<h3 id="nombre" class="modal-title text-center"> Horarios de '+nombre+'</h3>');
+                             }
                         }else{
                             alert("Lo sentimos ocurrio un error");
                         }

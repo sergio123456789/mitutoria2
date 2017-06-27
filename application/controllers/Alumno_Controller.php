@@ -15,6 +15,7 @@ class Alumno_Controller extends CI_Controller {
 		$this->load->model('Lista_model','lista',true);
 		$this->load->model('Notas_model','notas',true);
 		$this->load->model('Tutoria_model','tutoria',true);
+		$this->load->model('Calificacion_model','calificacion',true);
 		$this->load->library('session');
 
 		}else{
@@ -137,6 +138,7 @@ class Alumno_Controller extends CI_Controller {
         $this->layout->view('/Alumnos/misramos.php',$datos,false);
     }
 
+
 	public function historialTutorias()
     {
 		$user=$this->session->userdata('logged_in');
@@ -148,6 +150,22 @@ class Alumno_Controller extends CI_Controller {
     {
     	 redirect('Alumno_Controller/index');
     }
+
+    function mostrarProfe($usu_id){
+		$usuario = $this->usuario->findById($usu_id);
+		$asignaturas = $this->asignatura->asignaturaProfe($usu_id);
+		$notas = array();
+		foreach ($asignaturas as $key => $value) {
+			$notas[$value->get('asig_id')] = $this->calificacion->calificacionesDelProfe($usu_id,$value->get('asig_id'));
+		}
+		$datos['notas'] = $notas;
+		$datos["asig"] = $asignaturas;
+		$datos['usuario'] = $usuario;
+
+		$this->layout->view('/Alumnos/verProfe.php',$datos,false);
+    }
+
+
 }
 /* End of file Alumno_Controller.php */
 /* Location: ./application/controllers/Alumno_Controller.php */
