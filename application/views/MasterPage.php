@@ -64,8 +64,10 @@
 
   <header class="main-header">
     <!-- Logo -->
+
+
       <!-- mini logo for sidebar mini 50x50 pixels -->
-        <a href="<?=site_url('loginController/volverIndex')?>" class="logo">
+        <a  class="logo">
       <span class="logo-mini"><img src="<?=base_url('')?>resources/images/favicon/favicon-32x32.png" style="width: 100%; height: 100%;"></span>
       <!-- logo for regular state and mobile devices -->
       <span class="logo-lg"><img src="<?=base_url('')?>resources/images/materialize-logo.png" style="width: 200px; height: 50px;"></span>
@@ -86,7 +88,8 @@
          <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="<?=base_url('')?>resources/images/user.png" style ="width:25px; height:25px" class="user-image" alt="User Image">
+            <i class="glyphicon glyphicon-off" aria-hidden="true"></i> 
+            
               <span class="hidden-xs"><?php echo $this->session->userdata('username');?></span>
             </a>
             <ul class="dropdown-menu">

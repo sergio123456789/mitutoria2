@@ -5,8 +5,8 @@
 	                     <div class="col-md-12">
 	                        <div class="card">
 	                            <div class="card-header" data-background-color="purple">
-	                                <h4 class="title">Tutorías disponibles según mi malla</h4>
-	                                <p class="category">Acá puedes solicitar tus tutorías </p>
+	                                <h4 class="title">Ayudantías disponibles según mi malla</h4>
+	                                <p class="category">Acá ver los horarios de las ayudantias</p>
 	                            </div>
 	                            <div class="card-content table-responsive">
 	                              <div id="links" class="section scrollspy">
@@ -117,7 +117,7 @@
 					 var id = $(this).attr('id');
                 $.ajax({
                     type: 'POST',
-                    url: "<?=site_url('/Alumno_Controller/Cargarprofesjson')?>",
+                    url: "<?=site_url('/Alumno_Controller/Cargarprofesayudantiasjson')?>",
                     dataType: 'json',
                     data: {"id" : id},
                     beforeSend: function () {;
@@ -132,11 +132,11 @@
                                  var JSONVAL =  JSON.parse(value);
                                 
                                  nombre = JSONVAL.asig_nombre;
-                                 $("#tblGrid").append('<tr><td><img src='+JSONVAL.usu_foto+' style="border-radius: 50%;" alt="" width="42px" height="42"> '+JSONVAL.usu_nombre+'</td><td>'+JSONVAL.hor_sala+'</td><td>'+JSONVAL.hor_dia+'</td>      <td>'+JSONVAL.hor_inicio+'</td> <td>'+JSONVAL.hor_termino+'</td>	<td><a href="<?=site_url('Alumno_Controller/solicitar/')?>'+JSONVAL.hor_id+'"><button type="button"  class="btn btn-warning btn-sm pull-right" >Solicitar</button></a> </td> </tr>');
+                                 $("#tblGrid").append('<tr><td><img src='+JSONVAL.usu_foto+' style="border-radius: 50%;" alt="" width="42px" height="42"> '+JSONVAL.usu_nombre+'</td><td>'+JSONVAL.hor_sala+'</td><td>'+JSONVAL.hor_dia+'</td>      <td>'+JSONVAL.hor_inicio+'</td> <td>'+JSONVAL.hor_termino+'</td> </tr>');
                              
                              });
                              if (typeof(nombre) == "undefined") {
-                             	$("#nommodal").append('<h3 id="nombre" class="modal-title text-center">TUTORIAS NO DISPONIBLES</h3>');
+                             	$("#nommodal").append('<h3 id="nombre" class="modal-title text-center">HORARIOS NO DISPONIBLES</h3>');
                         	}
                         	else{
                              $("#nommodal").append('<h3 id="nombre" class="modal-title text-center"> Horarios de '+nombre+'</h3>');

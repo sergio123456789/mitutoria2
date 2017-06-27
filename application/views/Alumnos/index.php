@@ -117,6 +117,7 @@
 								                <th>Día</th>
 								                <th>Inicio</th>
 								                <th>Término</th>
+								    
 								              </tr>
 								            </thead>
 								            <tbody id="tblGrid">

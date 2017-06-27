@@ -137,7 +137,17 @@ class Alumno_Controller extends CI_Controller {
 
         $this->layout->view('/Alumnos/misramos.php',$datos,false);
     }
-
+	public function Cargarprofesayudantiasjson()
+	{
+	$id_asig = $_POST["id"];
+   	$profesasig= $this->asignatura->misProxAsig($id_asig,"3");
+   	$newJSON = array();
+   	foreach ($profesasig as $key => $value) {
+   		$newJSON [] = json_encode($profesasig[$key]);
+   	}
+   	header('Content-Type: application/json');
+    echo json_encode(array("estado" =>true,"mensaje"=>"Se ha actualizado correctamente","equipo" => $newJSON ),true);
+	}
 
 	public function historialTutorias()
     {

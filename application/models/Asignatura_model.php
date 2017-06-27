@@ -99,7 +99,7 @@ class Asignatura_model extends CI_Model {
 		return $this->db->delete('asignatura');
 	}
 
-	public function misProxAsig($id_asi){
+	public function misProxAsig($id_asi,$tipo = 1){
 		$res = null;
 		$this->load->database();
 		$this->db->select('*');
@@ -108,6 +108,7 @@ class Asignatura_model extends CI_Model {
 		$this->db->join('asignatura',  'horario.hor_asig_id = asignatura.asig_id');
 		$this->db->where('asignatura.asig_id', $id_asi);
 		$this->db->where('hor_estado', 0);
+		$this->db->where('hor_tipo', $tipo);
 		$res= $this->db->get();
 		return $res->result_array();
 	}
