@@ -15,6 +15,7 @@ class Alumno_Controller extends CI_Controller {
 		$this->load->model('Lista_model','lista',true);
 		$this->load->model('Notas_model','notas',true);
 		$this->load->model('Tutoria_model','tutoria',true);
+		$this->load->model('Disponibilidad_model','disponibilidad',true);
 		$this->load->model('Calificacion_model','calificacion',true);
 		$this->load->library('session');
 
@@ -137,6 +138,66 @@ class Alumno_Controller extends CI_Controller {
 
         $this->layout->view('/Alumnos/misramos.php',$datos,false);
     }
+    public function createdispo()
+    {
+	$this->layout->view('/Alumnos/CrearDisponibilidad.php',"cscs",false);
+    }
+
+    public function test()
+    {
+    	$user = $this->session->userdata('logged_in');
+    	$datosDis = $this->disponibilidad->findByIdUsu($user['id']);
+    	echo json_encode($datosDis);
+    }
+
+	public function insertDispo(){
+        $user = $this->session->userdata('logged_in');
+        $data["error"] = "";
+        if ((isset($_POST['inicio']) && isset($_POST['fin'])) || isset($_POST['dia'])) {
+           if (!empty($_POST['inicio']) && !empty($_POST['fin'])) {
+        if ($_POST['dia']==1) {
+        $dia = "lunes";
+        } else if ($_POST['dia']==2) {
+        $dia = "martes";
+        }else if ($_POST['dia']==3) {
+        $dia = "miercoles";
+        }else if ($_POST['dia']==4) {
+        $dia = "jueves";
+        }else if ($_POST['dia']==5) {
+        $dia = "viernes";
+        }
+            if ($_POST['inicio'] >= '09:00' && $_POST['fin'] <= '20:00' && $_POST['inicio'] < $_POST['fin'] ) {
+          $row = array(
+            'dis_nombre' => $dia,
+            'dis_dia' =>  $_POST['dia'],
+            'dis_hi' => '2018/01/'.$_POST['dia'].' '.$_POST['inicio'],
+            'dis_ht' => '2018/01/'.$_POST['dia'].' '.$_POST['fin'],
+            'dis_usu_id' => $user['id']
+                );
+               $datos = $this->disponibilidad->create($row);
+               $datos->insert(); 
+
+        }else{
+            $data["error"] = "Horario no Admitido";
+           }
+        }
+
+      $this->layout->view('Alumnos/CrearDisponibilidad',$data,false);
+        }else {
+        $data["error"] = "Porfavor seleccione almenos un horario de disponibilidad";
+    }
+    }
+    // intento full calendar
+
+    function deleteevento($id = null)
+    { if(!is_null($id)){
+            $route = $this->disponibilidad->findById($id);
+            if($route){
+                $route->delete();
+            }
+        }
+        $this->layout->view('/CrearDisponibilidad');
+    }
 	public function Cargarprofesayudantiasjson()
 	{
 	$id_asig = $_POST["id"];
@@ -156,11 +217,7 @@ class Alumno_Controller extends CI_Controller {
        	$datos["tutoria"]=$tutorias;
  		$this->layout->view('/Alumnos/historialtutorias.php',$datos,false);
     }
-    public function ayudante()
-    {
-    	 redirect('Alumno_Controller/index');
-    }
-
+   
     function mostrarProfe($usu_id){
 		$usuario = $this->usuario->findById($usu_id);
 		$asignaturas = $this->asignatura->asignaturaProfe($usu_id);

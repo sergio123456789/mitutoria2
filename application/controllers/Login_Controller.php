@@ -31,7 +31,7 @@ class Login_Controller extends CI_Controller {
 		   {
 		   		$user = $this->session->userdata('logged_in');
 	   			if(count($user['permisos']) > 0){
-					if (in_array(5, $user['permisos'])) {
+					if (in_array(5, $user['permisos']) || in_array(6, $user['permisos'])) {
 	   					redirect('Alumno_Controller/index','refresh');
    					}elseif (in_array(3, $user['permisos'])) {
 	   					redirect('Tutor_Controller/index','refresh');

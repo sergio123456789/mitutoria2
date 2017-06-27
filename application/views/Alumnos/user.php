@@ -3,8 +3,8 @@
 
 <a href="#_" class="lightbox" id="pablo">
 <img src="<?=$usuario->get('usu_foto')?>">
-</a> 
-
+</a>  	
+    <?php $user=$this->session->userdata('logged_in'); ?>
 	                <div class="row">
 	                <!-- MENSAJES DE OPERACIONES -->
                               <div class="messages">
@@ -183,8 +183,8 @@
 	                            </div>
     							</div>
 
-    								<?php if ($this->session->userdata('permisos') == 6): ?>
-    								<a href="<?=site_url('Alumno_Controller/ayudante') ?>" class="btn btn-primary btn-round">Ayudantía</a>
+    								<?php if (in_array(6, $user['permisos'])): ?>
+    								<a href="<?=site_url('Alumno_Controller/createdispo') ?>" class="btn btn-primary btn-round">Ayudantía</a>
     								<?php endif ?>
 
     							</div>

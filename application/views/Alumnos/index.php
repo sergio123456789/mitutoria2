@@ -159,6 +159,7 @@
 						</div>
 					</div>
 				</div>
+				
 			<script type="text/javascript">
 				$(".Mostrar").click(function(){
 					 var id = $(this).attr('id');
