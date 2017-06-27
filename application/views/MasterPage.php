@@ -380,25 +380,17 @@
                   </a>
                 </li>
                      <li class="treeview">
-                  <a href="<?=site_url()?>/Profesor_Controller/miHorario">
+                  <a href="<?=site_url()?>/Profesor_Controller/historial">
                     <i class="fa fa-calendar-o"></i>
-                    <span>Mi Horario</span>
+                    <span>Historial</span>
                     <span class="pull-right-container">
                       <span class="label label-primary pull-right"></span>
                     </span>
                   </a>
                 </li>
-                   <li class="treeview">
-                  <a href="<?=site_url()?>/Profesor_Controller/misRamos">
-                    <i class="fa fa-calendar-o"></i>
-                    <span>Mis Ramos</span>
-                    <span class="pull-right-container">
-                      <span class="label label-primary pull-right"></span>
-                    </span>
-                  </a>
-                </li>
+                
 
-                <li class="treeview">
+                <!--<li class="treeview">
                   <a href="<?=site_url()?>/Profesor_Controller/solReforzamientos">
                     <i class="fa fa-graduation-cap"></i>
                     <span>Solicitar Reforzamientos</span>
@@ -406,16 +398,7 @@
                       <span class="label label-primary pull-right"></span>
                     </span>
                   </a>
-                </li>
-                   <li class="treeview">
-                  <a href="<?=site_url()?>/Profesor_Controller/Notificaciones">
-                    <i class="fa fa-bell"></i>
-                    <span>Notificaciones</span>
-                    <span class="pull-right-container">
-                      <span class="label label-primary pull-right"></span>
-                    </span>
-                  </a>
-                </li>
+                </li>-->
                     <?php } ?>
                     <?php if ((in_array(5, $user['permisos']))|| in_array(6, $user['permisos']))  { ?>
                               <li class="treeview">

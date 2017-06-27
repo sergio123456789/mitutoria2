@@ -12,20 +12,28 @@
 	                                <table class="table" style="text-align: center;">
 	                                    <thead class="text-primary" >
 	                                    	<th style="text-align: center;">Asignatura</th>
-	                                    	<th style="text-align: center;">Sección</th>
-	                                    	<th style="text-align: center;">Area</th>
 	                                    	
+	                                    	
+	                                    	
+	                                    		
 	                                    	
 	                                    </thead>
 	                                    <tbody>
+	                                    <?php foreach ($profesor as $pro){ ?>
+	                                    <?php if ($pro->get('prof_usu_id')==$user['id']){ ?>
+	                                    	
+	                                    
 	                                        <tr>
-	                                        	<td>Matemática I</td>
-	                                        	<td>Sección 40</td>
-    							                <td>Informática</td>
+	                                        <?php foreach ($asignatura as $asi){?>
+	                                         <?php if ($asi->get("asig_id")==$pro->get('prof_asig_id')){ ?>
+    								        <td><?=$asi->get('asig_nombre')?></td>	
+    								        <?php } ?>
+	                                        <?php }?>
+
 												
 
 	                                        </tr>
-
+<?php }?><?php }?>
 	                                    </tbody>
 	                                </table>
 

@@ -1,60 +1,4 @@
-  <div class="main-panel">
-			<nav class="navbar navbar-transparent navbar-absolute">
-				<div class="container-fluid">
-					<div class="navbar-header">
-						<button type="button" class="navbar-toggle" data-toggle="collapse">
-							<span class="sr-only">Toggle navigation</span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-						</button>
-						<a class="navbar-brand" href="#">Perfil</a>
-					</div>
-					<div class="collapse navbar-collapse">
-						<ul class="nav navbar-nav navbar-right">
-							<li>
-								<a href="#pablo" class="dropdown-toggle" data-toggle="dropdown">
-									<i class="material-icons">dashboard</i>
-									<p class="hidden-lg hidden-md">Dashboard</p>
-								</a>
-							</li>
-							<li class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-									<i class="material-icons">notifications</i>
-									<span class="notification">5</span>
-									<p class="hidden-lg hidden-md">Notifications</p>
-								</a>
-								<ul class="dropdown-menu">
-									<li><a href="#">Mike John responded to your email</a></li>
-									<li><a href="#">You have 5 new tasks</a></li>
-									<li><a href="#">You're now friend with Andrew</a></li>
-									<li><a href="#">Another Notification</a></li>
-									<li><a href="#">Another One</a></li>
-								</ul>
-							</li>
-							<li>
-								<a href="#pablo" class="dropdown-toggle" data-toggle="dropdown">
-	 							   <i class="material-icons">person</i>
-	 							   <p class="hidden-lg hidden-md">Perfil</p>
-	 						   </a>
-							</li>
-						</ul>
-
-						<form class="navbar-form navbar-right" role="search">
-							<div class="form-group  is-empty">
-	                        	<input type="text" class="form-control" placeholder="Buscar">
-	                        	<span class="material-input"></span>
-							</div>
-							<button type="submit" class="btn btn-white btn-round btn-just-icon">
-								<i class="material-icons">search</i><div class="ripple-container"></div>
-							</button>
-	                    </form>
-					</div>
-				</div>
-			</nav>
-
-	        <div class="content">
-	            <div class="container-fluid">
+<link rel="stylesheet" href="<?=base_url('resources/bootstrap/css/style.css')?>"><div class="container-fluid">
 	                <div class="row">
 	                    <div class="col-md-8">
 	                        <div class="card">
@@ -63,39 +7,32 @@
 									<p class="category">Recuerda sólo puedes cambiar tu clave</p>
 	                            </div>
 	                            <div class="card-content">
-	                                <form>
+	                            <?php foreach ($usuario as $usu){ ?>
+	                            	<?php if ($usu->get('usu_id')==$user['id']){ ?>
+	                            		
+	                            	<form>
 	                                    <div class="row">
 	                                        <div class="col-md-5">
 												<div class="form-group label-floating">
-													<label class="control-label">Carrera</label>
-													<input type="text" class="form-control" disabled>
-												</div>
-	                                        </div>
+													<label class="control-label">area</label>
+													<?php foreach ($area as $are){ ?>
+    								        <?php if ($are->get("ar_id")==$usu->get('usu_are_id')){ ?>
+    								        	<input type="text" value="<?=$are->get('ar_nombre')?>" class="form-control" disabled></div> </div>
+    								        	<?php } ?>	
+    								        <?php } ?>
+													
+												
+	                                       
 	                                        <div class="col-md-4">
 												<div class="form-group label-floating">
 													<label class="control-label">Inacap Mail</label>
-													<input type="email" class="form-control" disabled>
+													<input type="email" value="<?=$usu->get('usu_correo')?>" class="form-control" disabled>
 												</div>
 	                                        </div>
 	                                          <div class="col-md-3">
 												<div class="form-group label-floating">
-													<label class="control-label">Clave </label>
-													<input type="text" class="form-control" disabled>
-												</div>
-	                                        </div>
-	                                    </div>
-
-	                                    <div class="row">
-	                                        <div class="col-md-6">
-												<div class="form-group label-floating">
-													<label class="control-label">Nombre</label>
-													<input type="text" class="form-control" disabled>
-												</div>
-	                                        </div>
-	                                        <div class="col-md-6">
-												<div class="form-group label-floating">
-													<label class="control-label">Apellido</label>
-													<input type="text" class="form-control" disabled>
+													<label class="control-label">Rut </label>
+													<input type="text" value="<?=$usu->get('usu_rut')?>-<?=$usu->get('usu_dv')?>" class="form-control" disabled>
 												</div>
 	                                        </div>
 	                                    </div>
@@ -103,49 +40,41 @@
 	                                    <div class="row">
 	                                        <div class="col-md-12">
 												<div class="form-group label-floating">
-													<label class="control-label">Dirección</label>
-													<input type="text" class="form-control" disabled>
+													<label class="control-label">Nombre Completo</label>
+													<input type="text" value="<?=$usu->get('usu_nombre')?>" class="form-control" disabled>
 												</div>
 	                                        </div>
 	                                    </div>
 
+
 	                                    <div class="row">
 	                                        <div class="col-md-4">
 												<div class="form-group label-floating">
-													<label class="control-label">Ciudad</label>
-													<input type="text" class="form-control" disabled>
+													<label class="control-label">Contraseña</label>
+													<input type="text" value="<?=$usu->get('usu_pass')?>" class="form-control" disabled>
 												</div>
 	                                        </div>
-	                                        <div class="col-md-4">
-												<div class="form-group label-floating">
-													<label class="control-label">Comuna</label>
-													<input type="text" class="form-control" disabled>
-												</div>
-	                                        </div>
-	                                        <div class="col-md-4">
-												<div class="form-group label-floating">
-													<label class="control-label">Número</label>
-													<input type="text" class="form-control" disabled>
-												</div>
-	                                        </div>
+	                                        
+	                                        
 	                                    </div>
 	                                    <div class="clearfix"></div>
 	                                </form>
 	                            </div>
 
 	                              <div class="card-content">
-	                                <form>
+	                                <form action="<?=site_url('Profesor_Controller/cambiarcon')?>" method="POST">
 	                                    <div class="row">
+	                                    <input type="text" id="conid" name="conid" value="<?=$user['id']?>"  style="visibility:hidden">
 	                                        <div class="col-md-4">
 												<div class="form-group label-floating">
 													<label class="control-label">Nueva Contraseña</label>
-													<input type="text" class="form-control" >
+													<input type="text" id="nuecon" name="nuecon" class="form-control" >
 												</div>
 	                                        </div>
 	                                        <div class="col-md-4">
 												<div class="form-group label-floating">
 													<label class="control-label">Confirmar Contraseña</label>
-													<input type="text" class="form-control" >
+													<input type="text" id="concon" name="concon" class="form-control" >
 												</div>
 	                                        </div>
 	                                    </div>
@@ -153,63 +82,68 @@
 	                                    <button type="submit" class="btn btn-primary pull-right">Cambiar contraseña</button>
 	                                    <div class="clearfix"></div>
 	                                </form>
+	                                <?php } ?>
+	                                <?php } ?>
+	                           
 	                            </div>
 	                        </div>
 	                    </div>
-						<div class="col-md-4">
+						<div class="col-md-4" style="margin-top:5%;">
     						<div class="card card-profile">
     							<div class="card-avatar">
     								<a href="#pablo">
-    									<img class="img" src="../../assets/img/faces/marc.jpg" />
+    									<img class="img" src="../../resources/images/marc.jpg" />
     								</a>
     							</div>
 
     							<div class="content">
-    								<h6 class="category text-gray">Profesor</h6>
-    								<h4 class="card-title">Jose Muñoz</h4>
+    								
+    								<h4 class="card-title"><?=$usu->get('usu_nombre')?></h4>
     								<p class="card-content">
     									 <div class="card-content table-responsive">
-	                               
+	                                <table class="table table-hover">
+	                                    <thead>
+	                                        <th>Asignaturas</th>
+	                                    	
+	                                    </thead>
+	                                    <tbody>
+	                                          <?php foreach ($profesor as $pro){ ?>
+	                                    <?php if ($pro->get('prof_usu_id')==$user['id']){ ?>
+	                                    	
+	                                    
+	                                        <tr>
+	                                        <?php foreach ($asignatura as $asi){?>
+	                                         <?php if ($asi->get("asig_id")==$pro->get('prof_asig_id')){ ?>
+    								        <td><?=$asi->get('asig_nombre')?></td>	
+    								        <?php } ?>
+	                                        <?php }?>
+
+												
+
+	                                        </tr>
+<?php }?><?php }?>
+	                                        
+	                                    </tbody>
+	                                </table>
 	                            </div>
-    								</p>
-    								
+    							
     							</div>
     						</div>
 		    			</div>
 	                </div>
 	            </div>
-	        </div>
+	            <script type="text/javascript">
+	            	var password, password2;
 
-	        <footer class="footer">
-	            <div class="container-fluid">
-	                <nav class="pull-left">
-	                    <ul>
-	                        <li>
-	                            <a href="#">
-	                                Home
-	                            </a>
-	                        </li>
-	                        <li>
-	                            <a href="#">
-	                                Company
-	                            </a>
-	                        </li>
-	                        <li>
-	                            <a href="#">
-	                                Portfolio
-	                            </a>
-	                        </li>
-	                        <li>
-	                            <a href="#">
-	                               Blog
-	                            </a>
-	                        </li>
-	                    </ul>
-	                </nav>
-	                <p class="copyright pull-right">
-	                    &copy; <script>document.write(new Date().getFullYear())</script> <a href="http://www.creative-tim.com">Creative Tim</a>, made with love for a better web
-	                </p>
-	            </div>
-	        </footer>
-	    </div>
-	</div>
+password = document.getElementById('nuecon');
+password2 = document.getElementById('concon');
+
+password.onchange = password2.onkeyup = passwordMatch;
+
+function passwordMatch() {
+    if(password.value !== password2.value)
+        password2.setCustomValidity('Las contraseñas no coinciden.');
+    else
+        password2.setCustomValidity('');
+}
+	            </script>
