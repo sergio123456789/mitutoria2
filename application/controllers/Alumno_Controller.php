@@ -138,9 +138,10 @@ class Alumno_Controller extends CI_Controller {
 
         $this->layout->view('/Alumnos/misramos.php',$datos,false);
     }
+
     public function createdispo()
     {
-	$this->layout->view('/Alumnos/CrearDisponibilidad.php',"cscs",false);
+	$this->load->view('/Alumnos/CrearDisponibilidad.php',"cscs",false);
     }
 
     public function test()
@@ -155,20 +156,10 @@ class Alumno_Controller extends CI_Controller {
         $data["error"] = "";
         if ((isset($_POST['inicio']) && isset($_POST['fin'])) || isset($_POST['dia'])) {
            if (!empty($_POST['inicio']) && !empty($_POST['fin'])) {
-        if ($_POST['dia']==1) {
-        $dia = "lunes";
-        } else if ($_POST['dia']==2) {
-        $dia = "martes";
-        }else if ($_POST['dia']==3) {
-        $dia = "miercoles";
-        }else if ($_POST['dia']==4) {
-        $dia = "jueves";
-        }else if ($_POST['dia']==5) {
-        $dia = "viernes";
-        }
+        
             if ($_POST['inicio'] >= '09:00' && $_POST['fin'] <= '20:00' && $_POST['inicio'] < $_POST['fin'] ) {
           $row = array(
-            'dis_nombre' => $dia,
+            'dis_nombre' => "Disponibilidad",
             'dis_dia' =>  $_POST['dia'],
             'dis_hi' => '2018/01/'.$_POST['dia'].' '.$_POST['inicio'],
             'dis_ht' => '2018/01/'.$_POST['dia'].' '.$_POST['fin'],
@@ -182,7 +173,7 @@ class Alumno_Controller extends CI_Controller {
            }
         }
 
-      $this->layout->view('Alumnos/CrearDisponibilidad',$data,false);
+      $this->load->view('/Alumnos/CrearDisponibilidad.php',$data,false);
         }else {
         $data["error"] = "Porfavor seleccione almenos un horario de disponibilidad";
     }
@@ -196,7 +187,7 @@ class Alumno_Controller extends CI_Controller {
                 $route->delete();
             }
         }
-        $this->layout->view('/CrearDisponibilidad');
+        $this->load->view('/Alumnos/CrearDisponibilidad');
     }
 	public function Cargarprofesayudantiasjson()
 	{

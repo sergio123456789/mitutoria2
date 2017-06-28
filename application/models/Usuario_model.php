@@ -226,6 +226,22 @@ function insertperusu(){
 		}
 		return $user;
 	}
+	public function getDisponibilidad()
+	{
+		$disponibilidades = null;
+		try {
+			$result = $this->db->order_by('dis_dia', 'ASC')->get_where('disponibilidad',array('dis_usu_id'=>$this->_columns['usu_id']));
+			$CI =& get_instance();
+			$CI->load->model('Disponibilidad_model');
+			foreach ($result->result() as $key => $value) {
+				$dis = $CI->Disponibilidad_model->create(get_object_vars($value));
+				$disponibilidades[] =  $dis;
+			}
+		} catch (Exception $e) {
+		
+		}
+		return $disponibilidades;
+	}
 }
 /*
 	public function saveusu()

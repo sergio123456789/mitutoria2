@@ -184,8 +184,16 @@
     							</div>
 
     								<?php if (in_array(6, $user['permisos'])): ?>
-    								<a href="<?=site_url('Alumno_Controller/createdispo') ?>" class="btn btn-primary btn-round">Ayudantía</a>
+    								<a onclick="abrir()" class="btn btn-primary btn-round">Ayudantía</a>
     								<?php endif ?>
+    								<script type="text/javascript">
+    								 function abrir(idProd) { 
+
+                open('<?=site_url('Alumno_Controller/createdispo')?>','','top=300,left=300,width=550,height=600') ; 
+
+                }
+
+                </script>
 
     							</div>
     							</div>
