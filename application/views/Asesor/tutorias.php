@@ -6,7 +6,7 @@
 	                        <div class="card" style="margin-top:5%;">
 	                            <div class="card-header" data-background-color="purple">
 	                                <h4 class="title">Tutorías</h4>
-	                                <p class="category">Acá puedes ver todas las Tutoráas </p>
+	                                <p class="category">Acá puedes ver todas las Tutorías </p>
 	                            </div>
 	                            <div class="card-content table-responsive">
 	                                <table class="table" id="example1" style="text-align: center;">
@@ -24,16 +24,7 @@
 	                                        	<td><?=$tur->get('usu_nombre')?></td>
 	                                        	<td><?=$tur->get('asig_nombre')?></td>
     							                <td><?=$tur->get('hor_fechasis')?></td>
-    							                <?php if($tur->get('hor_tipo') == 1){?>
     							                <td>Tutoría</td>
-    							                <?php } ?>
-    							                <?php if($tur->get('hor_tipo') == 2){?>
-    							                <td>Reforzamiento</td>
-    							                <?php } ?>
-    							                <?php if($tur->get('hor_tipo') == 3){?>
-    							                <td>Ayudantía</td>
-    							                <?php } ?>
-
     							                <?php if($tur->get('hor_estado') == 0){?>
     							                <td><span class="label label-warning">Pendiente</span></td>
     							                <?php } ?>
