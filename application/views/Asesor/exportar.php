@@ -11,10 +11,10 @@
 	                            <div class="card-content table-responsive">
 	                              <div id="links" class="section scrollspy">
            						 <div class="collection">
-           						   <a href="#modal-default" data-toggle="modal" data-target="#modal-default" class="collection-item">Alumnos</a>
-           						   <a href="#modal-default" data-toggle="modal" data-target="#modal-default" class="collection-item ">Profesores</a>
-           						   <a href="#modal-default" data-toggle="modal" data-target="#modal-default" class="collection-item">Tutorías</a>
-           						   <a href="#modal-default" data-toggle="modal" data-target="#modal-default" class="collection-item">Reforzamiento</a>
+           						   <a href="<?=site_url('Excel_Controller/downloadAlum')?>" class="collection-item">Alumnos</a>
+           						   <a href="<?=site_url('Excel_Controller/downloadProfe')?>" class="collection-item ">Profesores</a>
+           						   <a href="<?=site_url('Excel_Controller/downloadTuto')?>"  class="collection-item">Tutorías</a>
+           						   <a href="<?=site_url('Excel_Controller/downloadRefor')?>"  class="collection-item">Reforzamiento</a>
            						 </div>
 	                            </div>
 	                        </div>
@@ -45,23 +45,4 @@
 
 							</div></div></div>
 
-		<div class="modal fade" id="modal-default">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" style="text-align: center;">¿Seguro que desea descargar el archivo?</h4>
-              </div>
-              <div class="modal-footer">
-              <form>
-                <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Cancelar</button>
-                <a href="<?=site_url('Excel_Controller/downloadUsu')?>"><button type="submit" class="btn  btn-success">Aceptar</button></a>         	
-              </form>
-              </div>
-            </div>
-            <!-- /.modal-content -->
-          </div>
-          <!-- /.modal-dialog -->
-        </div>
         <!-- /.modal -->

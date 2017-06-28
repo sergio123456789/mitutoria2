@@ -32,8 +32,8 @@
 								        </div>
 								        <div class="modal-body" style="text-align: center;">
 										  <form action="<?=site_url('Excel_Controller/UsuarioUploader')?>" method="post" enctype="multipart/form-data">
-        <input type="file"  name="file" style="margin-left: 25%"> 
-        <button type="submit" class="btn btn-primary" style="margin-top: 5%;">Importar</button>
+        <input type="file" accept=".csv" name="file" style="margin-left: 25%"> 
+        <button type="submit" class="btn btn-primary"  style="margin-top: 5%;">Importar</button>
     </form>
 										  
 										</div>

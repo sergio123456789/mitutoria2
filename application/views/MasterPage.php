@@ -182,24 +182,6 @@
                     </span>
                   </a>
                 </li>
-                <li class="treeview">
-                  <a href="<?=site_url()?>/Asesor_Controller/verAyudantia">
-                    <i class="fa fa-book"></i>
-                    <span>Ayudantía</span>
-                    <span class="pull-right-container">
-                      <span class="label label-primary pull-right"></span>
-                    </span>
-                  </a>
-                </li>
-                <li class="treeview">
-                  <a href="<?=site_url()?>/Asesor_Controller/Notificaciones">
-                    <i class="fa fa-bell"></i>
-                    <span>Notificaciones</span>
-                    <span class="pull-right-container">
-                      <span class="label label-primary pull-right"></span>
-                    </span>
-                  </a>
-                </li>
                  <li class="treeview">
                   <a href="<?=site_url()?>/Asesor_Controller/Importar">
                     <i class="fa fa-upload"></i>

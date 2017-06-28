@@ -110,7 +110,6 @@ function insertperusu(){
 				$row = $query->row_object();
 				$usuario=$this->create($row);
 				$aux=$usuario->get('usu_rut');
-
 			}
 
 			if ($this->_columns['usu_rut']!=$aux) {
@@ -121,6 +120,7 @@ function insertperusu(){
 		}else{
 			$this->db->where('usu_id',$this->_columns['usu_id']);
 			$this->db->update('usuario',$this->_columns);
+			
 
 		}
 	}
@@ -242,7 +242,7 @@ function insertperusu(){
 		}
 		return $disponibilidades;
 	}
-	function downloadUser($user){
+	function downloadAlum($user){
 
 		$this->load->dbutil();
         $this->load->helper('file');
@@ -250,11 +250,9 @@ function insertperusu(){
         $delimiter = "|";
         $newline = "\r\n";
         $filename = $user.".csv";
-        $query = "SELECT CONCAT(usu_rut,'-',usu_dv) AS RUT, usu_nombre AS NOMBRE, usu_correo AS CORREO FROM usuario";
+        $query = "SELECT CONCAT(usu_rut,'-',usu_dv) AS RUT, usu_nombre AS NOMBRE, usu_correo AS CORREO, b.alu_programa_estudio AS CARRERA, b.alu_semestre AS SEMESTRE,b.alu_jornada AS JORNADA, b.alu_fechamatricula AS MATRICULA, b.alu_edad AS EDAD, b.alu_celular AS CELULAR FROM usuario a INNER JOIN alumno b ON a.usu_id = b.alu_usu_id";
         $result = $this->db->query($query);
-
         $data = $this->dbutil->csv_from_result($result, $delimiter, $newline);
-
         force_download($filename, "\xEF\xBB\xBF".$data);
 	}
 

@@ -48,6 +48,9 @@ public function UsuarioUploader(){
                }
             if ($usuario->get('usu_id')!=0) {
 
+                 $fechaNacim = date('d/m/y', strtotime($datos['18']));
+                 $fechaMatri = date('d/m/y', strtotime($datos['31']));
+
                   $usualum = array(
                         'alu_usu_id' => $usuario->get('usu_id'),
                         'alu_inst' => $datos['1'],
@@ -62,7 +65,7 @@ public function UsuarioUploader(){
                         'alu_correo_personal' => $datos['15'],
                         'alu_telefono' => $datos['16'],
                         'alu_celular' => $datos['17'],
-                        'alu_fecha_nacimiento' => $datos['18'], 
+                        'alu_fecha_nacimiento' => $fechaNacim, 
                         'alu_edad' => $datos['19'],
                         'alu_sexo' => $datos['20'],
                         'alu_pais' => $datos['21'],
@@ -74,7 +77,7 @@ public function UsuarioUploader(){
                         'alu_ciudad' => $datos['28'],
                         'alu_region' => $datos['29'],
                         'alu_plan' => $datos['30'],
-                        'alu_fechamatricula' => $datos['31'],
+                        'alu_fechamatricula' => $fechaMatri,
                         'alu_comunacolegio' => $datos['32'],
                         'alu_rolrbd' => $datos['33'],
                         'alu_colegio' => $datos['34'],
@@ -92,8 +95,9 @@ public function UsuarioUploader(){
                         'alu_pagare' => $datos['49'],
                         'alu_cupones' => $datos['48'],
                             );
+                
                  $alumno = $this->alum->create($usualum);
-                $alumno->save();
+                 $alumno->save();
                   //var_dump($usualum);
                 }
              
@@ -166,22 +170,16 @@ public function UsuarioUploader(){
                 while (($datos = fgetcsv($gestor, 1000, ";")) !== FALSE) {
                
                     if ($coun!=0) {
-                        
-                   
                     $dato = explode('-',$datos['1']);
-
                     $nombre=$datos['0'];
                     $rut = $dato['0'];
                     $dv = $dato['1'];
-
                     $email=$datos['2'];
                     $area=$datos['3']; 
                     }
                     $coun= $coun + 1;
                 fclose($gestor);
-
                 }
-
                 $user = $this->session->userdata('logged_in');
                 if(count($user['permisos']) > 0){
                     if (in_array(1, $user['permisos'])) {
@@ -225,7 +223,7 @@ public function UsuarioUploader(){
     }
 
     public function downloadUsu(){
-        $this->usuario->downloadUser('usuarios');
+        $this->usuario->downloadAlum('usuarios');
         if(count($user['permisos']) > 0){
                     if (in_array(1, $user['permisos'])) {
                         redirect('Asesor_Controller/importar','refresh');
