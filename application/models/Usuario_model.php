@@ -201,6 +201,7 @@ function insertperusu(){
 		return $result;
 	}
 
+
 	 public function findByRut($rut){
     $query = $this ->db-> get_where('usuario',array('usu_rut'=>$rut));
    if($query -> num_rows() >= 1)

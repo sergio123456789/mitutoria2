@@ -22,29 +22,7 @@ function myFunction() {
 
     <script type="text/javascript">
 			google.charts.load('current', {packages: ['corechart', 'bar']});
-      google.charts.setOnLoadCallback(drawChart);
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Tutorías', 'Cantidad de tutorías por área'],
-          ['Agropecuaria y Agroindustrial',     11],
-          ['Construcción',      2],
-          ['Electricidad Y Electrónica',  2],
-          ['Informática Y Telecomunicaciones', 2],
-          ['Mecánica',    4],
-          ['Minería Y Metalurgia', 2],
-          ['Procesos Industriales', 2]
-        ]);
-
-        var options = {
-        	chartArea:{left:30,top:20,bottom:20,width:"100%",height:"100%"},
-         
-        };
-
-        var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
-        chart.draw(data, options);
-      }
 			google.charts.setOnLoadCallback(drawRightY);
-
 			function drawRightY() {
 			      var data = google.visualization.arrayToDataTable([
 			        ['Área', 'Con Ayudantía', 'Sin Ayudantía'],
@@ -136,17 +114,6 @@ function myFunction() {
 	                                </table>
 	                            </div>
 	                        </div>
-
-						<div class="col-md-6">
-						<div class="card">
-							<div class="card-header" data-background-color="purple">
-	                                <h4 class="title">Tutorías realizadas </h4>
-	                                <p class="category">Acá puedes visualizar las tutorías realizadas por área </p>
-	                            </div>
-	                       <p> <div id="donutchart" style="width: 400px; height: 300px;"></div></p>
-	                      
-	                    </div>
-	                    </div>
 
 	                    	<!-- Modal de eliminar la tutoría-->
 

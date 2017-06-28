@@ -128,6 +128,19 @@ function insert(){
 		return $resultado;
 	}
 
+	public function getDetalleNotaProf($id=null){
+    $result = null;
+    $this->load->database();
+    $this->db->select('hor_fechasis,asig_nombre,cal_nota,cal_comentario');
+    $this->db->from('calificacion');
+    $this->db->join('usuario',  'calificacion.cal_usu_id = usuario.usu_id');
+    $this->db->join('horario','calificacion.cal_hor_id = horario.hor_id');
+    $this->db->join('asignatura','horario.hor_asig_id = asignatura.asig_id');
+    $this->db->where('calificacion.cal_usu_id', $id);
+    $consulta = $this->db->get();
+    return $consulta->result_array();
+}
+
 }
 
 /* End of file Calificacion_model.php */

@@ -26,11 +26,6 @@ class Asesor_Controller extends CI_Controller {
 		$datitos['tutorias'] = $tutoria;
 		$this->layout->view('/Asesor/tutorias.php',$datitos,false);
 	}
-	public function verReforzamientos(){
-		$reforzamiento =$this->tutoria->getReforzamiento();
-		$datitos['reforzamientos'] = $reforzamiento;
-		$this->layout->view('/Asesor/reforzamiento.php',$datitos,false);
-	}
 	public function Importar(){
 		$this->layout->view('/Asesor/importar.php');
 	}
@@ -38,6 +33,11 @@ class Asesor_Controller extends CI_Controller {
 		$this->layout->view('/Asesor/exportar.php');
 	}
 
+public function verReforzamientos(){
+		$reforzamiento =$this->tutoria->getReforzamiento();
+		$datitos['reforzamientos'] = $reforzamiento;
+		$this->layout->view('/Asesor/reforzamiento.php',$datitos,false);
+	}
 
 	public function detalleAlumno(){
 
@@ -78,6 +78,7 @@ class Asesor_Controller extends CI_Controller {
 
 		$profe =$this->usuario->getUserByPerfil(4);
 		$datitos['profesores'] = $profe;
+		
 		$this->layout->view('/Asesor/VerProfesores.php',$datitos,false);
 	}
 
