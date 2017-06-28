@@ -185,14 +185,14 @@ function insertperusu(){
 		return $area;
 	}
 
-	public function getUserByPerfil($perfil = null,$area = null){
+	public function getUserByPerfil($perfil=null){
 		$result = null;
 		$this->load->database();
-		$this->db->select('usu_id,usu_nombre,usu_correo,usu_pass,usu_are_id');
+		$this->db->select('*');
 		$this->db->from('usuario');
 		$this->db->join('permisos',  'usuario.usu_id = permisos.per_usu_id');
+
 		$this->db->where_in('permisos.perf_id', $perfil);
-		$this->db->where('usuario.usu_are_id', $area);
 		
 		$consulta = $this->db->get();
 		foreach ($consulta->result() as $row) {
@@ -242,6 +242,54 @@ function insertperusu(){
 		}
 		return $disponibilidades;
 	}
+	function downloadUser($user){
+
+		$this->load->dbutil();
+        $this->load->helper('file');
+        $this->load->helper('download');
+        $delimiter = "|";
+        $newline = "\r\n";
+        $filename = $user.".csv";
+        $query = "SELECT CONCAT(usu_rut,'-',usu_dv) AS RUT, usu_nombre AS NOMBRE, usu_correo AS CORREO FROM usuario";
+        $result = $this->db->query($query);
+
+        $data = $this->dbutil->csv_from_result($result, $delimiter, $newline);
+
+        force_download($filename, "\xEF\xBB\xBF".$data);
+	}
+
+	public function getAsigProfByRut($id=null){
+    $result = null;
+    $this->load->database();
+    $this->db->select('asig_nombre, asig_cod');
+    $this->db->from('profesor');
+    $this->db->join('usuario',  'profesor.prof_usu_id = usuario.usu_id');
+    $this->db->join('asignatura','profesor.prof_asig_id = asignatura.asig_id');
+    $this->db->where('profesor.prof_usu_id', $id);
+    $consulta = $this->db->get();
+    return $consulta->result_array();
+}
+
+  public function getByRutAndPerf($perfil=null,$rut=null){
+		$result = null;
+		$this->load->database();
+		$this->db->select('usu_id,usu_nombre,usu_correo,usu_pass,usu_are_id');
+		$this->db->from('usuario');
+		$this->db->join('permisos',  'usuario.usu_id = permisos.per_usu_id');
+		$this->db->where('permisos.perf_id', $perfil);
+		$this->db->where('usuario.usu_rut', $rut);		
+		$consulta = $this->db->get();
+
+		if($consulta -> num_rows() >= 1)
+         {
+         	$row = $consulta->row_object();
+            $result = $this->create($row);
+            return $result; 
+		}
+		return false;
+	}
+
+
 }
 /*
 	public function saveusu()

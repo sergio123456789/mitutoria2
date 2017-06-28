@@ -116,6 +116,20 @@ class Tutoria_model extends CI_Model {
 			}
 		return $result;
 	}
+	public function getTutoria(){
+		$result = null;
+		$this->load->database();
+		$this->db->select('usu_nombre, asig_nombre, hor_fechasis, hor_estado,hor_tipo');
+		$this->db->from('horario');
+		$this->db->join('usuario',  'horario.hor_usu_id = usuario.usu_id');
+		$this->db->join('asignatura', 'horario.hor_asig_id = asignatura.asig_id');		
+		$consulta = $this->db->get();
+		foreach ($consulta->result() as $row) {
+			$result[] = $this->create($row);
+		}
+		return $result;
+	}
+
 	
 }
 

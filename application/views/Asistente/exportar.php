@@ -11,10 +11,10 @@
 	                            <div class="card-content table-responsive">
 	                              <div id="links" class="section scrollspy">
            						 <div class="collection">
-           						   <a href="#myModal" data-toggle="modal" class="collection-item">Alumnos</a>
-           						   <a href="#myModal" data-toggle="modal" class="collection-item ">Profesores</a>
-           						   <a href="#myModal" data-toggle="modal" class="collection-item">Tutorías</a>
-           						   <a href="#myModal" data-toggle="modal" class="collection-item">Reforzamiento</a>
+           						   <a href="#modal-default" data-toggle="modal" data-target="#modal-default" class="collection-item">Alumnos</a>
+           						   <a href="#modal-default" data-toggle="modal" data-target="#modal-default" class="collection-item ">Profesores</a>
+           						   <a href="#modal-default" data-toggle="modal" data-target="#modal-default" class="collection-item">Tutorías</a>
+           						   <a href="#modal-default" data-toggle="modal" data-target="#modal-default" class="collection-item">Reforzamiento</a>
            						 </div>
 	                            </div>
 	                        </div>
@@ -44,3 +44,25 @@
 
 
 							</div></div></div>
+
+<div class="modal fade" id="modal-default">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">¿Seguro que desea descargar el archivo?</h4>
+              </div>
+              <div class="modal-body">
+                <p>One fine body&hellip;</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary">Aceptar</button>
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->

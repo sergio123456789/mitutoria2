@@ -70,7 +70,7 @@ public function UsuarioUploader(){
                         'alu_ciudad_familia' => $datos['22'],
                         'alu_region_familia' => $datos['23'],
                         'alu_ingreso_familiar' => $datos['24'],
-                        'alu_direccion' => $datos['26'],
+                        'alu_direccion' => $datos['25'],
                         'alu_ciudad' => $datos['28'],
                         'alu_region' => $datos['29'],
                         'alu_plan' => $datos['30'],
@@ -88,7 +88,7 @@ public function UsuarioUploader(){
                         'alu_semestre_ingreso' => $datos['42'],
                         'alu_reincorporado' => $datos['44'],
                         'alu_num_asignatura' => $datos['50'],
-                        'alu_semestre' => $datos['52'],
+                        'alu_semestre' => $datos['47'],
                         'alu_pagare' => $datos['49'],
                         'alu_cupones' => $datos['48'],
                             );
@@ -96,8 +96,6 @@ public function UsuarioUploader(){
                 $alumno->save();
                   //var_dump($usualum);
                 }
-                
-
              
               //  var_dump($coun);
                
@@ -105,6 +103,14 @@ public function UsuarioUploader(){
                  $coun = $coun + 1 ;
             }
 
+                $user = $this->session->userdata('logged_in');
+                if(count($user['permisos']) > 0){
+                    if (in_array(1, $user['permisos'])) {
+                        redirect('Asesor_Controller/importar','refresh');
+                    }elseif (in_array(2, $user['permisos'])) {
+                        redirect('Asistente_Controller/importar','refresh');
+                    }
+                }
                 fclose($gestor);
 
             }
@@ -136,7 +142,16 @@ public function UsuarioUploader(){
                 fclose($gestor);
 
             }
+            $user = $this->session->userdata('logged_in');
+                if(count($user['permisos']) > 0){
+                    if (in_array(1, $user['permisos'])) {
+                        redirect('Asesor_Controller/importar','refresh');
+                    }elseif (in_array(2, $user['permisos'])) {
+                        redirect('Asistente_Controller/importar','refresh');
+                    }
+                }
         }
+
 
  
     }
@@ -166,6 +181,15 @@ public function UsuarioUploader(){
                 fclose($gestor);
 
                 }
+
+                $user = $this->session->userdata('logged_in');
+                if(count($user['permisos']) > 0){
+                    if (in_array(1, $user['permisos'])) {
+                        redirect('Asesor_Controller/importar','refresh');
+                    }elseif (in_array(2, $user['permisos'])) {
+                        redirect('Asistente_Controller/importar','refresh');
+                    }
+                }
             }
         }
 
@@ -175,16 +199,10 @@ public function UsuarioUploader(){
         if (isset($_FILES['file'])) {
             if (($gestor = fopen($_FILES['file']['tmp_name'], "r")) !== FALSE) {
                 $coun = 0 ;
-                
 
                 while (($datos = fgetcsv($gestor, 1000, ";")) !== FALSE) {
-               
-                    if ($coun!=0) {
-                        
-                   
+                    if ($coun!=0) {                   
                     $dato = explode('-',$datos['9']);
-
-                  
                     $rut = $dato['0'];
                     $dv = $dato['1'];
                     $tutor=$datos['10'];
@@ -194,10 +212,28 @@ public function UsuarioUploader(){
                 fclose($gestor);
 
                 }
+                $user = $this->session->userdata('logged_in');
+                if(count($user['permisos']) > 0){
+                    if (in_array(1, $user['permisos'])) {
+                        redirect('Asesor_Controller/importar','refresh');
+                    }elseif (in_array(2, $user['permisos'])) {
+                        redirect('Asistente_Controller/importar','refresh');
+                    }
+                }
             }
         }
-
     }
+
+    public function downloadUsu(){
+        $this->usuario->downloadUser('usuarios');
+        if(count($user['permisos']) > 0){
+                    if (in_array(1, $user['permisos'])) {
+                        redirect('Asesor_Controller/importar','refresh');
+                    }elseif (in_array(2, $user['permisos'])) {
+                        redirect('Asistente_Controller/importar','refresh');
+                    }
+                }    
+            }
 
 }
 
