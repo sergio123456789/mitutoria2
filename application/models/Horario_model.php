@@ -149,6 +149,12 @@ function insert(){
 		return $result;	
 	}
 
+	public function getCountTutorias($numero = null){
+		$query = $this->db->query("SELECT * FROM horario WHERE hor_tipo=1 AND hor_estado=".$numero);
+        $numero = $query->num_rows();
+        return $numero;
+	}
+
 
 }
 

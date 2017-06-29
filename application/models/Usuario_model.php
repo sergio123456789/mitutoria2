@@ -289,6 +289,15 @@ function insertperusu(){
 	}
 
 
+
+	public function getCountPerfiles($numero = null){
+		$query = $this->db->query("SELECT * FROM permisos WHERE perf_id=".$numero);
+        $numero = $query->num_rows();
+        return $numero;
+	}
+
+
+
 }
 /*
 	public function saveusu()

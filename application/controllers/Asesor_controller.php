@@ -12,10 +12,19 @@ class Asesor_Controller extends CI_Controller {
 		$this->load->model('Calificacion_model','calificacion',true);
 		$this->load->model('Tutoria_model','tutoria',true);
 		$this->load->model('Disponibilidad_model','disponibilidad',true);
+		$this->load->model('Horario_model','horario',true);
 	}
 	public function index()
 	{
-		$this->layout->view('/Asesor/index.php','datos',false);
+		$tutoriarealizada = $this->horario->getCountTutorias(3);
+		$tutoriacancelada = $this->horario->getCountTutorias(2);
+		$counttutores     = $this->usuario->getCountPerfiles(4);
+		$countalumnos     = $this->usuario->getCountPerfiles(6);
+		$datitos['tutoriarealizada'] = $tutoriarealizada;
+		$datitos['tutoriacancelada'] = $tutoriacancelada;
+		$datitos['counttutores'] = $counttutores;
+		$datitos['countalumnos'] = $countalumnos;
+		$this->layout->view('/Asesor/index.php',$datitos,false);
 	}
 
 	public function verAlumnos(){

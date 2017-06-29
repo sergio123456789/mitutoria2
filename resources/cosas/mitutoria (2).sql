@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-06-2017 a las 02:11:08
+-- Tiempo de generación: 29-06-2017 a las 06:01:34
 -- Versión del servidor: 10.1.21-MariaDB
 -- Versión de PHP: 5.6.30
 
@@ -6198,10 +6198,11 @@ INSERT INTO `carrera` (`car_id`, `car_nombre`) VALUES
 
 CREATE TABLE `disponibilidad` (
   `dis_id` int(11) NOT NULL,
-  `dis_nombre` varchar(60) NOT NULL,
+  `dis_sala` varchar(11) NOT NULL,
   `dis_dia` varchar(60) NOT NULL,
   `dis_hi` datetime NOT NULL,
   `dis_ht` datetime NOT NULL,
+  `dis_estado` int(11) NOT NULL COMMENT '0: Deshabilitado 1: Habilitado',
   `dis_usu_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -6209,9 +6210,9 @@ CREATE TABLE `disponibilidad` (
 -- Volcado de datos para la tabla `disponibilidad`
 --
 
-INSERT INTO `disponibilidad` (`dis_id`, `dis_nombre`, `dis_dia`, `dis_hi`, `dis_ht`, `dis_usu_id`) VALUES
-(2, 'Disponibilidad', '1', '2018-01-01 09:00:00', '2018-01-01 13:00:00', 5603),
-(3, 'Disponibilidad', '1', '2018-01-01 09:00:00', '2018-01-01 13:00:00', 5974);
+INSERT INTO `disponibilidad` (`dis_id`, `dis_sala`, `dis_dia`, `dis_hi`, `dis_ht`, `dis_estado`, `dis_usu_id`) VALUES
+(2, 'Sala 1', '1', '2018-01-01 09:00:00', '2018-01-01 13:00:00', 1, 5603),
+(3, 'Sala 2', '1', '2018-01-01 09:00:00', '2018-01-01 13:00:00', 1, 5974);
 
 -- --------------------------------------------------------
 
@@ -6237,9 +6238,9 @@ CREATE TABLE `horario` (
 --
 
 INSERT INTO `horario` (`hor_id`, `hor_dia`, `hor_inicio`, `hor_termino`, `hor_fechasis`, `hor_usu_id`, `hor_sala`, `hor_asig_id`, `hor_estado`, `hor_tipo`) VALUES
-(1, 'LUNES', '12:00:00', '15:00:00', '2017-06-01', 5974, 'Sala N°1', 1, 1, 1),
-(2, 'MARTES', '15:00:00', '17:00:00', '2017-06-01', 5974, 'Sala N°1', 1, 0, 1),
-(3, 'MARTES', '15:00:00', '17:00:00', '2017-06-01', 5974, 'Sala N°1', 2, 0, 2);
+(1, 'LUNES', '12:00:00', '15:00:00', '2017-06-01', 5974, 'Sala N°1', 1, 3, 1),
+(2, 'MARTES', '15:00:00', '17:00:00', '2017-06-01', 5974, 'Sala N°1', 1, 2, 1),
+(3, 'MARTES', '15:00:00', '17:00:00', '2017-06-01', 5974, 'Sala N°1', 2, 2, 2);
 
 -- --------------------------------------------------------
 
