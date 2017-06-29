@@ -157,7 +157,7 @@ class Alumno_Controller extends CI_Controller {
         if ((isset($_POST['inicio']) && isset($_POST['fin'])) || isset($_POST['dia'])) {
            if (!empty($_POST['inicio']) && !empty($_POST['fin'])) {
         
-            if ($_POST['inicio'] >= '09:00' && $_POST['fin'] <= '20:00' && $_POST['inicio'] < $_POST['fin'] ) {
+            if ($_POST['inicio'] >= '08:00' && $_POST['fin'] <= '23:00' && $_POST['inicio'] < $_POST['fin'] ) {
           $row = array(
             'dis_nombre' => "Disponibilidad",
             'dis_dia' =>  $_POST['dia'],

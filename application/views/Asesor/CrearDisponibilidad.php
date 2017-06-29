@@ -46,11 +46,11 @@
         center: ''
       },
       titleFormat: 'YYYY',
-       minTime : '09:00:00',
-      maxTime : '21:00:00',
+       minTime : '08:00:00',
+      maxTime : '23:00:00',
       businessHours: {
-        start: '09:00:00', // hora final
-        end: '21:00:00', // hora inicial
+        start: '08:00:00', // hora final
+        end: '23:00:00', // hora inicial
       },
       contenHeight : 'auto',
       columnFormat: 'dddd',
