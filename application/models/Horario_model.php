@@ -138,6 +138,7 @@ function insert(){
 		$this->db->join('usuario',  'horario.hor_usu_id = usuario.usu_id');
 		$this->db->join('asignatura',  'horario.hor_asig_id = asignatura.asig_id');
 		$this->db->where('lista.lis_usu_id', $id_alum);
+		$this->db->where('lista.lis_estado', "2");
 		$this->db->where('horario.hor_estado ', $estado);
 		$this->db->order_by('horario.hor_fechasis', "DESC");
 		$res= $this->db->get();
@@ -148,6 +149,25 @@ function insert(){
 		}
 		return $result;	
 	}
+	public function mitutoriasporestadohorarioparacalificar($id_alum,$id_lis){
+		$result = null;
+		$this->load->database();
+		$this->db->select('*');
+		$this->db->from('horario');
+		$this->db->join('tutoria',  'tutoria.tuto_hor_id = horario.hor_id');
+		$this->db->join('lista',  'tutoria.tuto_lis_id = lista.lis_id');
+		$this->db->join('usuario',  'horario.hor_usu_id = usuario.usu_id');
+		$this->db->join('asignatura',  'horario.hor_asig_id = asignatura.asig_id');
+		$this->db->where('lista.lis_usu_id', $id_alum);
+		$this->db->where('lista.lis_id', $id_lis);
+		$this->db->where('horario.hor_estado ',"3");
+		$res= $this->db->get();
+		$result = null;
+			if ($res->num_rows() == 1) {
+				$result = $this->create($res->row_object());
+			}
+			return $result;
+	} 
 
 	public function getCountTutorias($numero = null){
 		$query = $this->db->query("SELECT * FROM horario WHERE hor_tipo=1 AND hor_estado=".$numero);

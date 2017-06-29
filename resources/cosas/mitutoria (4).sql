@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-06-2017 a las 06:01:34
+-- Tiempo de generación: 29-06-2017 a las 11:10:36
 -- Versión del servidor: 10.1.21-MariaDB
 -- Versión de PHP: 5.6.30
 
@@ -6160,17 +6160,9 @@ CREATE TABLE `calificacion` (
   `cal_usu_id` int(11) DEFAULT NULL,
   `cal_nota` decimal(10,0) NOT NULL,
   `cal_hor_id` int(11) NOT NULL,
+  `cal_usu_id_alum` int(11) NOT NULL,
   `cal_comentario` longtext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `calificacion`
---
-
-INSERT INTO `calificacion` (`cal_id`, `cal_usu_id`, `cal_nota`, `cal_hor_id`, `cal_comentario`) VALUES
-(1, 5974, '70', 1, 'loco wena '),
-(2, 5974, '10', 1, 'loco malo'),
-(3, 5974, '45', 2, ':)');
 
 -- --------------------------------------------------------
 
@@ -18399,7 +18391,8 @@ ALTER TABLE `asignatura`
 ALTER TABLE `calificacion`
   ADD PRIMARY KEY (`cal_id`),
   ADD KEY `cal_usu_id` (`cal_usu_id`),
-  ADD KEY `cal_hor_id` (`cal_hor_id`);
+  ADD KEY `cal_hor_id` (`cal_hor_id`),
+  ADD KEY `cal_usu_id_alum` (`cal_usu_id_alum`);
 
 --
 -- Indices de la tabla `carrera`
@@ -18576,7 +18569,8 @@ ALTER TABLE `asignatura`
 --
 ALTER TABLE `calificacion`
   ADD CONSTRAINT `calificacion_ibfk_1` FOREIGN KEY (`cal_usu_id`) REFERENCES `usuario` (`usu_id`),
-  ADD CONSTRAINT `calificacion_ibfk_2` FOREIGN KEY (`cal_hor_id`) REFERENCES `horario` (`hor_id`);
+  ADD CONSTRAINT `calificacion_ibfk_2` FOREIGN KEY (`cal_hor_id`) REFERENCES `horario` (`hor_id`),
+  ADD CONSTRAINT `calificacion_ibfk_3` FOREIGN KEY (`cal_usu_id_alum`) REFERENCES `usuario` (`usu_id`);
 
 --
 -- Filtros para la tabla `disponibilidad`

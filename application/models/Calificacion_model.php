@@ -5,7 +5,10 @@ class Calificacion_model extends CI_Model {
 	private $columns = array(
      'cal_id' =>0,
      'cal_usu_id' =>0,
-     'cal_nota' =>0
+     'cal_hor_id' =>0,
+     'cal_nota' =>0,
+     'cal_usu_id_alum' => 0,
+     'cal_comentario' =>""
 	);
 
 	public function __construct()
@@ -140,7 +143,19 @@ function insert(){
     $consulta = $this->db->get();
     return $consulta->result_array();
 }
-
+	public function calificacion($id_usu=null,$id_hor){
+    $this->load->database();
+    $this->db->select('*');
+    $this->db->from('calificacion');
+     $this->db->where('calificacion.cal_usu_id_alum', $id_usu);
+     $this->db->where('calificacion.cal_hor_id', $id_hor);
+    $res = $this->db->get();
+   	$result = false;
+			if ($res->num_rows() == 1) {
+				$result = true;
+			}
+			return $result;
+}
 }
 
 /* End of file Calificacion_model.php */
