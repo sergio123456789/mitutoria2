@@ -11,6 +11,7 @@ class Asesor_Controller extends CI_Controller {
 		$this->load->model('Alumno_model','alumno',true);
 		$this->load->model('Calificacion_model','calificacion',true);
 		$this->load->model('Tutoria_model','tutoria',true);
+		$this->load->model('Disponibilidad_model','disponibilidad',true);
 	}
 	public function index()
 	{
@@ -96,6 +97,19 @@ public function verReforzamientos(){
 
 
 	}
+
+
+	 public function createdispo($id)
+    {
+    	$datitos['id'] = $id;
+	$this->load->view('/Asesor/CrearDisponibilidad.php',$datitos,false);
+    }
+
+    public function test($id)
+    {
+    	$datosDis = $this->disponibilidad->findByIdUsu($id);
+    	echo json_encode($datosDis);
+    }
 
 }
 

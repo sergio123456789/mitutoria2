@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-06-2017 a las 03:22:13
+-- Tiempo de generación: 29-06-2017 a las 02:11:08
 -- Versión del servidor: 10.1.21-MariaDB
 -- Versión de PHP: 5.6.30
 
@@ -6205,6 +6205,14 @@ CREATE TABLE `disponibilidad` (
   `dis_usu_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `disponibilidad`
+--
+
+INSERT INTO `disponibilidad` (`dis_id`, `dis_nombre`, `dis_dia`, `dis_hi`, `dis_ht`, `dis_usu_id`) VALUES
+(2, 'Disponibilidad', '1', '2018-01-01 09:00:00', '2018-01-01 13:00:00', 5603),
+(3, 'Disponibilidad', '1', '2018-01-01 09:00:00', '2018-01-01 13:00:00', 5974);
+
 -- --------------------------------------------------------
 
 --
@@ -6230,7 +6238,8 @@ CREATE TABLE `horario` (
 
 INSERT INTO `horario` (`hor_id`, `hor_dia`, `hor_inicio`, `hor_termino`, `hor_fechasis`, `hor_usu_id`, `hor_sala`, `hor_asig_id`, `hor_estado`, `hor_tipo`) VALUES
 (1, 'LUNES', '12:00:00', '15:00:00', '2017-06-01', 5974, 'Sala N°1', 1, 1, 1),
-(2, 'MARTES', '15:00:00', '17:00:00', '2017-06-01', 5974, 'Sala N°1', 1, 0, 1);
+(2, 'MARTES', '15:00:00', '17:00:00', '2017-06-01', 5974, 'Sala N°1', 1, 0, 1),
+(3, 'MARTES', '15:00:00', '17:00:00', '2017-06-01', 5974, 'Sala N°1', 2, 0, 2);
 
 -- --------------------------------------------------------
 
@@ -11962,7 +11971,7 @@ INSERT INTO `permisos` (`per_usu_id`, `perf_id`) VALUES
 (5631, 5),
 (5632, 5),
 (5633, 5),
-(5634, 5),
+(5634, 1),
 (5635, 5),
 (5636, 5),
 (5637, 5),
@@ -12302,7 +12311,8 @@ INSERT INTO `permisos` (`per_usu_id`, `perf_id`) VALUES
 (5970, 5),
 (5971, 5),
 (5972, 5),
-(5973, 5);
+(5973, 5),
+(5974, 4);
 
 -- --------------------------------------------------------
 
@@ -18502,12 +18512,12 @@ ALTER TABLE `carrera`
 -- AUTO_INCREMENT de la tabla `disponibilidad`
 --
 ALTER TABLE `disponibilidad`
-  MODIFY `dis_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `dis_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `horario`
 --
 ALTER TABLE `horario`
-  MODIFY `hor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `hor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `lista`
 --

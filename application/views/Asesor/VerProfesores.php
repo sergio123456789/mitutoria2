@@ -36,7 +36,7 @@
                                                 <td><?=$profe->get('usu_rut')?>-<?=$profe->get('usu_dv')?></td>
                                                 <center>
                                                 <td><a type='button' fakeid="<?=$profe->get('usu_id')?>" fakenombre="<?=$profe->get('usu_nombre')?>" class='btn btn-default editasig'><i class="fa fa-book"></i></a></td>
-                                                <td><a type='button' fakeid="<?=$profe->get('usu_id')?>" fakenombre="<?=$profe->get('usu_nombre')?>" class='btn btn-default'><i class="fa fa-calendar"></i></a></td>
+                                                <td><a type='button' fakeid="<?=$profe->get('usu_id')?>" fakenombre="<?=$profe->get('usu_nombre')?>" class='btn btn-default editcalendario' ><i class="fa fa-calendar"></i></a></td>
                                                 <td>70</td>
                                                 <td><a type='button' fakeid="<?=$profe->get('usu_id')?>" fakenombre="<?=$profe->get('usu_nombre')?>" class='btn btn-default editdetalle'><i class="fa fa-eye"></i></a></td>
                                                 </center>
@@ -141,7 +141,7 @@
                                     </div>
                                     <!-- /.box-header -->
                                     <div class="box-body no-padding">
-                                      <table class="table table-striped">
+                                      <table class="table table-striped" id="example1">
                                         <tr>
                                           <th style="text-align: center;">Fecha </th>
                                           <th style="text-align: center;">Asignatura </th>
@@ -262,6 +262,20 @@
     // <==== Fin botón mostrar Detalle ====>
 
 
+       // <==== botón mostrar calendario ====>
+ $(".editcalendario").click(function () {
+            var id = $(this).attr('fakeid');
+            console.log(id);
+           open('<?=site_url('Asesor_Controller/createdispo/')?>'+id,'','top=300,left=300,width=550,height=600');
+        });
+
+    // <==== Fin botón mostrar calendario ====>
+
+                     function abrir(idProd) { 
+
+                
+
+                }
 
 
  $(function () {

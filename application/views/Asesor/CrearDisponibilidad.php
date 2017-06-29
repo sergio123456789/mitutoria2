@@ -35,8 +35,9 @@
 </style>
 <script>
   $(document).ready(function() {
-    $.post('<?php echo site_url('Asesor_Controller/test');?>',
+    $.post('<?=site_url("Asesor_Controller/test/".$id)?>',
       function(data){
+        console.log(data);
     $('#calendar').fullCalendar({
       locale:'es',
       header: {
@@ -59,13 +60,6 @@
       dayNamesShort: ['domingo','Lunes','Martes' ,'Miercoles','Jueves','Viernes','sabado'],
       eventLimit: true, // allow "more" link when too many events
       events: $.parseJSON(data), 
-      eventClick: function(event) {
-        var aceptar = confirm("¿ Está seguro de quitar esta Disponibilidad ?");
-        if(aceptar){
-          location.href="<?=site_url('Alumno_Controller/deleteevento')?>"+"/"+event.id;
-        }
-      }
-
       });
     }); 
 
@@ -85,10 +79,10 @@
 <div class="card-body">
         <div class="section">
           <div class="section-body">
-          <form class="form form-horizontal" action="<?=site_url('Alumno_Controller/insertDispo')?>" method="post" id="remind">
+          <form class="form form-horizontal">
          <div class="section">
 
-          <div class="section-title">Definir Disponibilidad</div>
+          <div class="section-title" style="text-align: center;">Horario Disponibilidad</div>
           <div class="section-body">
             </div>
 
@@ -101,44 +95,7 @@
         <?php if (isset($error) ){ ?>
            <h4 style="color: red;"> <?=$error?></h4>
           <?php }?>
-             <table class=" table table-striped primary" cellspacing="0" >
-                <thead>
-                    <tr>
-                       <th>
-                          <select name="dia" id="ffi_editnombre" class="form-control">
-                               <option value="1" >Lunes</option>
-                               <option value="2" >Martes</option>
-                               <option value="3" >Miercoles</option>
-                               <option value="4" >Jueves</option>
-                               <option value="5" >Viernes</option>
-                          </select>
-                       </th>
-                       </tr>
-                   </thead>
-                <tbody>
-              <tr>
-           <td> <div class="row">
-             <div class="col-md-12 col-sm-6 col-xs-6">
-                Desde <input type="time"  placeholder="09:00" style="width:100px " name="inicio" >
-             </div>
-             <div class="col-md-12 col-sm-6 col-xs-6">
-                Hasta <input type="time" placeholder="10:00" style="width:100px " name="fin" >
-             </div>
-           </div>
-             
-             
-            </td>
-         </tr>
-      </tbody>
-</table>
    <div class="row">
-     <div class="col-xs-4 col-md-12 col-sm-6 ">
-        <input type="submit" name="submit" id="submit" class="btn btn-sm btn-success"  value="Insertar" tabindex="2" />
-      </div>
-     <div class="col-xs-8 col-md-12 col-sm-6">
-        <p style="margin-top:0px; color:gray;" >Click sobre tu horario para borrar</p>
-
-     </div>
 </div>
 </div>
      </div>
