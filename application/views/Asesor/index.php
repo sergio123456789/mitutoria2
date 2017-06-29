@@ -58,7 +58,85 @@ function myFunction() {
 			      var materialChart = new google.charts.Bar(document.getElementById('chart_div'));
 			      materialChart.draw(data, materialOptions);
 			    }
-    </script>		<div class="container-fluid">
+    </script>		
+<br>
+<!-- Small boxes (Stat box) -->
+      <div class="row">
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-green">
+            <div class="inner">
+            <?php if ($tutoriarealizada == null || empty($tutoriarealizada) || $tutoriarealizada == 0){?>
+            	<h3>0</h3>
+            	<p>Tutorías Realizadas</p>
+            <?php } ?>
+              <h3><?=$tutoriarealizada?></h3>
+              <p>Tutorías Realizadas</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-checkmark-circled"></i>
+            </div>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-aqua">
+            <div class="inner">
+               <?php if ($counttutores == null || empty($counttutores) || $counttutores == 0){?>
+            	<h3>0</h3>
+            	<p>Total de tutores</p>
+            <?php } ?>
+              <h3><?=$counttutores?></h3>
+              <p>Total de tutores</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-ios-people"></i>
+            </div>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-yellow">
+            <div class="inner">
+              <?php if ($countalumnos == null || empty($countalumnos) || $countalumnos == 0){?>
+            	<h3>0</h3>
+            	<p>Total de Ayudantes</p>
+            <?php } ?>
+              <h3><?=$countalumnos?></h3>
+              <p>Total de Ayudantes</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-person"></i>
+            </div>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-red">
+            <div class="inner">
+            <?php if ($tutoriacancelada == null || empty($tutoriacancelada) || $tutoriacancelada == 0){?>
+            	<h3>0</h3>
+            	<p>Tutorías Canceladas</p>
+            <?php } ?>
+              <h3><?=$tutoriacancelada?></h3>
+              <p>Tutorías Canceladas</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-close-circled"></i>
+            </div>
+          </div>
+        </div>
+        <!-- ./col -->
+      </div>
+      <!-- /.row -->
+
+     
+
+
+    <div class="container-fluid">
 					<div class="row">
 					 <div class="col-md-12">
 						<div class="card">

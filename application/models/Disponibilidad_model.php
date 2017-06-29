@@ -11,11 +11,12 @@ class Disponibilidad_model extends CI_Model {
 
 	private  $_columns  =  array(
 			'dis_id' => 0,
-			'dis_nombre' => '',
+			'dis_sala' => '',
 			'dis_dia' => '',
 			'dis_hi' => '',
 			'dis_ht' => '',
-			'dis_usu_id' => 0
+			'dis_usu_id' => 0,
+			'dis_estado' => 0
 			);
 
 	public function get($attr){
@@ -64,7 +65,7 @@ class Disponibilidad_model extends CI_Model {
 		$result = null;
 		try {
 		$this->db->where('dis_usu_id',$id_usu);
-		$this->db->select('dis_id id,dis_nombre title, dis_hi start, dis_ht end');
+		$this->db->select('dis_id id,dis_sala title, dis_hi start, dis_ht end');
 		$this->db->from('disponibilidad');
 		return $this->db->get()->result(); 
 		} catch (Exception $e) {

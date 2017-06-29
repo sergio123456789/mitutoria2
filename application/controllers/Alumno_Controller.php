@@ -28,8 +28,8 @@ class Alumno_Controller extends CI_Controller {
 		$user=$this->session->userdata('logged_in');
        	$tutorias= $this->horario->mistutoriasporestadolista($user['id'],"1");
        	$asignatura= $this->asignatura->findAllBy('asig_estado',"1");
-       	$datos["tutoria"]=$tutorias;
        	$datos["asignaturas"]=$asignatura;
+       	$datos["tutoria"]=$tutorias;
  		$this->layout->view('/Alumnos/index.php',$datos,false);
 	}
 
@@ -71,7 +71,7 @@ class Alumno_Controller extends CI_Controller {
 	 $horario->save();
 	 $tuto = $this->tutoria->create($rowTuto);
 	 $tuto->save();
-      redirect('Alumno_Controller/index');
+      redirect('Tutor_Controller/index');
 	}
 
     public function cancelar(){
@@ -159,7 +159,6 @@ class Alumno_Controller extends CI_Controller {
         
             if ($_POST['inicio'] >= '08:00' && $_POST['fin'] <= '23:00' && $_POST['inicio'] < $_POST['fin'] ) {
           $row = array(
-            'dis_nombre' => "Disponibilidad",
             'dis_dia' =>  $_POST['dia'],
             'dis_hi' => '2018/01/'.$_POST['dia'].' '.$_POST['inicio'],
             'dis_ht' => '2018/01/'.$_POST['dia'].' '.$_POST['fin'],
@@ -223,6 +222,50 @@ class Alumno_Controller extends CI_Controller {
 		$this->layout->view('/Alumnos/verProfe.php',$datos,false);
     }
 
+     function claficarProfe($usu_id,$id_lis){
+		$usuario = $this->usuario->findById($usu_id);
+		$asignaturas = $this->asignatura->asignaturaProfe($usu_id);
+		$notas = array();
+		foreach ($asignaturas as $key => $value) {
+			$notas[$value->get('asig_id')] = $this->calificacion->calificacionesDelProfe($usu_id,$value->get('asig_id'));
+		}
+		$user = $this->session->userdata('logged_in');
+		$tutorias= $this->horario->mitutoriasporestadohorarioparacalificar($user['id'],$id_lis);
+		$id_lista = $this->lista->findhorarioByIdLista($id_lis);	
+		$horario = $this->horario->findById($id_lista->get("hor_id"));
+		$calificacion = $this->calificacion->calificacion($user['id'],$horario->get('hor_id'));
+
+       	$datos["tutoria"]=$tutorias;
+       	$datos["calificacion"]=$calificacion;
+  
+		$datos['notas'] = $notas;
+		$datos["asig"] = $asignaturas;
+		$datos['usuario'] = $usuario;
+
+		$this->layout->view('/Alumnos/verProfe.php',$datos,false);
+    }
+    function Puntuar ()
+    {
+    	$puntuacion = $_POST['estrellas'];
+    	$opinion = $_POST['opinion'];
+    	$id = $_POST['id'];
+     	$id_lista = $this->lista->findhorarioByIdLista($id);	
+		$horario = $this->horario->findById($id_lista->get("hor_id"));
+		$user = $this->session->userdata('logged_in');
+		$array = array(
+			 'cal_id' =>0,
+		     'cal_usu_id' =>$horario->get('hor_usu_id'),
+		     'cal_hor_id' =>$horario->get('hor_id'),
+		     'cal_nota' =>$puntuacion,
+		     'cal_usu_id_alum' =>$user['id'],
+		     'cal_comentario' =>$opinion
+				);
+		$calificacion = $this->calificacion->create($array);
+		$calificacion->save();
+		redirect('Alumno_Controller/mostrarProfe/'.$horario->get('hor_usu_id'));
+
+
+    }
 
 }
 /* End of file Alumno_Controller.php */

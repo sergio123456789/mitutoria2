@@ -16,14 +16,13 @@
 	                                    	<th style="text-align: center;">Fecha</th>
 	                                    	<th style="text-align: center;">Inicio</th>
 	                                    	<th style="text-align: center;">Término</th>
-											
 	                                    </thead>
 	                                  <tbody>
 	                                    <?php if (!empty($tutoria)): ?>
 	                                       <?php foreach ($tutoria as $key => $value) { ?>
 	                                        <tr>
 	                                        	<td><?=$value->get('asig_nombre')?></td>
-												<td ><a href="#pablo"><img class="img" src="../../resources/images/marc.jpg" style="width: 42px; height: 42px;border-radius: 50%;"/></a> <?=$value->get('usu_nombre')?> </td>
+												<td ><a href="<?=site_url('/Alumno_Controller/claficarProfe/'.$value->get('usu_id')."/". $value->get('lis_id'))?>"><img class="img" src="<?=$value->get('usu_foto') ?>" style="width: 42px; height: 42px;border-radius: 50%;"/></a> <?=$value->get('usu_nombre')?> </td>
 	                                        	<td><?=$value->get('lis_fecha')?></td>
 	                                        	<td><?=$value->get('hor_inicio')?></td>
 	                                        	<td><?=$value->get('hor_termino')?></td>

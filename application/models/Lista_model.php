@@ -97,8 +97,8 @@ function insert(){
 		$this->load->database();
 		$this->db->select('*');
 		$this->db->from('horario');
-		$this->db->join('tutoria',  'tutoria.tuto_hor_id = horario.hor_id');
-		$this->db->join('lista',  'tutoria.tuto_lis_id = lista.lis_id');
+		$this->db->join('tutoria', 'tutoria.tuto_hor_id = horario.hor_id');
+		$this->db->join('lista', 'tutoria.tuto_lis_id = lista.lis_id');
 		$this->db->where('lista.lis_id', $lis_id);
 		$res= $this->db->get();
 		$result = null;
