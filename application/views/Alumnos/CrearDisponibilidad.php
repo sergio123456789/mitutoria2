@@ -35,7 +35,7 @@
 </style>
 <script>
   $(document).ready(function() {
-    $.post('<?php echo site_url('Asesor_Controller/test');?>',
+    $.post('<?php echo site_url('Alumno_Controller/test');?>',
       function(data){
     $('#calendar').fullCalendar({
       locale:'es',
