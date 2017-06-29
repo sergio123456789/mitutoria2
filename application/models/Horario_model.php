@@ -128,6 +128,16 @@ function insert(){
 		}
 		return $result;	
 	}
+		public function cancelar($id){
+		$sql="update horario set hor_estado =2 WHERE hor_id=".$id;
+		$query = $this->db->query($sql);
+		return 1;
+	}
+	public function aceptar($id){
+		$sql="update horario set hor_estado =1 WHERE hor_id=".$id;
+		$query = $this->db->query($sql);
+		return 1;
+	}
 	public function mistutoriasporestadohorario($id_alum,$estado){
 		$result = null;
 		$this->load->database();
