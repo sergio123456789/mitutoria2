@@ -302,11 +302,19 @@
                     <span class="pull-right-container">
                       <span class="label label-primary pull-right"></span>
                     </span>
-                  </a>
+                  </a>ss
                 </li>
                      <li class="treeview">
-                  <a href="<?=site_url()?>/Tutor_Controller/miHorario">
+                  <a  onclick="abrir()" >
                     <i class="fa fa-calendar-o"></i>
+                    <script type="text/javascript">
+                     function abrir(idProd) { 
+
+                open('<?=site_url('Tutor_Controller/miHorario')?>','','top=300,left=300,width=550,height=600') ; 
+
+                }
+
+                </script>
                     <span>Mi Horario</span>
                     <span class="pull-right-container">
                       <span class="label label-primary pull-right"></span>
@@ -331,16 +339,7 @@
                       <span class="label label-primary pull-right"></span>
                     </span>
                   </a>
-                </li>
-                   <li class="treeview">
-                  <a href="<?=site_url()?>/Tutor_Controller/Notificaciones">
-                    <i class="fa fa-bell"></i>
-                    <span>Notificaciones</span>
-                    <span class="pull-right-container">
-                      <span class="label label-primary pull-right"></span>
-                    </span>
-                  </a>
-                </li>
+                </li>                  
                     <?php } ?>
                     <?php if ((in_array(4, $user['permisos'])) ) { ?>
                          <li class="treeview">

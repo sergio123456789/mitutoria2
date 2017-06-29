@@ -9,43 +9,40 @@
 	                                <p class="category">Acá confirmas tu asistencia a la tutoría</p>
 	                            </div>
 	                            <div class="card-content table-responsive">
-	                                <table class="table" style="text-align: center;">
+	                                <table class="table" id=example1 style="text-align: center;">
 	                                    <thead class="text-primary" >
 	                                    	<th style="text-align: center;">Tutoría</th>
 	                                    	<th style="text-align: center;">Alumno</th>
 	                                    	<th style="text-align: center;">Fecha</th>
 	                                    	<th style="text-align: center;">Inicio</th>
-	                                    	<th style="text-align: center;">Término</th>
-											<th style="text-align: center;">Confirmar</th>
+	                                    	<th style="text-align: center;">Término</th>											
 											<th style="text-align: center;">Cancelar</th>
 	                                    </thead>
 	                                    <tbody>
+	                                  <?php if (!empty($alumnos)): ?>
+	                                       <?php foreach ($alumnos as $value) { ?>
 	                                        <tr>
-	                                        	<td>Matemática</td>
-	                                        	<td rowspan="2"><a href="#pablo">
-    									<img class="img" src="../../resources/images/marc.jpg" style="width: 42px; height: 42px; border-radius: 50%;" />
-    								</a>  Américo Pérez  </td>
-    								<td>01/06/17</td>
-    								<td>10:15</td>
-    								<td>12:30</td>
+	                                           <td><?=$value->get('asig_nombre')  ?></td>	                                               	
+	                                           <td rowspan="2"><a href="#pablo">
+    									<img class="img" src="../../resources/images/marc.jpg" style="width: 42px  ; height: 42px; border-radius: 50%;" />
+    								</a><?=$value->get('usu_nombre') ?>    								
+    								           </td>   								
+    								           <td><?=$value->get('hor_fechasis') ?></td>
+    								           <td><?=$value->get('hor_inicio')?></td>
+    								           <td><?=$value->get('hor_termino')?></td>	
 												<td>
-												<button type="button" rel="tooltip" title="Confirmar" href="#" data-toggle="modal" class="btn btn-success btn-simple btn-xs">
-                    							<i class="fa fa-check"></i>
-                    							</button>
-												</td>
-												
-												<td>
-												<button type="button" rel="tooltip" title="Cancelar" id="openBtn" href="#deleteModal" data-toggle="modal" class="btn btn-danger btn-simple btn-xs">
+		                   <button type="button" rel="tooltip" title="Cancelar" id="<?=$value->get('lis_id')?>" href="#deleteModal" data-toggle="modal" class="btn btn-danger btn-simple btn-xs cancelar">
                     							<i class="fa fa-times"></i>
                     							</button>
 												</td>
 
 	                                        </tr>
+	                                        <?php } ?>
+										<?php endif ?>
 
 	                                    </tbody>
 	                                </table>
-   	<!-- Modal de cancelar la tutoría-->
-
+   <!-- Modal de cancelar la tutoría-->
 	                    		<div class="modal fade" id="deleteModal">
 								<div class="modal-dialog">
 								      <div class="modal-content">
@@ -54,15 +51,16 @@
 								          <h3 class="modal-title" style="text-align:center;" >¿Estas seguro que quieres cancelar tu tutoría?</h3>
 								        </div>
 								        <div class="modal-body">
+								         <form method="post" action="<?=site_url('Tutor_Controller/cancelar')?>">
+								   <input type="text" name="id" id="eliminar_empresa" value="eliminar_empresa">
 										  <h5 class="text-center"><b>Ingresa el motivo</b></h5>
-										  <div class="form-group is-empty"><textarea class="form-control" rows="5"></textarea><span class="material-input"></span></div>
+										  <div class="form-group is-empty"><textarea name="motivo" class="form-control" rows="5"></textarea><span class="material-input"></span></div>
 										</div>
-								        <div class="modal-footer">
-								        <button type="button" class="btn btn-primary">Enviar</button>
-								        <button type="button" class="btn btn-default " data-dismiss="modal">Cancelar</button>  
+								        <div class="modal-footer" id="cansel">
+								        <button type="submit" class="btn btn-primary">Enviar</button>
+								        <button type="button" class="btn btn-default " data-dismiss="modal">Cancelar</button>
+								         </form>  
 								        </div>
-												
-
 								      </div><!-- /.modal-content -->
 								    </div><!-- /.modal-dialog -->
 								  </div><!-- /.modal -->	
@@ -72,3 +70,11 @@
 	                        </div>
 	                    </div>
     </div></div>
+    
+
+    <script type="text/javascript">
+    	$(".cancelar").click(function(){
+					var id = $(this).attr('id');
+					$("#eliminar_empresa").val(id);
+				});
+    </script>

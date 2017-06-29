@@ -78,6 +78,27 @@ public function get($key){
 		$this->db->insert('alumno',$this->columns);
 
 	}
+	public function findAlumnsBytutor($id = null){
+    	$this->load->database();
+    	//SELECT * FROM usuario u INNER JOIN lista l INNER JOIN tutoria t INNER JOIN horario h INNER JOIN asignatura a INNER JOIN alumno al ON l.lis_usu_id=u.usu_id && t.tuto_lis_id=l.lis_id && h.hor_id=t.tuto_hor_id && a.asig_id=h.hor_asig_id && al.alu_usu_id = l.lis_usu_id WHERE h.hor_usu_id=5630 );
+    	$result = array();
+    	$this->db->select('*');
+    	$this->db->from('usuario');
+    	$this->db->join('lista','lista.lis_usu_id=usuario.usu_id');  	
+    	$this->db->join('tutoria','tutoria.tuto_lis_id=lista.lis_id');
+    	$this->db->join('horario','horario.hor_id=tutoria.tuto_hor_id');
+    	$this->db->join('asignatura','asignatura.asig_id=horario.hor_asig_id');  	
+    	$this->db->join('alumno','alumno.alu_usu_id=lis_usu_id');
+    	$this->db->where('horario.hor_usu_id',$id);
+    	$res=$this->db->get();
+    	if($res->num_rows()>0){
+    		foreach ($res->result() as $value) {
+    			$result[]= $this->create($value);
+    		}
+    	}
+
+        return $result;
+    }
 
     public function save(){
 		try {
