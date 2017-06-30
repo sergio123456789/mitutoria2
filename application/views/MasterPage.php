@@ -156,31 +156,18 @@
                   </a>
                 </li>
                 <li class="treeview">
-                  <a href="<?=site_url()?>/Asesor_Controller/verProfesor">
-                    <i class="fa fa-user-secret"></i>
-                    <span>Ver Profesores</span>
+                  <a href="#">
+                    <i class="fa fa-group"></i>
+                    <span>Profesores</span>
                     <span class="pull-right-container">
-                      <span class="label label-primary pull-right"></span>
+                      <i class="fa fa-angle-left pull-right"></i>
                     </span>
                   </a>
-                </li>
-                   <li class="treeview">
-                  <a href="<?=site_url()?>/Asesor_Controller/verTutorias">
-                    <i class="fa fa-book"></i>
-                    <span>Tutorías</span>
-                    <span class="pull-right-container">
-                      <span class="label label-primary pull-right"></span>
-                    </span>
-                  </a>
-                </li>
-                 <li class="treeview">
-                  <a href="<?=site_url()?>/Asesor_Controller/verReforzamientos">
-                    <i class="fa fa-book"></i>
-                    <span>Reforzamientos</span>
-                    <span class="pull-right-container">
-                      <span class="label label-primary pull-right"></span>
-                    </span>
-                  </a>
+                  <ul class="treeview-menu">
+                    <li><a href="<?=site_url()?>/Asesor_Controller/verProfesor"><i class="fa fa-user-secret"></i>Profesores</a></li>
+                    <li><a href="<?=site_url()?>/Asesor_Controller/verTutor"><i class="fa fa-graduation-cap"></i>Tutores</a></li>
+                    <li><a href="<?=site_url()?>/Asesor_Controller/verTutorProgresion"><i class="fa fa-line-chart"></i>Tutores Progresión</a></li>
+                  </ul>
                 </li>
                  <li class="treeview">
                   <a href="<?=site_url()?>/Asesor_Controller/Importar">

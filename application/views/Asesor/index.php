@@ -61,7 +61,7 @@ function myFunction() {
     </script>		
 <br>
 <!-- Small boxes (Stat box) -->
-      <div class="row">
+      <div class="row" style="margin-left:1%; margin-right:1%">
         <div class="col-lg-3 col-xs-6">
           <!-- small box -->
           <div class="small-box bg-green">
@@ -69,9 +69,10 @@ function myFunction() {
             <?php if ($tutoriarealizada == null || empty($tutoriarealizada) || $tutoriarealizada == 0){?>
             	<h3>0</h3>
             	<p>Tutorías Realizadas</p>
-            <?php } ?>
+            <?php } else{ ?>
               <h3><?=$tutoriarealizada?></h3>
               <p>Tutorías Realizadas</p>
+              <?php }?>
             </div>
             <div class="icon">
               <i class="ion ion-checkmark-circled"></i>
@@ -86,9 +87,10 @@ function myFunction() {
                <?php if ($counttutores == null || empty($counttutores) || $counttutores == 0){?>
             	<h3>0</h3>
             	<p>Total de tutores</p>
-            <?php } ?>
+            <?php } else{ ?>
               <h3><?=$counttutores?></h3>
               <p>Total de tutores</p>
+            <?php }?>
             </div>
             <div class="icon">
               <i class="ion ion-ios-people"></i>
@@ -103,9 +105,10 @@ function myFunction() {
               <?php if ($countalumnos == null || empty($countalumnos) || $countalumnos == 0){?>
             	<h3>0</h3>
             	<p>Total de Ayudantes</p>
-            <?php } ?>
+            <?php } else{ ?>
               <h3><?=$countalumnos?></h3>
               <p>Total de Ayudantes</p>
+           <?php } ?>
             </div>
             <div class="icon">
               <i class="ion ion-person"></i>
@@ -120,9 +123,10 @@ function myFunction() {
             <?php if ($tutoriacancelada == null || empty($tutoriacancelada) || $tutoriacancelada == 0){?>
             	<h3>0</h3>
             	<p>Tutorías Canceladas</p>
-            <?php } ?>
+            <?php } else{ ?>
               <h3><?=$tutoriacancelada?></h3>
               <p>Tutorías Canceladas</p>
+           	<?php } ?>
             </div>
             <div class="icon">
               <i class="ion ion-close-circled"></i>

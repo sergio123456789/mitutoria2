@@ -6,25 +6,23 @@
                <div class="col-md-12">
                           <div class="card">
                               <div class="card-header" data-background-color="purple">
-                                  <h4 class="title">Profesores</h4>
-                                  <p class="category">Acá puedes buscar, editar y añadir Profesores</p>
+                                  <h4 class="title">Buscar Profesor</h4>
+                                  <p class="category">Acá puedes buscar profesores por su rut</p>
                               </div>
-                              <br>
-                              <button class="btn btn-success" style="margin-left:1%;" data-toggle="modal" data-target="#new_modal"><i class="fa fa-plus"></i> Añadir Profesor </button>
-
                               <div class="card-content table-responsive" style="float: center;">
                                       <div class="row">
                                           <div class="col-xs-12">
                                              <div class="card-content table-responsive">
                                   <table id="example1" class="table" style="text-align: center;">
                                       <thead class="text-primary" >
-                                        <th style="text-align: center;">Profesor</th>
+                                        <th style="text-align: center;">Tutor</th>
                                         <th style="text-align: center;">Correo</th>
                                         <th style="text-align: center;">Rut</th>
                                         <th style="text-align: center;">Ver Asignaturas</th>
                                         <th style="text-align: center;">Ver Horario</th>
                                         <th style="text-align: center;">Nota Acumulada</th>
                                         <th style="text-align: center;">Detalle N. Acumulada</th>
+
                                       </thead>  
                                       <tbody>
 
@@ -174,64 +172,6 @@
                                 </div>
                             </div>
             <!--===== Fin modal Detalle ==========-->
-
-
-
-    <!--==== Modal Añadir Profe ====-->
-
-    <div id="new_modal" class="modal fade" role="dialog" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
-                    </button>
-                    <h4 class="modal-title" >Agregar Profesor</h4>
-                </div>
-                <div class="modal-body text-center">
-                    <form class="form-horizontal form-label-left" action="<?=site_url('redesController/agregarRedes')?>" method="POST">
-                        <div class="form-group">
-                            <label class="control-label col-md-3" for="last-name">Nombre Completo<span class="required">*</span>
-                            </label>
-                            <div class="col-md-7">
-                                <input type="text" id="name" name="name"  required="required" class="form-control col-md-7 col-xs-12">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-md-3" for="last-name">Correo<span class="required">*</span>
-                            </label>
-                            <div class="col-md-7">
-                                <input type="text" id="mail" name="mail"  required="required" class="form-control col-md-7 col-xs-12">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-md-3" for="last-name">Rut<span class="required">*</span>
-                            </label>
-                            <div class="col-md-7">
-                                <input type="text" id="rut" name="rut"  required="required" class="form-control col-md-4"> -                                
-                                <input type="text" id="dv" name="dv"  required="required" class="form-control col-md-2">
-                            </div>
-                        </div>
-                  </div>
-
-                <div class="modal-footer">
-                    <div class="col-md-2 pull-left">
-                        <button type="button" id="btnRst" class="btn btn-primary" style="display : none">Reset Password</button>
-                    </div>
-                    <div class="col-md-8">
-                        <button type="button" id="modal_cancel" class="btn btn-default pull-right" data-dismiss="modal">Cancelar</button>
-                    </div>
-                    <div class="col-md-2">
-                        <button id="btnAdd" type="submit" class="btn btn-success">Guardar</button>
-                    </div>
-                </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <!--==== fin modal añadir profe =====-->
-
-
-
                   </div>
                 </div>
   <script>

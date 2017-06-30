@@ -200,7 +200,7 @@ public function UsuarioUploader(){
                         'usu_correo' => $mail,
                         'usu_pass' => '123456',
                         'usu_estado' => 1,
-                        'usu_are_id' => '',
+                        'usu_are_id' => 8,
                         'usu_rut' => $rut,
                         'usu_dv' => $dv
                         );

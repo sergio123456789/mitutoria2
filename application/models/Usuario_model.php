@@ -121,25 +121,27 @@ function insertperusu(){
 	public function saveusu()
 	{
 		$this->load->database();
-		
 		$query=$this->db->get_where('usuario',array('usu_rut'=>$this->_columns['usu_rut']));
 		$aux='';	
-		
+		$auxDos='';
 			if($query->num_rows() > 0){
 				$row = $query->row_object();
 				$usuario=$this->create($row);
 				$aux=$usuario->get('usu_rut');
-			}
+				$auxDos=$usuario->get('usu_id');
 
+			}
 			if ($this->_columns['usu_rut']!=$aux) {
 			$this->db->insert("usuario",$this->_columns);
 			$this->_columns['usu_id'] = $this->db->insert_id();
 			
-			return 1;
+			return 'perfil';
 		}else{
+
+			$this->_columns['usu_id']=$auxDos;
 			$this->db->where('usu_id',$this->_columns['usu_id']);
 			$this->db->update('usuario',$this->_columns);
-			
+			return $auxDos;
 
 		}
 	}
