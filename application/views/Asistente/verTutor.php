@@ -24,6 +24,7 @@
                                         <th style="text-align: center;">Ver Horario</th>
                                         <th style="text-align: center;">Nota Acumulada</th>
                                         <th style="text-align: center;">Detalle N. Acumulada</th>
+                                        <th style="text-align: center;">Editar</th>
                                       </thead>  
                                       <tbody>
 
@@ -39,6 +40,7 @@
                                                 <td><a type='button' fakeid="<?=$profe->get('usu_id')?>" fakenombre="<?=$profe->get('usu_nombre')?>" class='btn btn-default editcalendario' ><i class="fa fa-calendar"></i></a></td>
                                                 <td>70</td>
                                                 <td><a type='button' fakeid="<?=$profe->get('usu_id')?>" fakenombre="<?=$profe->get('usu_nombre')?>" class='btn btn-default editdetalle'><i class="fa fa-eye"></i></a></td>
+                                                <td><a type='button' fakeid="<?=$profe->get('usu_id')?>" fakenombre="<?=$profe->get('usu_nombre')?>" class='btn btn-default edittutor'><i class="fa fa-pencil"></i></a></td>
                                                 </center>
                                           </tr>
                                           <?php endforeach; ?>
@@ -176,7 +178,7 @@
 
 
 
-    <!--==== Modal Añadir Profe ====-->
+    <!--==== Modal Añadir Tutor ====-->
 <!-- modal agregar -->
 <div id="new_modal" class="modal fade " role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -184,10 +186,12 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
                 </button>
-                <h4 class="modal-title" >Nueva Configuración</h4>
+                <h4 class="modal-title">Nuevo Tutor</h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal form-label-left" enctype="multipart/form-data" action="<?=site_url('confController/agregarConfiguracion')?>" method="POST">
+                <form class="form-horizontal form-label-left" enctype="multipart/form-data" action="<?=site_url('Asistente_Controller/agregarTutor')?>" method="POST">
+                   
+                <div class="col-md-12">
                     <div class="col-lg-12">
                           <div class="col-lg-6">
                             <label >Nombre Completo<span class="required">*</span>
@@ -204,14 +208,14 @@
                           <div class="col-lg-4">
                             <label >Rut<span class="required">*</span>
                             </label>
-                            <input type="text" id="name" name="name"  required="required" class="form-control col-md-7 col-xs-12">
+                            <input type="text" id="rut" name="rut"  required="required" class="form-control col-md-7 col-xs-12">
                         </div>
                         <div class="col-lg-2">
                             <label >Digito V.<span class="required">*</span>
                             </label>
-                            <input type="text" id="name" name="name"  required="required" class="form-control col-md-7 col-xs-12">
+                            <input type="text" id="dv" name="dv"  required="required" class="form-control col-md-7 col-xs-12">
                         </div>
-                        
+
                         <div class="col-lg-6">
                             <label >Asignaturas
                             </label>
@@ -219,8 +223,15 @@
                             <?php foreach ($asignaturas as $asig) { ?>
                              <option value="<?=$asig->get('asig_id')?>"><?=$asig->get('asig_nombre')?></option>
                           <?php  } ?>    
-                                </select>
+                            </select>
                         </div>
+                        <div class="col-lg-12">
+                            <label >Foto Perfil
+                            </label>
+                            <input type="file" accept="image/*" id="photo" name="photo" class="form-control col-md-7 col-xs-12">
+                        </div>
+                </div>
+
                     </div>
 
         
@@ -240,7 +251,86 @@
     </div>
 </div>
 <!-- /modal agregar -->
-    <!--==== fin modal añadir profe =====-->
+    <!--==== fin modal añadir Tutor =====-->
+
+
+    <!--==== Modal Editar Tutor ====-->
+<!-- modal agregar -->
+<div id="editutor_modal" class="modal fade " role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title">Nuevo Tutor</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal form-label-left" enctype="multipart/form-data" action="<?=site_url('Asistente_Controller/editarTutor')?>" method="POST">
+                   
+                <div class="col-md-12">
+                    <div class="col-lg-12">
+                          <div class="col-lg-6">
+                            <label >Nombre Completo<span class="required">*</span>
+                            </label>
+                            <input type="text" id="editname" name="editname"  required="required" class="form-control col-md-7 col-xs-12">
+                        </div>
+                        <div class="col-lg-6">
+                            <label >Correo Electrónico
+                            </label>
+                            <input type="email" id="editemail" name="editemail" class="form-control col-md-7 col-xs-12">
+                        </div>
+                    </div>
+                      <div class="col-lg-12">
+                          <div class="col-lg-4">
+                            <label >Rut<span class="required">*</span>
+                            </label>
+                            <input type="text" id="editrut" name="editrut"  required="required" class="form-control col-md-7 col-xs-12">
+                        </div>
+                        <div class="col-lg-2">
+                            <label >Digito V.<span class="required">*</span>
+                            </label>
+                            <input type="text" id="editdv" name="editdv"  required="required" class="form-control col-md-7 col-xs-12">
+                        </div>
+
+                       
+                        <div class="col-lg-6">
+                            <label >Foto Perfil
+                            </label>
+                            <input type="file" accept="image/*" id="photo" name="photo" class="form-control col-md-7 col-xs-12">
+                            <input type="text" hidden="hidden" id="oldphoto" name="oldphoto">
+                            <input type="text" hidden="hidden" id="editid" name="oldphoto">
+                        </div>
+                         <div class="col-lg-12">
+                            <label >Asignaturas
+                            </label>
+                            <select name="editasignaturas[]" id="editasignaturas" class="js-example-tokenizer form-control select2" multiple="multiple" style="width: 100%">
+                            <?php foreach ($asignaturas as $asig) { ?>
+                             <option value="<?=$asig->get('asig_id')?>"><?=$asig->get('asig_nombre')?></option>
+                          <?php  } ?>    
+                            </select>
+                        </div>
+                </div>
+
+                    </div>
+
+        
+            </div>
+            <div class="modal-footer">
+                <div class="col-md-8">
+                <br>
+                    <button type="button" id="modal_cancel" class="btn btn-default pull-right" data-dismiss="modal">Cancelar</button>
+                </div>
+                <div class="col-md-2">
+                <br>
+                    <button id="btnAdd" type="submit" class="btn btn-success">Guardar</button>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- /modal agregar -->
+    <!--==== fin modal Editar Tutor =====-->
 
 
 
@@ -255,7 +345,7 @@
             console.log(id);
             $.ajax({
                 type: "POST",
-                url: "<?=site_url('Asesor_Controller/detalleAsignaturaProfe')?>",
+                url: "<?=site_url('Asistente_Controller/detalleAsignaturaProfe')?>",
                 dataType: "json",
                 data:{"idasig" : id},
                  beforeSend:function () {
@@ -295,7 +385,7 @@
             console.log(id);
             $.ajax({
                 type: "POST",
-                url: "<?=site_url('Asesor_Controller/detalleProfeNota')?>",
+                url: "<?=site_url('Asistente_Controller/detalleProfeNota')?>",
                 dataType: "json",
                 data:{"idusu" : id},
                  beforeSend:function () {
@@ -331,6 +421,74 @@
         });
 
     // <==== Fin botón mostrar Detalle ====>
+
+     // <==== botón editar tutor ====>
+
+$(".edittutor").click(function () {
+            var id = $(this).attr('fakeid');
+            var nombre = $(this).attr('fakenombre');
+            var myarr = new Array();
+            var select1 = document.getElementById("editasignaturas");
+
+            $.ajax({
+                type: "POST",
+                url: "<?=site_url('Asistente_Controller/detalleTutor')?>",
+                dataType: "json",
+                data:{"idusu" : id},
+                 beforeSend:function () {
+                   $("#editname").val("");
+                    $("#editemail").val("");
+                    $("#editrut").val("");
+                    $("#editdv").val("");
+                    $("#editasignaturas").val("");
+                    $("#oldphoto").val("");
+                    $("#editid").val("");
+                    $('#carga_modal').modal('show');
+                },
+                success: function(data) {
+
+                    $("#editname").val(nombre);
+                    $("#editemail").val(data.email);
+                    $("#editrut").val(data.rut);
+                    $("#editdv").val(data.dv);
+
+                    /*for(var i in data.asignaturas.items) {
+                      myarr.push(data.asignaturas.items[i]);  // (o el campo que necesites)
+                      console.log(myarr);
+                   }*/
+                  //  $("#editasignaturas").multipleSelect("uncheckAll");
+                    data.asignaturas.forEach(function(entry) {
+                        myarr.push(entry);
+                        //$("#editasignaturas").select2('val',entry);
+                    });
+
+                     $.each($("#editasignaturas"), function(){
+                          $(this).select2('val', myarr);
+                    });
+
+                    console.log(myarr);
+                    $("#editasignaturas").val(myarr);
+
+                    
+                    $("#oldphoto").val(data.foto);
+                    $("#editid").val(id);
+                  
+                    $('#carga_modal').modal('hide');
+                    $('#editutor_modal').modal('show').fadeIn(800);
+                    
+                 },
+                   error:function (data) {
+                    $('#carga_modal').modal('hide');
+                    alert("lo sentimos no pudimos cargar los datos solicitados, favor intente mas tarde");
+                },
+                
+                complete : function(xhr, status) {
+                    $('#carga_modal').modal('hide');
+                }
+            });
+        });
+     // <==== botón editar tutor ====>
+
 
 
        // <==== botón mostrar calendario ====>

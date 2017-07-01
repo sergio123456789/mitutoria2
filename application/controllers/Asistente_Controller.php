@@ -14,6 +14,13 @@ public function __construct()
 		$this->load->model('Disponibilidad_model','disponibilidad',true);
 		$this->load->model('Horario_model','horario',true);
 		$this->load->model('Asignatura_model','asignatura',true);
+        $this->load->library('upload');
+
+		$config['upload_path']          = './resources/images/profilephotos/';
+        $config['allowed_types']        = 'jpg|png';
+        $config['max_size']             = 20480;
+        $config['overwrite']            = true;
+        $this->upload->initialize($config);
 
 	}
 	public function index()
@@ -135,8 +142,116 @@ public function verReforzamientos(){
     	$datosDis = $this->disponibilidad->findByIdUsu($id);
     	echo json_encode($datosDis);
     }
+    public function agregarTutor(){
+    	$datos = $this->input->post();
+    	$nombre=$datos['name'];
+    	$correo=$datos['email'];
+    	$rut=$datos['rut'];
+    	$dv=$datos['dv'];
+    	$asignaturas = $datos['asignaturas'];
+    	$imagen='';
 
-}
+    	if (isset($nombre)&&isset($rut)&&isset($correo)&&isset($dv)) {
+
+				if($_FILES["photo"]["type"] == 'image/png' || $_FILES["photo"]["type"] == 'image/jpeg' || $_FILES["photo"]["type"] == 'image/jpg'){
+
+						$tmp_name  = $_FILES["photo"]["tmp_name"];
+						$name = basename($_FILES["photo"]["name"]);
+						$explode = explode('.', $name);
+						$extension = $explode['1'];
+						$punto = ".";
+						$img =  $rut;
+						$imagen = $img.$punto.$extension;
+						$ruta = "./resources/images/profilephotos/{$imagen}";
+						move_uploaded_file($tmp_name, $ruta);
+
+					}else{
+						$imagen = '';
+					}
+
+    			$tutor=array(
+                        'usu_nombre' => $nombre,
+                        'usu_correo' => $correo,
+                        'usu_pass' => '123456',
+                        'usu_estado' => 1,
+                        'usu_are_id' => 8,
+                        'usu_rut' => $rut,
+                        'usu_dv' => $dv,
+                        'usu_foto'=>$imagen
+                        );
+    			
+                    $usuario = $this->usuario->create($tutor);
+                    $ret=$usuario->saveusu(); 
+                     if ($ret=='perfil') {
+                       $usuario->setPermisos(array(
+                        'per_usu_id' => $usuario->get('usu_id'),
+                        'perf_id' => 3
+                        ));  
+                       $usuario->insertperusu();
+                       $ret=$usuario->get('usu_id');
+						
+						if ($asignaturas!=NULL) {
+					
+						foreach ($asignaturas as $key => $value) {
+                            $prof=array(
+                            'prof_asig_id'=>$value,
+                            'prof_usu_id'=>$ret
+                            );
+	                        $profe=$this->usuario->createAsig($prof);
+	                        $profe->saveProfAsig();
+							}
+						}
+                       
+					}
+
+                   
+    		}
+
+    	}
+
+    	 public function editarTutor(){
+
+
+    	 }
+
+    	 public function detalleTutor(){
+
+    	 	$idTuto=$this->input->post('idusu');
+
+
+    	 	if(isset($idTuto)){
+    	 	$arrayasignaturas = array();
+			$idusu = $this->input->post('idusu');
+			$confid  = intval($idusu);
+			$user = $this->usuario->findById($confid);
+			$asignaturas = $this->usuario->getAsigProfById($confid);
+			//var_dump($asignaturas);
+
+			foreach ($asignaturas as $val){
+				$arrayasignaturas[]=$val->getAsig('prof_asig_id');
+            };
+
+			$data =  array(
+			'email' => $user->get('usu_correo'),
+			'rut' => $user->get('usu_rut'),
+			'dv' =>	$user->get('usu_dv'),
+			'asignaturas' => $arrayasignaturas,//$arrayasignaturas,
+			'foto' => $user->get('usu_foto'));
+			echo json_encode($data);
+		
+		 }else{
+            return "existen campos vacíos";
+
+        }
+
+    	 }
+
+
+
+
+    }
+
+
 
 /* End of file Asistente_Controller.php */
 /* Location: ./application/controllers/Asistente_Controller.php */

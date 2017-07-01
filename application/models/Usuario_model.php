@@ -295,13 +295,29 @@ function insertperusu(){
 	public function getAsigProfByRut($id=null){
     $result = null;
     $this->load->database();
-    $this->db->select('asig_nombre, asig_cod');
+    $this->db->select('asig_id,asig_nombre, asig_cod');
     $this->db->from('profesor');
     $this->db->join('usuario',  'profesor.prof_usu_id = usuario.usu_id');
     $this->db->join('asignatura','profesor.prof_asig_id = asignatura.asig_id');
     $this->db->where('profesor.prof_usu_id', $id);
     $consulta = $this->db->get();
     return $consulta->result_array();
+}
+
+	public function getAsigProfById($id=null){
+    $result = null;
+    $this->load->database();
+    $this->db->select('*');
+    $this->db->from('profesor');
+    $this->db->where('prof_usu_id', $id);
+    $consulta = $this->db->get();
+    if ($consulta->num_rows()>0) {
+    	foreach ($consulta->result() as $row) {
+			$result[] = $this->createAsig($row);
+		}
+		return $result;
+    }
+    return false;
 }
 
   public function getByRutAndPerf($perfil=null,$rut=null){
