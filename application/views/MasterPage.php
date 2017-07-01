@@ -96,7 +96,6 @@
               <!-- User image -->
               <li class="user-header">
                 <img src="<?=base_url('')?>resources/images/user.png"  class="img-circle" alt="User Image">
-
                 <p>
                   <?php echo $this->session->userdata('username');?>
                   <small><?=$user["nombre"]?></small>
@@ -209,13 +208,18 @@
                   </a>
                 </li>
                 <li class="treeview">
-                  <a href="<?=site_url()?>/Asistente_Controller/verProfesor">
-                    <i class="fa fa-user-secret"></i>
-                    <span>Ver Profesores</span>
+                  <a href="#">
+                    <i class="fa fa-group"></i>
+                    <span>Profesores</span>
                     <span class="pull-right-container">
-                      <span class="label label-primary pull-right"></span>
+                      <i class="fa fa-angle-left pull-right"></i>
                     </span>
                   </a>
+                  <ul class="treeview-menu">
+                    <li><a href="<?=site_url()?>/Asistente_Controller/verProfesor"><i class="fa fa-user-secret"></i>Profesores</a></li>
+                    <li><a href="<?=site_url()?>/Asistente_Controller/verTutor"><i class="fa fa-graduation-cap"></i>Tutores</a></li>
+                    <li><a href="<?=site_url()?>/Asistente_Controller/verTutorProgresion"><i class="fa fa-line-chart"></i>Tutores Progresión</a></li>
+                  </ul>
                 </li>
                    <li class="treeview">
                   <a href="<?=site_url()?>/Asistente_Controller/verTutorias">

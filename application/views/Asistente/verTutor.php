@@ -209,13 +209,17 @@
                         <div class="col-lg-2">
                             <label >Digito V.<span class="required">*</span>
                             </label>
-                            <input type="text" id="name" name="name" required="required" class="form-control col-md-7 col-xs-12">
+                            <input type="text" id="name" name="name"  required="required" class="form-control col-md-7 col-xs-12">
                         </div>
-
-                       <div class="col-lg-6">
-                            <label >Foto Perfil
+                        
+                        <div class="col-lg-6">
+                            <label >Asignaturas
                             </label>
-                            <input type="file" accept="image/*" id="photo" name="photo" class="form-control col-md-7 col-xs-12">
+                            <select name="asignaturas[]" class="js-example-tokenizer form-control select2" multiple="multiple" style="width: 100%">
+                            <?php foreach ($asignaturas as $asig) { ?>
+                             <option value="<?=$asig->get('asig_id')?>"><?=$asig->get('asig_nombre')?></option>
+                          <?php  } ?>    
+                                </select>
                         </div>
                     </div>
 
