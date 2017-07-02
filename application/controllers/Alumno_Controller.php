@@ -17,6 +17,7 @@ class Alumno_Controller extends CI_Controller {
 		$this->load->model('Tutoria_model','tutoria',true);
 		$this->load->model('Disponibilidad_model','disponibilidad',true);
 		$this->load->model('Calificacion_model','calificacion',true);
+		$this->load->model('Area_model','area',true);
 		$this->load->library('session');
 
 		}else{
@@ -26,13 +27,209 @@ class Alumno_Controller extends CI_Controller {
 	public function index()
 	{
 		$user=$this->session->userdata('logged_in');
+		$usuario = $this->usuario->findById($user['id']);
+		$area = $this->area->findAll();
+		$alumno = $this->alumno->findByName('alu_usu_id',$user['id']);	
+		$datos['usuario'] = $usuario;
+		$datos['alumno'] = $alumno;
+		$datos['area'] = $area;
+		$this->layout->view('/Alumnos/mannuevo.php',$datos,false);
+	}
+	public function eliminar($id_user)
+	{
+	$usuario = $this->usuario->findById($id_user);
+	$usuario->set('usu_estado' , 0);
+	      	redirect('Alumno_Controller/index');
+	}
+	public function editar()
+	{
+		$nombre =$_POST['nombre'];$rut =$_POST['rut'];
+		$dv =$_POST['dv'];$edad =$_POST['edad'];
+		$fechanacimiento =$_POST['fechanacimiento'];$pais =$_POST['pais'];
+		$comuna =$_POST['comuna'];$direcion =$_POST['direcion'];
+		$ciudad =$_POST['ciudad'];$region =$_POST['region'];
+		$plan =$_POST['plan'];$fechamatricula =$_POST['fechamatricula'];
+		$alumnonuevo =$_POST['alumnonuevo'];$telefono =$_POST['telefono'];
+		$celular =$_POST['celular'];$correo =$_POST['correo'];
+		$correo_personal =$_POST['correo_personal'];$ciudadfamilia =$_POST['ciudadfamilia'];
+		$ingresofamiliar =$_POST['ingresofamiliar'];$comunacolegio =$_POST['comunacolegio'];
+		$rolrbd =$_POST['rolrbd'];$colegio =$_POST['colegio'];
+		$inst =$_POST['inst'];$tipocolegio =$_POST['tipocolegio'];
+		$otrocolegio =$_POST['otrocolegio'];$egresomedia =$_POST['egresomedia'];
+		$puntajepsu =$_POST['puntajepsu'];$insanterior =$_POST['insanterior'];
+		$carreraanterior =$_POST['carreraanterior'];$semestreingreso =$_POST['semestreingreso'];
+		$reincorporado =$_POST['reincorporado'];$numasignatura =$_POST['numasignatura'];
+		$semestre =$_POST['semestre'];$pagare =$_POST['pagare'];
+		$cupones =$_POST['cupones'];$codpe =$_POST['codpe'];
+		$progamadeestudio =$_POST['progamadeestudio'];$codigomencion =$_POST['codigomencion'];
+		$mencion =$_POST['mencion'];$jornada =$_POST['jornada'];
+		$genero =$_POST['genero'];$cantidadexcompetencias =$_POST['cantidadexcompetencias'];
+		$Peec =$_POST['Peec'];$cantidadhomologaciones =$_POST['cantidadhomologaciones'];
+		$codpe =$_POST['codpe']; $area =$_POST['area'];
+
+		$usu  =  array(
+			'usu_id' => 0,
+			'usu_nombre' => $nombre,
+			'usu_correo' => $correo,
+			'usu_estado' => 1,
+			'usu_are_id' => $area,
+			'usu_rut' => $rut,
+			'usu_dv' => $dv
+			);
+
+  			 $usuario = $this->usuario->create($usu);
+               $ret=$usuario->saveusu();
+               
+        $alu=$this->alumno->findAllBy("alu_usu_id",$usuario->get('usu_id'));
+		$alumno = array(
+		'alu_id' => $alu->get('alu_id'), 
+		'alu_usu_id' => $usuario->get('usu_id'),
+		'alu_inst' => $inst,
+		'alu_cod_pe' => $codpe,
+		'alu_programa_estudio' => $progamadeestudio,
+		'alu_cod_mencion' => $codigomencion,
+		'alu_mencion' => $mencion,
+		'alu_jornada' => $jornada ,
+		'alu_peec' => $Peec,
+		'alu_cant_ex_competencias' => $cantidadexcompetencias,
+		'alu_cant_homologaciones' => $cantidadhomologaciones,
+		'alu_correo_personal' => $correo_personal,
+		'alu_telefono' => $telefono,
+		'alu_celular' => $celular,
+		'alu_fecha_nacimiento' => $fechanacimiento, 
+		'alu_edad' => $edad,
+		'alu_sexo' => $genero,
+		'alu_pais' => $pais,
+		'alu_comuna' => $comuna, 
+		'alu_ciudad_familia' => $ciudadfamilia,
+		'alu_region_familia' => '',
+		'alu_ingreso_familiar' => $ingresofamiliar,
+		'alu_direccion' => $direcion,
+		'alu_ciudad' => $ciudad,
+		'alu_region' => $region,
+		'alu_plan' => $plan,
+		'alu_fechamatricula' => $fechamatricula,
+		'alu_comunacolegio' => $comunacolegio,
+		'alu_rolrbd' => $rolrbd,
+		'alu_colegio' => $colegio,
+		'alu_tipo_colegio' => $tipocolegio,
+		'alu_otro_colegio' =>$otrocolegio,
+		'alu_egreso_media' => $egresomedia,
+		'alu_puntaje_psu' => $puntajepsu,
+		'alu_ins_anterior' => $insanterior,
+		'alu_carrera_anterior' => $carreraanterior,
+		'alu_nuevo_antiguo' => $alumnonuevo,
+		'alu_semestre_ingreso' => $semestreingreso,
+		'alu_reincorporado' => $reincorporado,
+		'alu_num_asignatura' => $numasignatura,
+		'alu_semestre' => $semestre,
+		'alu_pagare' => $pagare,
+		'alu_cupones' => $cupones
+			);
+
+    $alumnocreate = $this->alumno->create($alumno);
+	 $alumnocreate->save();
+	       	redirect('Alumno_Controller/index');
+	}
+	public function nuevo()
+	{
+		$nombre =$_POST['nombre'];$rut =$_POST['rut'];
+		$dv =$_POST['dv'];$edad =$_POST['edad'];
+		$fechanacimiento =$_POST['fechanacimiento'];$pais =$_POST['pais'];
+		$comuna =$_POST['comuna'];$direcion =$_POST['direcion'];
+		$ciudad =$_POST['ciudad'];$region =$_POST['region'];
+		$plan =$_POST['plan'];$fechamatricula =$_POST['fechamatricula'];
+		$alumnonuevo =$_POST['alumnonuevo'];$telefono =$_POST['telefono'];
+		$celular =$_POST['celular'];$correo =$_POST['correo'];
+		$correo_personal =$_POST['correo_personal'];$ciudadfamilia =$_POST['ciudadfamilia'];
+		$ingresofamiliar =$_POST['ingresofamiliar'];$comunacolegio =$_POST['comunacolegio'];
+		$rolrbd =$_POST['rolrbd'];$colegio =$_POST['colegio'];
+		$inst =$_POST['inst'];$tipocolegio =$_POST['tipocolegio'];
+		$otrocolegio =$_POST['otrocolegio'];$egresomedia =$_POST['egresomedia'];
+		$puntajepsu =$_POST['puntajepsu'];$insanterior =$_POST['insanterior'];
+		$carreraanterior =$_POST['carreraanterior'];$semestreingreso =$_POST['semestreingreso'];
+		$reincorporado =$_POST['reincorporado'];$numasignatura =$_POST['numasignatura'];
+		$semestre =$_POST['semestre'];$pagare =$_POST['pagare'];
+		$cupones =$_POST['cupones'];$codpe =$_POST['codpe'];
+		$progamadeestudio =$_POST['progamadeestudio'];$codigomencion =$_POST['codigomencion'];
+		$mencion =$_POST['mencion'];$jornada =$_POST['jornada'];
+		$genero =$_POST['genero'];$cantidadexcompetencias =$_POST['cantidadexcompetencias'];
+		$Peec =$_POST['Peec'];$cantidadhomologaciones =$_POST['cantidadhomologaciones'];
+		$codpe =$_POST['codpe']; $area =$_POST['area'];
+
+		$usu  =  array(
+			'usu_id' => 0,
+			'usu_nombre' => $nombre,
+			'usu_correo' => $correo,
+			'usu_estado' => 1,
+			'usu_are_id' => $area,
+			'usu_rut' => $rut,
+			'usu_dv' => $dv
+			);
+
+  		   $usuario = $this->usuario->create($usu);
+               $ret=$usuario->saveusu(); 
+
+		$alumno = array(
+		'alu_id' => 0, 
+		'alu_usu_id' => $usuario->get('usu_id'),
+		'alu_inst' => $inst,
+		'alu_cod_pe' => $codpe,
+		'alu_programa_estudio' => $progamadeestudio,
+		'alu_cod_mencion' => $codigomencion,
+		'alu_mencion' => $mencion,
+		'alu_jornada' => $jornada ,
+		'alu_peec' => $Peec,
+		'alu_cant_ex_competencias' => $cantidadexcompetencias,
+		'alu_cant_homologaciones' => $cantidadhomologaciones,
+		'alu_correo_personal' => $correo_personal,
+		'alu_telefono' => $telefono,
+		'alu_celular' => $celular,
+		'alu_fecha_nacimiento' => $fechanacimiento, 
+		'alu_edad' => $edad,
+		'alu_sexo' => $genero,
+		'alu_pais' => $pais,
+		'alu_comuna' => $comuna, 
+		'alu_ciudad_familia' => $ciudadfamilia,
+		'alu_region_familia' => '',
+		'alu_ingreso_familiar' => $ingresofamiliar,
+		'alu_direccion' => $direcion,
+		'alu_ciudad' => $ciudad,
+		'alu_region' => $region,
+		'alu_plan' => $plan,
+		'alu_fechamatricula' => $fechamatricula,
+		'alu_comunacolegio' => $comunacolegio,
+		'alu_rolrbd' => $rolrbd,
+		'alu_colegio' => $colegio,
+		'alu_tipo_colegio' => $tipocolegio,
+		'alu_otro_colegio' =>$otrocolegio,
+		'alu_egreso_media' => $egresomedia,
+		'alu_puntaje_psu' => $puntajepsu,
+		'alu_ins_anterior' => $insanterior,
+		'alu_carrera_anterior' => $carreraanterior,
+		'alu_nuevo_antiguo' => $alumnonuevo,
+		'alu_semestre_ingreso' => $semestreingreso,
+		'alu_reincorporado' => $reincorporado,
+		'alu_num_asignatura' => $numasignatura,
+		'alu_semestre' => $semestre,
+		'alu_pagare' => $pagare,
+		'alu_cupones' => $cupones
+			);
+
+          $alumno = $this->alum->create($usualum);
+                 $alumno->save();
+                  //var_dump($usualum);
+  	redirect('Alumno_Controller/index');
+    }
+	/*public function index()
+	{
+		$user=$this->session->userdata('logged_in');
        	$tutorias= $this->horario->mistutoriasporestadolista($user['id'],"1");
        	$asignatura= $this->asignatura->findAllBy('asig_estado',"1");
        	$datos["asignaturas"]=$asignatura;
        	$datos["tutoria"]=$tutorias;
  		$this->layout->view('/Alumnos/index.php',$datos,false);
-	}
-
+	}*/
 	public function Cargarprofesjson()
 	{
 	$id_asig = $_POST["id"];
