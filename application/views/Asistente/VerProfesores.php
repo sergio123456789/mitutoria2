@@ -9,7 +9,9 @@
                                   <p class="category">Acá puedes buscar, editar y añadir Profesores</p>
                               </div>
                               <br>
-                              <button class="btn btn-success" style="margin-left:1%;" data-toggle="modal" data-target="#new_modal"><i class="fa fa-plus"></i> Añadir Profesor </button>
+                               <center>
+                                <button class="btn btn-success" data-toggle="modal" data-target="#new_modal"><i class="fa fa-plus"></i> Añadir Profesor</button>
+                              </center>
 
                               <div class="card-content table-responsive" style="float: center;">
                                       <div class="row">
@@ -17,28 +19,31 @@
                                              <div class="card-content table-responsive">
                                   <table id="example1" class="table" style="text-align: center;">
                                       <thead class="text-primary" >
+                                        <th style="text-align: center;">Foto</th>
                                         <th style="text-align: center;">Profesor</th>
                                         <th style="text-align: center;">Correo</th>
                                         <th style="text-align: center;">Rut</th>
                                         <th style="text-align: center;">Ver Asignaturas</th>
                                         <th style="text-align: center;">Ver Horario</th>
-                                        <th style="text-align: center;">Nota Acumulada</th>
-                                        <th style="text-align: center;">Detalle N. Acumulada</th>
+                                        <th style="text-align: center;">Detalle Notas</th>
+                                        <th style="text-align: center;">Editar</th>
+                                        <th style="text-align: center;">Eliminar</th>
                                       </thead>  
                                       <tbody>
 
                                       <?php foreach ($profesores as $profe) :?>
                                           <tr>
-                                            <td rowspan="1"><a href="#pablo">
-                                              <img class="img" src="../../resources/images/marc.jpg" style="width: 42px; height: 42px; border-radius: 50%;" />
-                                               <?=$profe->get('usu_nombre')?></a></td>
+                                                <td><a href="#pablo">
+                                              <img class="img" src="../../resources/images/marc.jpg" style="width: 42px; height: 42px; border-radius: 50%;" /></a></td>
+                                                <td><?=$profe->get('usu_nombre')?></td>
                                                 <td><?=$profe->get('usu_correo')?></td>
                                                 <td><?=$profe->get('usu_rut')?>-<?=$profe->get('usu_dv')?></td>
                                                 <center>
                                                 <td><a type='button' fakeid="<?=$profe->get('usu_id')?>" fakenombre="<?=$profe->get('usu_nombre')?>" class='btn btn-default editasig'><i class="fa fa-book"></i></a></td>
                                                 <td><a type='button' fakeid="<?=$profe->get('usu_id')?>" fakenombre="<?=$profe->get('usu_nombre')?>" class='btn btn-default editcalendario' ><i class="fa fa-calendar"></i></a></td>
-                                                <td>70</td>
                                                 <td><a type='button' fakeid="<?=$profe->get('usu_id')?>" fakenombre="<?=$profe->get('usu_nombre')?>" class='btn btn-default editdetalle'><i class="fa fa-eye"></i></a></td>
+                                                <td><a type='button' fakeid="<?=$profe->get('usu_id')?>" fakenombre="<?=$profe->get('usu_nombre')?>" class='btn btn-default edittutor'><i class="fa fa-pencil"></i></a></td>
+                                                 <td style="width: 4px;"><a type='button' fakeid="<?=$profe->get('usu_id')?>" class='btn btn-danger deleteUsr pull-right deleteUsr' data-toggle='modal' data-target='#delete_modal'> <i class="fa fa-user-times" ></i></a></td>
                                                 </center>
                                           </tr>
                                           <?php endforeach; ?>
@@ -187,7 +192,7 @@
                 <h4 class="modal-title" >Nuevo Profesor</h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal form-label-left" enctype="multipart/form-data" action="<?=site_url('confController/agregarConfiguracion')?>" method="POST">
+                <form class="form-horizontal form-label-left" enctype="multipart/form-data" action="<?=site_url('Asistente_Controller/agregarProfesor')?>" method="POST">
                     <div class="col-lg-12">
                           <div class="col-lg-6">
                             <label >Nombre Completo<span class="required">*</span>
@@ -204,12 +209,12 @@
                           <div class="col-lg-4">
                             <label >Rut<span class="required">*</span>
                             </label>
-                            <input type="text" id="name" name="name"  required="required" class="form-control col-md-7 col-xs-12">
+                            <input type="text" id="rut" name="rut"  required="required" class="form-control col-md-7 col-xs-12">
                         </div>
                         <div class="col-lg-2">
                             <label >Digito V.<span class="required">*</span>
                             </label>
-                            <input type="text" id="name" name="name" required="required" class="form-control col-md-7 col-xs-12">
+                            <input type="text" id="dv" name="dv" required="required" class="form-control col-md-7 col-xs-12">
                         </div>
 
                        <div class="col-lg-6">
@@ -218,6 +223,15 @@
                             <input type="file" accept="image/*" id="photo" name="photo" class="form-control col-md-7 col-xs-12">
                         </div>
                     </div>
+                      <div class="col-lg-6">
+                            <label>Área</label>
+                            <select name="area" id="area"  class="js-example-tokenizer form-control select2"  style="width: 100%">
+                                        <?php foreach ($area as $ar){?>
+                                        <option value="<?=$ar->get('ar_id')?>"><?=$ar->get('ar_nombre')?></option>
+                                                <?php } ?> 
+
+                            </select>
+                        </div>
 
         
             </div>
@@ -338,12 +352,54 @@
 
     // <==== Fin botón mostrar calendario ====>
 
-                     function abrir(idProd) { 
 
+
+    $(".edittutor").click(function () {
+            var id = $(this).attr('fakeid');
+            var nombre = $(this).attr('fakenombre');
+            var myarr = new Array();
+            var select1 = document.getElementById("editasignaturas");
+
+            $.ajax({
+                type: "POST",
+                url: "<?=site_url('Asistente_Controller/detalleTutorProgresion')?>",
+                dataType: "json",
+                data:{"idusu" : id},
+                 beforeSend:function () {
+                   $("#editname").val("");
+                    $("#editemail").val("");
+                    $("#editrut").val("");
+                    $("#editdv").val("");
+                    $("#editarea").val("");
+                    $("#oldphoto").val("");
+                    $("#editid").val("");
+                    $('#carga_modal').modal('show');
+                },
+                success: function(data) {
+                  console.log(data);
+                    $("#editname").val(nombre);
+                    $("#editemail").val(data.email);
+                    $("#editrut").val(data.rut);
+                    $("#editdv").val(data.dv);
+                    $("#editarea").val(data.area).trigger("change");
+                    $("#oldphoto").val(data.foto);
+                    $("#editid").val(id);
+                  
+                    $('#carga_modal').modal('hide');
+                    $('#edit_modal').modal('show').fadeIn(800);
+                    
+                 },
+                   error:function (data) {
+                    $('#carga_modal').modal('hide');
+                    alert("lo sentimos no pudimos cargar los datos solicitados, favor intente mas tarde");
+                },
                 
-
+                complete : function(xhr, status) {
+                    $('#carga_modal').modal('hide');
                 }
-
+            });
+        });
+     // <==== botón editar tutor ====>
 
  $(function () {
         setTimeout(function() {
@@ -354,11 +410,10 @@
 
 
     $(function () {    
-            $(".js-example-tokenizer").select2({
-                multiple: true,
-                tokenSeparators: [',',';'],
-                cache:false
-            });
+      $("#area").select2({
+     theme: "classic"
+});
+$("#editarea").select2(); 
 
         });
 

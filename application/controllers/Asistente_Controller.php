@@ -97,7 +97,9 @@ public function verReforzamientos(){
 	public function verProfesor(){
 
 		$profe =$this->usuario->getUserByPerfil(4);
+		$area = $this->usuario->getAreaUser();
 		$datitos['profesores'] = $profe;
+		$datitos['area'] = $area;
 		$this->layout->view('/Asistente/VerProfesores',$datitos,false);
 	}
 
@@ -212,6 +214,60 @@ public function verReforzamientos(){
 
     	}
 
+
+    	public function agregarProfesor(){
+    	$datos = $this->input->post();
+    	$nombre=$datos['name'];
+    	$correo=$datos['email'];
+    	$rut=$datos['rut'];
+    	$dv=$datos['dv'];
+    	$area = $datos['area'];
+    	$imagen='';
+
+    	if (isset($nombre)&&isset($rut)&&isset($correo)&&isset($dv)) {
+
+				if($_FILES["photo"]["type"] == 'image/png' || $_FILES["photo"]["type"] == 'image/jpeg' || $_FILES["photo"]["type"] == 'image/jpg'){
+
+						$tmp_name  = $_FILES["photo"]["tmp_name"];
+						$name = basename($_FILES["photo"]["name"]);
+						$explode = explode('.', $name);
+						$extension = $explode['1'];
+						$punto = ".";
+						$img =  $rut;
+						$imagen = $img.$punto.$extension;
+						$ruta = "./resources/images/profilephotos/Profesor/{$imagen}";
+						move_uploaded_file($tmp_name, $ruta);
+
+					}else{
+						$imagen = '';
+					}
+
+    			$tutor=array(
+                        'usu_nombre' => $nombre,
+                        'usu_correo' => $correo,
+                        'usu_pass' => '123456',
+                        'usu_estado' => 1,
+                        'usu_are_id' => $area,
+                        'usu_rut' => $rut,
+                        'usu_dv' => $dv,
+                        'usu_foto'=>$imagen
+                        );
+    			
+                    $usuario = $this->usuario->create($tutor);
+                    $ret=$usuario->saveusu(); 
+                     if ($ret=='perfil') {
+                       $usuario->setPermisos(array(
+                        'per_usu_id' => $usuario->get('usu_id'),
+                        'perf_id' => 4
+                        ));  
+                       $usuario->insertperusu();
+                       $ret=$usuario->get('usu_id');
+						
+					}
+    		}
+
+    	}
+
     	public function agregarTutorProgresion(){
     	$datos = $this->input->post();
     	$nombre=$datos['name'];
@@ -232,7 +288,7 @@ public function verReforzamientos(){
 						$punto = ".";
 						$img =  $rut;
 						$imagen = $img.$punto.$extension;
-						$ruta = "./resources/images/profilephotos/{$imagen}";
+						$ruta = "./resources/images/profilephotos/TutorProgresion/{$imagen}";
 						move_uploaded_file($tmp_name, $ruta);
 
 					}else{
@@ -285,7 +341,9 @@ public function verReforzamientos(){
 						$punto = ".";
 						$img =  $rut;
 						$imagen = $img.$punto.$extension;
-						$ruta = "./resources/images/profilephotos/{$imagen}";
+						$ruta = "./resources/images/profilephotos/Tutor/{$imagen}";
+						unlink("./resources/images/profilephotos/Tutor/{$imagen}"); 
+						clearstatcache(); 	
 						move_uploaded_file($tmp_name, $ruta);
 
 					}else{
@@ -345,7 +403,9 @@ public function verReforzamientos(){
 						$punto = ".";
 						$img =  $rut;
 						$imagen = $img.$punto.$extension;
-						$ruta = "./resources/images/profilephotos/{$imagen}";
+						$ruta = "./resources/images/profilephotos/TutorProgresion/{$imagen}";
+						unlink("./resources/images/profilephotos/TutorProgresion/{$imagen}"); 
+						clearstatcache(); 	
 						move_uploaded_file($tmp_name, $ruta);
 
 					}else{
