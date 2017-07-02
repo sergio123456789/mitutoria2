@@ -70,7 +70,7 @@
         <a  class="logo">
       <span class="logo-mini"><img src="<?=base_url('')?>resources/images/favicon/favicon-32x32.png" style="width: 100%; height: 100%;"></span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><img src="<?=base_url('')?>resources/images/materialize-logo.png" style="width: 200px; height: 50px;"></span>
+      <span class="logo-lg"><img src="<?=base_url('')?>resources/images/logomitutoria.png" style="width: 200px; height: 50px;"></span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
