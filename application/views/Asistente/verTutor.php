@@ -25,6 +25,7 @@
                                         <th style="text-align: center;">Nota Acumulada</th>
                                         <th style="text-align: center;">Detalle N. Acumulada</th>
                                         <th style="text-align: center;">Editar</th>
+                                        <th style="text-align: center;">Eliminar</th>
                                       </thead>  
                                       <tbody>
 
@@ -41,6 +42,7 @@
                                                 <td>70</td>
                                                 <td><a type='button' fakeid="<?=$profe->get('usu_id')?>" fakenombre="<?=$profe->get('usu_nombre')?>" class='btn btn-default editdetalle'><i class="fa fa-eye"></i></a></td>
                                                 <td><a type='button' fakeid="<?=$profe->get('usu_id')?>" fakenombre="<?=$profe->get('usu_nombre')?>" class='btn btn-default edittutor'><i class="fa fa-pencil"></i></a></td>
+                                                 <td style="width: 4px;"><a type='button' fakeid="<?=$profe->get('usu_id')?>" class='btn btn-danger deleteUsr pull-right deleteUsr' data-toggle='modal' data-target='#delete_modal'> <i class="fa fa-user-times" ></i></a></td>
                                                 </center>
                                           </tr>
                                           <?php endforeach; ?>
@@ -262,7 +264,7 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
                 </button>
-                <h4 class="modal-title">Nuevo Tutor</h4>
+                <h4 class="modal-title">Editar Tutor</h4>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal form-label-left" enctype="multipart/form-data" action="<?=site_url('Asistente_Controller/editarTutor')?>" method="POST">
@@ -298,7 +300,7 @@
                             </label>
                             <input type="file" accept="image/*" id="photo" name="photo" class="form-control col-md-7 col-xs-12">
                             <input type="text" hidden="hidden" id="oldphoto" name="oldphoto">
-                            <input type="text" hidden="hidden" id="editid" name="oldphoto">
+                            <input type="text" hidden="hidden" id="editid" name="editid">
                         </div>
                          <div class="col-lg-12">
                             <label >Asignaturas
@@ -331,6 +333,35 @@
 </div>
 <!-- /modal agregar -->
     <!--==== fin modal Editar Tutor =====-->
+
+
+
+    <!-- modal eliminar Tutor-->
+<div id="delete_modal" class="modal fade " role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title">Eliminar al Tutor</h4>
+            </div>
+            <div class="modal-body">
+                <h4 style="text-align: center;">¿Seguro/a que desea eliminar al tutor?</h4><h3 id="modal_name"></h3>
+                <div class="modal-footer">
+                    <div class="col-md-4">
+
+                        <button id="btnDel" type="button" class="btn btn-danger">Eliminar</button>
+                    </div>
+                    <div class="col-md-8">
+                        <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /modal eliminar Tutor -->
 
 
 
@@ -446,30 +477,19 @@ $(".edittutor").click(function () {
                     $('#carga_modal').modal('show');
                 },
                 success: function(data) {
-
+                  console.log(data);
                     $("#editname").val(nombre);
                     $("#editemail").val(data.email);
                     $("#editrut").val(data.rut);
                     $("#editdv").val(data.dv);
-
-                    /*for(var i in data.asignaturas.items) {
-                      myarr.push(data.asignaturas.items[i]);  // (o el campo que necesites)
-                      console.log(myarr);
-                   }*/
-                  //  $("#editasignaturas").multipleSelect("uncheckAll");
                     data.asignaturas.forEach(function(entry) {
                         myarr.push(entry);
-                        //$("#editasignaturas").select2('val',entry);
                     });
 
                      $.each($("#editasignaturas"), function(){
                           $(this).select2('val', myarr);
                     });
-
-                    console.log(myarr);
-                    $("#editasignaturas").val(myarr);
-
-                    
+                    $("#editasignaturas").val(myarr).trigger("change");
                     $("#oldphoto").val(data.foto);
                     $("#editid").val(id);
                   
@@ -488,6 +508,41 @@ $(".edittutor").click(function () {
             });
         });
      // <==== botón editar tutor ====>
+
+
+
+        // <==== Eliminar Botón ===>
+        var iddelete = 0;
+        $(".deleteUsr").click(function () {
+            iddelete = $(this).attr('fakeid');
+            console.log(iddelete);
+        });
+
+        $('#btnDel').click(function () {
+            if (iddelete != 0) {
+                $('#delete_modal').modal('hide');
+                console.log(iddelete);
+                $.ajax({
+                    type: "POST",
+                    url: "<?=site_url('Asistente_Controller/eliminarTutor')?>",
+                    dataType: "json",
+                    data: {"idusu": iddelete},
+                    beforeSend: function () {
+                        $('#carga_modal').modal('show');
+                    },
+                    success: function (data) {
+                        $('#carga_modal').modal('hide');
+                    },
+                    complete: function (xhr, status) {
+                        $('#carga_modal').modal('hide');
+                        location.reload();
+                    }
+                });
+            }else{
+                alert("No se ha seleccionado ningun usuario a eliminar");
+            }
+        });
+  // <==== Fin Eliminar Botón ===>
 
 
 

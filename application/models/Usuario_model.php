@@ -109,6 +109,18 @@ function insertperusu(){
 		return $this->db->delete('usuario');
 	}
 
+	function deleteAsig($id)
+	{
+		$this->db->where('prof_usu_id',$id);
+		return $this->db->delete('profesor');
+	}
+	function deletePermiso($id)
+	{
+		$this->db->where('per_usu_id',$id);
+		return $this->db->delete('permisos');
+	}
+
+
 	function findAll(){
 		$datos=array();
 		$bit = null;
