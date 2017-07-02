@@ -378,9 +378,29 @@ function insertperusu(){
         $result = $this->db->query($query);
         $data = $this->dbutil->csv_from_result($result, $delimiter, $newline);
         force_download($filename, "\xEF\xBB\xBF".$data);
+	}
+
+
+	 public function getAreaUser(){
+		$result = null;
+		$this->load->database();
+		$this->db->select('ar_id, ar_nombre');
+		$this->db->from('area');
+		$consulta = $this->db->get();
+
+		  if ($consulta->num_rows()>0) {
+    	foreach ($consulta->result() as $row) {
+			$result[] = $this->create($row);
+		}
+		return $result;
+    }
+    return false;
 	}	
 
 }
+
+
+
 /*
 	public function saveusu()
 	{

@@ -112,8 +112,9 @@ public function verReforzamientos(){
 	
 	public function verTutorProgresion(){
 		$profe =$this->usuario->getUserByPerfil(7);
+		$area = $this->usuario->getAreaUser();
 		$datitos['profesores'] = $profe;
-		
+		$datitos['area'] = $area;
 		$this->layout->view('/Asistente/VerTutoresProgresion.php',$datitos,false);
 	}	
 
@@ -211,6 +212,59 @@ public function verReforzamientos(){
 
     	}
 
+    	public function agregarTutorProgresion(){
+    	$datos = $this->input->post();
+    	$nombre=$datos['name'];
+    	$correo=$datos['email'];
+    	$rut=$datos['rut'];
+    	$dv=$datos['dv'];
+    	$area = $datos['area'];
+    	$imagen='';
+
+    	if (isset($nombre)&&isset($rut)&&isset($correo)&&isset($dv)) {
+
+				if($_FILES["photo"]["type"] == 'image/png' || $_FILES["photo"]["type"] == 'image/jpeg' || $_FILES["photo"]["type"] == 'image/jpg'){
+
+						$tmp_name  = $_FILES["photo"]["tmp_name"];
+						$name = basename($_FILES["photo"]["name"]);
+						$explode = explode('.', $name);
+						$extension = $explode['1'];
+						$punto = ".";
+						$img =  $rut;
+						$imagen = $img.$punto.$extension;
+						$ruta = "./resources/images/profilephotos/{$imagen}";
+						move_uploaded_file($tmp_name, $ruta);
+
+					}else{
+						$imagen = '';
+					}
+
+    			$tutor=array(
+                        'usu_nombre' => $nombre,
+                        'usu_correo' => $correo,
+                        'usu_pass' => '123456',
+                        'usu_estado' => 1,
+                        'usu_are_id' => $area,
+                        'usu_rut' => $rut,
+                        'usu_dv' => $dv,
+                        'usu_foto'=>$imagen
+                        );
+    			
+                    $usuario = $this->usuario->create($tutor);
+                    $ret=$usuario->saveusu(); 
+                     if ($ret=='perfil') {
+                       $usuario->setPermisos(array(
+                        'per_usu_id' => $usuario->get('usu_id'),
+                        'perf_id' => 7
+                        ));  
+                       $usuario->insertperusu();
+                       $ret=$usuario->get('usu_id'); 
+					}
+					redirect('Asistente_Controller/verTutor','refresh');
+
+    		}
+    	}
+
     	 public function editarTutor(){
     	 	$datos = $this->input->post();
     	 	$id    =$datos['editid'];
@@ -263,11 +317,91 @@ public function verReforzamientos(){
 							}
                 }
 
-               redirect('Asistente_Controller/verTutor','refresh');
+                redirect('Asistente_Controller/verTutorProgresion','refresh');
 
 				}else{
 					return "revisar campos requeridos";
 				}
+
+    	 }
+
+		public function editarTutorProgresion(){
+    	 	$datos = $this->input->post();
+    	 	$id    =$datos['editid'];
+	    	$nombre=$datos['editname'];
+	    	$correo=$datos['editemail'];
+	    	$rut=$datos['editrut'];
+	    	$dv=$datos['editdv'];
+	    	$area = $datos['editarea'];
+
+    	 		if (isset($nombre)&&isset($rut)&&isset($correo)&&isset($dv)) {
+
+				if($_FILES["photo"]["type"] == 'image/png' || $_FILES["photo"]["type"] == 'image/jpeg' || $_FILES["photo"]["type"] == 'image/jpg'){
+
+						$tmp_name  = $_FILES["photo"]["tmp_name"];
+						$name = basename($_FILES["photo"]["name"]);
+						$explode = explode('.', $name);
+						$extension = $explode['1'];
+						$punto = ".";
+						$img =  $rut;
+						$imagen = $img.$punto.$extension;
+						$ruta = "./resources/images/profilephotos/{$imagen}";
+						move_uploaded_file($tmp_name, $ruta);
+
+					}else{
+						$imagen = $this->input->post('oldphoto');
+					}
+
+					$tutor=array(
+						'usu_id' => $id,
+                        'usu_nombre' => $nombre,
+                        'usu_correo' => $correo,
+                        'usu_pass' => '123456',
+                        'usu_estado' => 1,
+                        'usu_are_id' => $area,
+                        'usu_rut' => $rut,
+                        'usu_dv' => $dv,
+                        'usu_foto'=>$imagen
+                        );
+                    $usuario = $this->usuario->create($tutor);
+                    $usuario->save(); 
+
+               redirect('Asistente_Controller/verTutorProgresion','refresh');
+
+				}else{
+					return "revisar campos requeridos";
+				}
+
+    	 }
+
+
+
+
+
+
+    	  public function detalleTutorProgresion(){
+
+    	 	$idTuto=$this->input->post('idusu');
+
+
+    	 	if(isset($idTuto)){
+    	 	$arrayasignaturas = array();
+			$idusu = $this->input->post('idusu');
+			$confid  = intval($idusu);
+			$user = $this->usuario->findById($confid);
+
+			$data =  array(
+			'email' => $user->get('usu_correo'),
+			'rut' => $user->get('usu_rut'),
+			'dv' =>	$user->get('usu_dv'),
+			'area' => $user->get('usu_are_id'),
+			'foto' => $user->get('usu_foto'));
+			echo json_encode($data);
+		
+		 }else{
+            return "existen campos vacíos";
+
+        }
 
     	 }
 
@@ -301,6 +435,18 @@ public function verReforzamientos(){
 
         }
 
+    	 }
+
+    	 public function eliminarTutorProgresion(){
+
+    	 	$id = $this->input->post('idusu');
+    	 	if(isset($id)){
+    	 		$this->usuario->deletePermiso($id);
+    	 		$this->usuario->delete($id);
+    	 		redirect('Asistente_Controller/verTutorProgresion','refresh');
+    	 	}else{
+    	 		return "ha ocurrido un problema al eliminar al usuario";
+    	 	}
     	 }
 
 
