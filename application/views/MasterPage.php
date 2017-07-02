@@ -144,7 +144,6 @@
                     </span>
                   </a>
                 </li>
-
                   <li class="treeview">
                   <a href="<?=site_url()?>/Asesor_Controller/verAlumnos">
                     <i class="fa fa-user"></i>
@@ -221,41 +220,20 @@
                     <li><a href="<?=site_url()?>/Asistente_Controller/verTutorProgresion"><i class="fa fa-line-chart"></i>Tutores Progresión</a></li>
                   </ul>
                 </li>
-                   <li class="treeview">
-                  <a href="<?=site_url()?>/Asistente_Controller/verTutorias">
-                    <i class="fa fa-book"></i>
-                    <span>Tutorías</span>
-                    <span class="pull-right-container">
-                      <span class="label label-primary pull-right"></span>
-                    </span>
-                  </a>
-                </li>
-                 <li class="treeview">
-                  <a href="<?=site_url()?>/Asistente_Controller/verReforzamientos">
-                    <i class="fa fa-book"></i>
-                    <span>Reforzamientos</span>
-                    <span class="pull-right-container">
-                      <span class="label label-primary pull-right"></span>
-                    </span>
-                  </a>
-                </li>
+
                 <li class="treeview">
-                  <a href="<?=site_url()?>/Asistente_Controller/verAyudantia">
-                    <i class="fa fa-book"></i>
-                    <span>Ayudantía</span>
+                  <a href="#">
+                    <i class="fa fa-bookmark-o"></i>
+                    <span>Ayudas</span>
                     <span class="pull-right-container">
-                      <span class="label label-primary pull-right"></span>
+                      <i class="fa fa-angle-left pull-right"></i>
                     </span>
                   </a>
-                </li>
-                <li class="treeview">
-                  <a href="<?=site_url()?>/Asistente_Controller/Notificaciones">
-                    <i class="fa fa-bell"></i>
-                    <span>Notificaciones</span>
-                    <span class="pull-right-container">
-                      <span class="label label-primary pull-right"></span>
-                    </span>
-                  </a>
+                  <ul class="treeview-menu">
+                    <li><a href="<?=site_url()?>/Asistente_Controller/verProfesor"><i class="fa fa-book"></i>Tutorías</a></li>
+                    <li><a href="<?=site_url()?>/Asistente_Controller/verTutor"><i class="fa fa-graduation-cap"></i>Reforzamientos</a></li>
+                    <li><a href="<?=site_url()?>/Asistente_Controller/verTutorProgresion"><i class="fa fa-line-chart"></i>Ayudantías</a></li>
+                  </ul>
                 </li>
                  <li class="treeview">
                   <a href="<?=site_url()?>/Asistente_Controller/Importar">
