@@ -5,11 +5,13 @@
                <div class="col-md-12">
                           <div class="card">
                               <div class="card-header" data-background-color="purple">
-                                  <h4 class="title">Profesores</h4>
-                                  <p class="category">Acá puedes buscar, editar y añadir Profesores</p>
+                                  <h4 class="title">Tutores</h4>
+                                  <p class="category">Acá puedes buscar, editar y añadir Tutores</p>
                               </div>
                               <br>
-                              <button class="btn btn-success" style="margin-left:1%;" data-toggle="modal" data-target="#new_modal"><i class="fa fa-plus"></i> Añadir Profesor </button>
+                               <center>
+                                <button class="btn btn-success" data-toggle="modal" data-target="#new_modal"><i class="fa fa-plus"></i> Añadir Tutor</button>
+                              </center>
 
                               <div class="card-content table-responsive" style="float: center;">
                                       <div class="row">
@@ -17,13 +19,13 @@
                                              <div class="card-content table-responsive">
                                   <table id="example1" class="table" style="text-align: center;">
                                       <thead class="text-primary" >
+                                        <th style="text-align: center;">Foto</th>
                                         <th style="text-align: center;">Profesor</th>
                                         <th style="text-align: center;">Correo</th>
                                         <th style="text-align: center;">Rut</th>
                                         <th style="text-align: center;">Ver Asignaturas</th>
                                         <th style="text-align: center;">Ver Horario</th>
-                                        <th style="text-align: center;">Nota Acumulada</th>
-                                        <th style="text-align: center;">Detalle N. Acumulada</th>
+                                        <th style="text-align: center;">Detalle Notas</th>
                                         <th style="text-align: center;">Editar</th>
                                         <th style="text-align: center;">Eliminar</th>
                                       </thead>  
@@ -31,15 +33,14 @@
 
                                       <?php foreach ($profesores as $profe) :?>
                                           <tr>
-                                            <td rowspan="1"><a href="#pablo">
-                                              <img class="img" src="../../resources/images/marc.jpg" style="width: 42px; height: 42px; border-radius: 50%;" />
-                                               <?=$profe->get('usu_nombre')?></a></td>
+                                                <td><a href="#pablo">
+                                              <img class="img" src="../../resources/images/marc.jpg" style="width: 42px; height: 42px; border-radius: 50%;" /></a></td>
+                                                <td><?=$profe->get('usu_nombre')?></td>
                                                 <td><?=$profe->get('usu_correo')?></td>
                                                 <td><?=$profe->get('usu_rut')?>-<?=$profe->get('usu_dv')?></td>
                                                 <center>
                                                 <td><a type='button' fakeid="<?=$profe->get('usu_id')?>" fakenombre="<?=$profe->get('usu_nombre')?>" class='btn btn-default editasig'><i class="fa fa-book"></i></a></td>
                                                 <td><a type='button' fakeid="<?=$profe->get('usu_id')?>" fakenombre="<?=$profe->get('usu_nombre')?>" class='btn btn-default editcalendario' ><i class="fa fa-calendar"></i></a></td>
-                                                <td>70</td>
                                                 <td><a type='button' fakeid="<?=$profe->get('usu_id')?>" fakenombre="<?=$profe->get('usu_nombre')?>" class='btn btn-default editdetalle'><i class="fa fa-eye"></i></a></td>
                                                 <td><a type='button' fakeid="<?=$profe->get('usu_id')?>" fakenombre="<?=$profe->get('usu_nombre')?>" class='btn btn-default edittutor'><i class="fa fa-pencil"></i></a></td>
                                                  <td style="width: 4px;"><a type='button' fakeid="<?=$profe->get('usu_id')?>" class='btn btn-danger deleteUsr pull-right deleteUsr' data-toggle='modal' data-target='#delete_modal'> <i class="fa fa-user-times" ></i></a></td>
