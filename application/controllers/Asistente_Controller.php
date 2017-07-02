@@ -7,13 +7,13 @@ public function __construct()
 		parent::__construct();
 		$this->layout->setLayout('/MasterPage',false);
 		$this->load->model('Usuario_model','usuario',true);		
-		$this->load->model('Usuario_model','usuario',true);
 		$this->load->model('Alumno_model','alumno',true);
 		$this->load->model('Calificacion_model','calificacion',true);
 		$this->load->model('Tutoria_model','tutoria',true);
 		$this->load->model('Disponibilidad_model','disponibilidad',true);
 		$this->load->model('Horario_model','horario',true);
 		$this->load->model('Asignatura_model','asignatura',true);
+		$this->load->model('Profesor_model','profesor',true);
         $this->load->library('upload');
 
 		$config['upload_path']          = './resources/images/profilephotos/';
@@ -601,6 +601,7 @@ public function verReforzamientos(){
     	 	}
     	 }
 
+<<<<<<< HEAD
     	  public function eliminarProfesor(){
 
     	 	$id = $this->input->post('idusu');
@@ -612,6 +613,44 @@ public function verReforzamientos(){
     	 		return "ha ocurrido un problema al eliminar al usuario";
     	 	}
     	 }
+=======
+    	 public function createTutoria($id){
+    	$profe = $this->profesor->findByIdUsu($id);
+    	$usuario = $this->usuario->findById($id);
+    	$asignaturas = array();
+    	foreach ($profe as $key => $value) {
+    		$asignaturas[] = $this->asignatura->findById($value->get('prof_asig_id'));
+    	}
+    	$datitos["asigxprofe"] = $asignaturas;
+    	$datitos["id"] = $id;
+    	$datitos["usu"] = $usuario;
+		$this->layout->view('/Asistente/CrearTutoria.php',$datitos,false);
+    }
+
+    function agregarTutoria(){
+    	$dia = $_POST["dia"];
+    	$inicio = $_POST["inicio"];
+    	$usu_id = $_POST["id"];
+    	$termino = $_POST["termino"];
+    	$sala = $_POST["sala"];
+    	$asi_id = $_POST["asig"];
+    	$rows = array(
+    		'hor_dia' =>$dia,
+    		'hor_inicio' =>$inicio,
+    		'hor_termino' =>$termino,
+    		'hor_fechasis' => date('Y-m-d'),
+    		'hor_usu_id' =>$usu_id,
+    		'hor_sala' => $sala,
+    		'hor_asig_id' => $asi_id,
+    		'hor_estado' =>0,
+    		'hor_tipo' =>1
+    	);
+    	$horario = $this->horario->create($rows);
+    	$horario->save();
+    	$this->session->set_flashdata('notice', 'Tutoría creada exitósamente');
+    	redirect('/Asistente_Controller/createTutoria/'.$usu_id,'refresh');
+    }
+>>>>>>> 868d745017d12829b22a2c9e5b99a517d230d656
 
     }
 

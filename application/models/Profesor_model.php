@@ -31,7 +31,7 @@ class Profesor_model extends CI_Model {
 	return $result;
     }
     public function create($row){
-		$prod =  new Area_model();
+		$prod =  new Profesor_model();
 		$prod->setColumns($row);
 		return $prod;
     }
@@ -40,6 +40,19 @@ class Profesor_model extends CI_Model {
 			$this->columns[$key] = $value;
 			}
     }
+
+    public function findByIdUsu($id_usu){
+    	$result = array();
+    	$this->load->database();
+    	$this->db->where('prof_usu_id',$id_usu);
+		$res = $this->db->get('profesor');
+		if ($res->num_rows() > 0) {
+			foreach ($res->result() as $value) {
+				$result[] = $this->create($value);
+			}
+		}
+		return $result;
+	    }
 
 }
 
