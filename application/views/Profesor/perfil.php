@@ -92,7 +92,7 @@
     						<div class="card card-profile">
     							<div class="card-avatar">
     								<a href="#pablo">
-    									<img class="img" src="../../resources/images/marc.jpg" />
+    									<img class="img" src="?=$usu->get('usu_foto') ?>" />
     								</a>
     							</div>
 
@@ -124,6 +124,7 @@
 <?php }?><?php }?>
 	                                        
 	                                    </tbody>
+	                                   
 	                                </table>
 	                            </div>
     							

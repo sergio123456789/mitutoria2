@@ -98,6 +98,14 @@ $("#form").submit(function(e){
                 url: "<?=site_url('Asesor_Controller/detalleAlumno')?>",
                 dataType: "json",
                 data: $(this).serialize(),
+                   beforeSend:function () {
+                    $("#name").empty(); //Cambiar al que esta seleccionado
+                    $("#correo").empty();
+                    $("#carrera").empty();
+                    $("#celular").empty();
+                    $("#ingreso").empty();
+                    $('#carga_modal').modal('show');
+                },
                 success: function(data) {
                     console.log(data);
                     $("#name").html(data.nombre); //Cambiar al que esta seleccionado

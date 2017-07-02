@@ -23,6 +23,11 @@ class Usuario_model extends CI_Model {
 			'per_usu_id' => 0,
 			'perf_id' => 0
 			);
+		private $_columnsAsigna= array(
+			'prof_asig_id' => 0,
+			'prof_usu_id' =>0
+		);
+
 
 	public function createper($row){
 		$per =  new Usuario_model();
@@ -32,6 +37,13 @@ class Usuario_model extends CI_Model {
 		return $per;
     }
 
+     public function createAsig($row){
+    	$asig= new Usuario_model();
+    	foreach ($row as $key => $value) {
+    		$asig->_columnsAsigna[$key] = $value;
+    	}
+    	return $asig;
+    }
 	public function create($row){
 		$usu =  new Usuario_model();
 		foreach ($row as $key => $value) {
@@ -45,6 +57,13 @@ class Usuario_model extends CI_Model {
 	}
 	public function getNombre(){
 		return $this->_columns['usu_nombre'];
+	}
+		function getAsig($attr){
+			return $this->_columnsAsigna[$attr];
+	}
+	public function setAsigna($key,$value)
+	{
+		$this->_columnsAsigna[$key] = $value;
 	}
 	function per($attr){
 		return $this->_columnspermiso[$attr];
@@ -90,6 +109,18 @@ function insertperusu(){
 		return $this->db->delete('usuario');
 	}
 
+	function deleteAsig($id)
+	{
+		$this->db->where('prof_usu_id',$id);
+		return $this->db->delete('profesor');
+	}
+	function deletePermiso($id)
+	{
+		$this->db->where('per_usu_id',$id);
+		return $this->db->delete('permisos');
+	}
+
+
 	function findAll(){
 		$datos=array();
 		$bit = null;
@@ -102,25 +133,27 @@ function insertperusu(){
 	public function saveusu()
 	{
 		$this->load->database();
-		
 		$query=$this->db->get_where('usuario',array('usu_rut'=>$this->_columns['usu_rut']));
 		$aux='';	
-		
+		$auxDos='';
 			if($query->num_rows() > 0){
 				$row = $query->row_object();
 				$usuario=$this->create($row);
 				$aux=$usuario->get('usu_rut');
-			}
+				$auxDos=$usuario->get('usu_id');
 
+			}
 			if ($this->_columns['usu_rut']!=$aux) {
 			$this->db->insert("usuario",$this->_columns);
 			$this->_columns['usu_id'] = $this->db->insert_id();
 			
-			return 1;
+			return 'perfil';
 		}else{
+
+			$this->_columns['usu_id']=$auxDos;
 			$this->db->where('usu_id',$this->_columns['usu_id']);
 			$this->db->update('usuario',$this->_columns);
-			
+			return $auxDos;
 
 		}
 	}
@@ -251,7 +284,21 @@ function insertperusu(){
         $delimiter = "|";
         $newline = "\r\n";
         $filename = $user.".csv";
-        $query = "SELECT CONCAT(usu_rut,'-',usu_dv) AS RUT, usu_nombre AS NOMBRE, usu_correo AS CORREO, b.alu_programa_estudio AS CARRERA, b.alu_semestre AS SEMESTRE,b.alu_jornada AS JORNADA, b.alu_fechamatricula AS MATRICULA, b.alu_edad AS EDAD, b.alu_celular AS CELULAR FROM usuario a INNER JOIN alumno b ON a.usu_id = b.alu_usu_id";
+        $query = "SELECT CONCAT(usu_rut,'-',usu_dv) AS RUT, usu_nombre AS NOMBRE, usu_correo AS CORREO, b.alu_programa_estudio AS CARRERA, b.alu_semestre AS SEMESTRE,b.alu_jornada AS JORNADA, DATE_FORMAT(b.alu_fechamatricula, '%d/%m/%Y') AS MATRICULA, b.alu_edad AS EDAD, b.alu_celular AS CELULAR FROM usuario a INNER JOIN alumno b ON a.usu_id = b.alu_usu_id ";
+        $result = $this->db->query($query);
+        $data = $this->dbutil->csv_from_result($result, $delimiter, $newline);
+        force_download($filename, "\xEF\xBB\xBF".$data);
+	}
+
+	function downloadTutorias($user){
+
+		$this->load->dbutil();
+        $this->load->helper('file');
+        $this->load->helper('download');
+        $delimiter = "|";
+        $newline = "\r\n";
+        $filename = $user.".csv";
+        $query = "SELECT a.hor_dia AS DIA, a.hor_inicio AS INICIO, a.hor_termino AS TERMINO, a.hor_sala AS SALA, b.usu_nombre AS NOMBRE, CONCAT(b.usu_rut,'-',b.usu_dv) AS RUT, b.usu_correo AS CORREO FROM horario a INNER JOIN usuario b INNER JOIN asignatura c ON a.hor_usu_id=b.usu_id AND a.hor_asig_id=c.asig_id";
         $result = $this->db->query($query);
         $data = $this->dbutil->csv_from_result($result, $delimiter, $newline);
         force_download($filename, "\xEF\xBB\xBF".$data);
@@ -260,13 +307,29 @@ function insertperusu(){
 	public function getAsigProfByRut($id=null){
     $result = null;
     $this->load->database();
-    $this->db->select('asig_nombre, asig_cod');
+    $this->db->select('asig_id,asig_nombre, asig_cod');
     $this->db->from('profesor');
     $this->db->join('usuario',  'profesor.prof_usu_id = usuario.usu_id');
     $this->db->join('asignatura','profesor.prof_asig_id = asignatura.asig_id');
     $this->db->where('profesor.prof_usu_id', $id);
     $consulta = $this->db->get();
     return $consulta->result_array();
+}
+
+	public function getAsigProfById($id=null){
+    $result = null;
+    $this->load->database();
+    $this->db->select('*');
+    $this->db->from('profesor');
+    $this->db->where('prof_usu_id', $id);
+    $consulta = $this->db->get();
+    if ($consulta->num_rows()>0) {
+    	foreach ($consulta->result() as $row) {
+			$result[] = $this->createAsig($row);
+		}
+		return $result;
+    }
+    return false;
 }
 
   public function getByRutAndPerf($perfil=null,$rut=null){
@@ -296,9 +359,48 @@ function insertperusu(){
         return $numero;
 	}
 
+	public function saveProfAsig(){
 
+		$this->load->database();
+		$this->db->insert("profesor",$this->_columnsAsigna);
+
+	}
+
+	function donwloadTutores($user){
+
+		$this->load->dbutil();
+        $this->load->helper('file');
+        $this->load->helper('download');
+        $delimiter = "|";
+        $newline = "\r\n";
+        $filename = $user.".csv";
+        $query = "SELECT a.usu_nombre AS NOMBRE_TUTOR, CONCAT(a.usu_rut,'-',a.usu_dv) AS RUT , b.asig_nombre AS ASIGNATURA FROM usuario a INNER JOIN asignatura b INNER JOIN profesor c ON a.usu_id=c.prof_usu_id WHERE b.asig_id=c.prof_asig_id ORDER BY a.usu_rut ASC";
+        $result = $this->db->query($query);
+        $data = $this->dbutil->csv_from_result($result, $delimiter, $newline);
+        force_download($filename, "\xEF\xBB\xBF".$data);
+	}
+
+
+	 public function getAreaUser(){
+		$result = null;
+		$this->load->database();
+		$this->db->select('ar_id, ar_nombre');
+		$this->db->from('area');
+		$consulta = $this->db->get();
+
+		  if ($consulta->num_rows()>0) {
+    	foreach ($consulta->result() as $row) {
+			$result[] = $this->create($row);
+		}
+		return $result;
+    }
+    return false;
+	}	
 
 }
+
+
+
 /*
 	public function saveusu()
 	{

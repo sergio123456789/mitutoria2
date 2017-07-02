@@ -46,18 +46,32 @@ class Asignatura_model extends CI_Model {
 	}
     public function save(){
 		try {
-			$this->load->database();
-		if($this->columns['asig_id'] == 0){
+		$this->load->database();
+		$query=$this->db->get_where('asignatura',array('asig_nombre'=>$this->columns['asig_nombre']));
+		$aux='';	
+		$auxDos='';
+			if($query->num_rows() > 0){
+				$row = $query->row_object();
+				$asignatura=$this->create($row);
+				$aux=$asignatura->get('asig_nombre');
+				$auxDos=$asignatura->get('asig_id');
+			
+			}
+			if ($this->columns['asig_nombre']!=$aux) {
 			$this->db->insert("asignatura",$this->columns);
-			$this->columns['asig_id'] = $this->db->insert_id();
-		}else{
+			$this->columns['asig'] = $this->db->insert_id();
+			return $this->db->insert_id();
+			}else{
+			$this->columns['asig_id']=$auxDos;
 			$this->db->where('asig_id',$this->columns['asig_id']);
 			$this->db->update('asignatura',$this->columns);
+			return $auxDos;
 		}
 			
 		} catch (Exception $e) {
 			echo"se produjo una excepcion del tipo".$e->getMessage() ;
 		}
+
 	}
 
 	public function findByName($column = null, $value = ''){

@@ -1,16 +1,16 @@
 <link rel="stylesheet" href="<?=base_url('resources/bootstrap/css/style.css')?>">
-<div class="container-fluid">
-						<div class="row">
-							<div class="col-md-12">
+ <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
                         
-	                        <div class="card" style="margin-top:5%;">
-	                            <div class="card-header" data-background-color="purple">
-	                                <h4 class="title">Tutorias para hoy</h4>
-	                                <p class="category">Acá confirmas tu asistencia a la clase</p>
-	                            </div>
-	                            <div class="card-content table-responsive">
-	                                <table class="table" style="text-align: center;">
-	                                    <thead class="text-primary" >
+                            <div class="card" style="margin-top:5%;">
+                                <div class="card-header" data-background-color="purple">
+                                   <h4 class="title">Tutorias para hoy</h4>
+                                    <p class="category">Acá confirmas tu asistencia a la clase</p>
+                                </div>
+                                <div class="card-content table-responsive">
+                                    <table class="table" id="example1" style="text-align: center;">
+                                        <thead class="text-primary" >
 	                                    	<th style="text-align: center;">Fecha</th>
 	                                    	<th style="text-align: center;">Inicio</th>
 	                                    	<th style="text-align: center;">Término</th>
@@ -21,11 +21,11 @@
 											<th style="text-align: center;">Cancelar</th>
 	                                    </thead>
 	                                    <tbody>
-	                                     
-	                                    <?php foreach ($horario as $hor){ ?><tr>
+	                                     <?php if (!empty($horario)): ?>
+	                                    <?php foreach ($horario as $hor){ ?>
 	                                        <?php if ($hor->get('hor_usu_id')==$user['id']){ ?>
-	                                        <?php if ($hor->get('hor_estado')<3){ ?>
-                                                    
+	                                        <?php if ($hor->get('hor_estado')<2){ ?>
+                                                    <tr>
                                                
 	                                        
 	                                    	<td><?=$hor->get('hor_dia')?></td>
@@ -56,25 +56,23 @@
 												 <td></td>
 												 <td></td>
 
-												 	<?php }else{?>
-												 	<?php if ($hor->get('hor_estado')==2){ ?>
-												 		
-												 	
-												 	<td>Cancelada</td>
-												 	<td></td>
-												 	<td></td>
-												 	<?php }else{?>
+												 	<?php }?>
 												 	
 												 <?php }?>
-												 <?php }?>
-    								        <?php } ?>
+    								       
 												
 </tr>
 	     <?php } ?> 
-          <?php } ?>                                     
- <?php } ?> 
+          <?php } ?>  
+
+ <?php } ?>
+  <?php endif ?>
 	                                    </tbody>
 	                                </table>
+                                   </div>
+                            </div>
+                        </div>
+    </div></div>
 
    												<!-- Modal de cancelar la tutoría-->
 
@@ -97,10 +95,7 @@
 								  </div><!-- /.modal -->	
 
 								  <!-- fin Modal de cancelar la clase-->
-	                            </div>
-	                        </div>
-	                    </div>
-    </div></div>
+	                         
     <script src="<?=base_url('resources/select2-4.0.3/vendor/jquery-3.2.1.min.js')?>"></script>
     <script type="text/javascript">
     	 var iddelete = 0;

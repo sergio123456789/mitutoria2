@@ -70,7 +70,7 @@
         <a  class="logo">
       <span class="logo-mini"><img src="<?=base_url('')?>resources/images/favicon/favicon-32x32.png" style="width: 100%; height: 100%;"></span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><img src="<?=base_url('')?>resources/images/materialize-logo.png" style="width: 200px; height: 50px;"></span>
+      <span class="logo-lg"><img src="<?=base_url('')?>resources/images/logomitutoria.png" style="width: 200px; height: 50px;"></span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -96,7 +96,6 @@
               <!-- User image -->
               <li class="user-header">
                 <img src="<?=base_url('')?>resources/images/user.png"  class="img-circle" alt="User Image">
-
                 <p>
                   <?php echo $this->session->userdata('username');?>
                   <small><?=$user["nombre"]?></small>
@@ -145,7 +144,6 @@
                     </span>
                   </a>
                 </li>
-
                   <li class="treeview">
                   <a href="<?=site_url()?>/Asesor_Controller/verAlumnos">
                     <i class="fa fa-user"></i>
@@ -156,31 +154,18 @@
                   </a>
                 </li>
                 <li class="treeview">
-                  <a href="<?=site_url()?>/Asesor_Controller/verProfesor">
-                    <i class="fa fa-user-secret"></i>
-                    <span>Ver Profesores</span>
+                  <a href="#">
+                    <i class="fa fa-group"></i>
+                    <span>Profesores</span>
                     <span class="pull-right-container">
-                      <span class="label label-primary pull-right"></span>
+                      <i class="fa fa-angle-left pull-right"></i>
                     </span>
                   </a>
-                </li>
-                   <li class="treeview">
-                  <a href="<?=site_url()?>/Asesor_Controller/verTutorias">
-                    <i class="fa fa-book"></i>
-                    <span>Tutorías</span>
-                    <span class="pull-right-container">
-                      <span class="label label-primary pull-right"></span>
-                    </span>
-                  </a>
-                </li>
-                 <li class="treeview">
-                  <a href="<?=site_url()?>/Asesor_Controller/verReforzamientos">
-                    <i class="fa fa-book"></i>
-                    <span>Reforzamientos</span>
-                    <span class="pull-right-container">
-                      <span class="label label-primary pull-right"></span>
-                    </span>
-                  </a>
+                  <ul class="treeview-menu">
+                    <li><a href="<?=site_url()?>/Asesor_Controller/verProfesor"><i class="fa fa-user-secret"></i>Profesores</a></li>
+                    <li><a href="<?=site_url()?>/Asesor_Controller/verTutor"><i class="fa fa-graduation-cap"></i>Tutores</a></li>
+                    <li><a href="<?=site_url()?>/Asesor_Controller/verTutorProgresion"><i class="fa fa-line-chart"></i>Tutores Progresión</a></li>
+                  </ul>
                 </li>
                  <li class="treeview">
                   <a href="<?=site_url()?>/Asesor_Controller/Importar">
@@ -222,49 +207,33 @@
                   </a>
                 </li>
                 <li class="treeview">
-                  <a href="<?=site_url()?>/Asistente_Controller/verProfesor">
-                    <i class="fa fa-user-secret"></i>
-                    <span>Ver Profesores</span>
+                  <a href="#">
+                    <i class="fa fa-group"></i>
+                    <span>Profesores</span>
                     <span class="pull-right-container">
-                      <span class="label label-primary pull-right"></span>
+                      <i class="fa fa-angle-left pull-right"></i>
                     </span>
                   </a>
+                  <ul class="treeview-menu">
+                    <li><a href="<?=site_url()?>/Asistente_Controller/verProfesor"><i class="fa fa-user-secret"></i>Profesores</a></li>
+                    <li><a href="<?=site_url()?>/Asistente_Controller/verTutor"><i class="fa fa-graduation-cap"></i>Tutores</a></li>
+                    <li><a href="<?=site_url()?>/Asistente_Controller/verTutorProgresion"><i class="fa fa-line-chart"></i>Tutores Progresión</a></li>
+                  </ul>
                 </li>
-                   <li class="treeview">
-                  <a href="<?=site_url()?>/Asistente_Controller/verTutorias">
-                    <i class="fa fa-book"></i>
-                    <span>Tutorías</span>
-                    <span class="pull-right-container">
-                      <span class="label label-primary pull-right"></span>
-                    </span>
-                  </a>
-                </li>
-                 <li class="treeview">
-                  <a href="<?=site_url()?>/Asistente_Controller/verReforzamientos">
-                    <i class="fa fa-book"></i>
-                    <span>Reforzamientos</span>
-                    <span class="pull-right-container">
-                      <span class="label label-primary pull-right"></span>
-                    </span>
-                  </a>
-                </li>
+
                 <li class="treeview">
-                  <a href="<?=site_url()?>/Asistente_Controller/verAyudantia">
-                    <i class="fa fa-book"></i>
-                    <span>Ayudantía</span>
+                  <a href="#">
+                    <i class="fa fa-bookmark-o"></i>
+                    <span>Ayudas</span>
                     <span class="pull-right-container">
-                      <span class="label label-primary pull-right"></span>
+                      <i class="fa fa-angle-left pull-right"></i>
                     </span>
                   </a>
-                </li>
-                <li class="treeview">
-                  <a href="<?=site_url()?>/Asistente_Controller/Notificaciones">
-                    <i class="fa fa-bell"></i>
-                    <span>Notificaciones</span>
-                    <span class="pull-right-container">
-                      <span class="label label-primary pull-right"></span>
-                    </span>
-                  </a>
+                  <ul class="treeview-menu">
+                    <li><a href="<?=site_url()?>/Asistente_Controller/verTutorias"><i class="fa fa-book"></i>Tutorías</a></li>
+                    <li><a href="<?=site_url()?>/Asistente_Controller/verReforzamientos"><i class="fa  fa-shield"></i>Reforzamientos</a></li>
+                    <li><a href="<?=site_url()?>/Asistente_Controller/verTutorProgresion"><i class="fa  fa-thumb-tack"></i>Ayudantías</a></li>
+                  </ul>
                 </li>
                  <li class="treeview">
                   <a href="<?=site_url()?>/Asistente_Controller/Importar">
@@ -369,17 +338,24 @@
                     </span>
                   </a>
                 </li>
-                
-
-                <!--<li class="treeview">
-                  <a href="<?=site_url()?>/Profesor_Controller/solReforzamientos">
-                    <i class="fa fa-graduation-cap"></i>
-                    <span>Solicitar Reforzamientos</span>
+                <li class="treeview">
+                  <a href="<?=site_url()?>/Profesor_Controller/createdispo">
+                    <i class="fa fa-clock-o"></i>
+                    <span>Disponibilidad</span>
                     <span class="pull-right-container">
                       <span class="label label-primary pull-right"></span>
                     </span>
                   </a>
-                </li>-->
+                </li>
+                <li class="treeview">
+                  <a href="<?=site_url()?>/Profesor_Controller/refor">
+                    <i class="fa fa-list-alt"></i>
+                    <span>Solicitar Reforzamiento</span>
+                    <span class="pull-right-container">
+                      <span class="label label-primary pull-right"></span>
+                    </span>
+                  </a>
+                </li>
                     <?php } ?>
                     <?php if ((in_array(5, $user['permisos']))|| in_array(6, $user['permisos']))  { ?>
                               <li class="treeview">

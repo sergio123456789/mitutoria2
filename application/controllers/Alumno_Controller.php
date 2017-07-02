@@ -268,7 +268,8 @@ class Alumno_Controller extends CI_Controller {
 	 $horario->save();
 	 $tuto = $this->tutoria->create($rowTuto);
 	 $tuto->save();
-      redirect('Tutor_Controller/index');
+	 $this->session->set_flashdata('notice', 'Tutoría tomada exitósamente');
+      redirect('Alumno_Controller/index');
 	}
 
     public function cancelar(){
@@ -290,6 +291,7 @@ class Alumno_Controller extends CI_Controller {
 
     	$lista = $this->lista->create($row);
       	$lista->save();
+      	$this->session->set_flashdata('notice', 'Tutoría cancelada exitósamente');
       	redirect('Alumno_Controller/index');
     }
 

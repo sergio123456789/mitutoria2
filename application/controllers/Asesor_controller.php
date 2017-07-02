@@ -88,9 +88,22 @@ public function verReforzamientos(){
 
 		$profe =$this->usuario->getUserByPerfil(4);
 		$datitos['profesores'] = $profe;
-		
 		$this->layout->view('/Asesor/VerProfesores.php',$datitos,false);
 	}
+
+		public function verTutor(){
+		$profe =$this->usuario->getUserByPerfil(3);
+		$datitos['profesores'] = $profe;
+		$this->layout->view('/Asesor/VerTutores.php',$datitos,false);
+	}
+	
+	
+	public function verTutorProgresion(){
+		$profe =$this->usuario->getUserByPerfil(7);
+		$datitos['profesores'] = $profe;
+		
+		$this->layout->view('/Asesor/VerTutoresProgresion.php',$datitos,false);
+	}	
 
 	public function detalleProfeNota(){
 

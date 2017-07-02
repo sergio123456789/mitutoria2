@@ -26,7 +26,6 @@
                                       </thead>  
                                       <tbody>
 
-
                                       <?php foreach ($profesores as $profe) :?>
                                           <tr>
                                             <td rowspan="1"><a href="#pablo">

@@ -8,6 +8,7 @@ class Excel_Controller extends CI_Controller {
         $this->load->model('Usuario_model','usuario',true);
         $this->load->model('Alumno_model','alum',true);
         $this->load->model('Datos_model','datos',true);
+        $this->load->model('Asignatura_model','asignatura',true);
     }
     function index()
     {
@@ -23,7 +24,7 @@ public function UsuarioUploader(){
                 while (($datos = fgetcsv($gestor, 1000, ";")) !== FALSE) {
                
                     if ($coun!=0) {
-                        
+
                     $arid = $this->datos->Miareaacademica($datos['2']);
                     $dato = explode('-',$datos['12']);
                     $rut = $dato['0'];
@@ -39,20 +40,23 @@ public function UsuarioUploader(){
                      );
                $usuario = $this->usuario->create($usu);
                $ret=$usuario->saveusu(); 
-               if ($ret==1) {
+
+               if ($ret=='perfil') {
                $usuario->setPermisos(array(
                 'per_usu_id' => $usuario->get('usu_id'),
                 'perf_id' => 5
                 ));  
                $usuario->insertperusu();
+               $ret=$usuario->get('usu_id');
                }
-            if ($usuario->get('usu_id')!=0) {
+                
 
-                 $fechaNacim = date('d/m/y', strtotime($datos['18']));
-                 $fechaMatri = date('d/m/y', strtotime($datos['31']));
+                 date_default_timezone_set("America/Santiago");
+                 $fechaMatri = date('y-m-d', strtotime($datos['31']));
+                 $fechaNacim = date('y-m-d', strtotime($datos['18']));
 
                   $usualum = array(
-                        'alu_usu_id' => $usuario->get('usu_id'),
+                        'alu_usu_id' => $ret,
                         'alu_inst' => $datos['1'],
                         'alu_cod_pe' => $datos['3'],
                         'alu_programa_estudio' => $datos['4'],
@@ -91,18 +95,14 @@ public function UsuarioUploader(){
                         'alu_semestre_ingreso' => $datos['42'],
                         'alu_reincorporado' => $datos['44'],
                         'alu_num_asignatura' => $datos['50'],
-                        'alu_semestre' => $datos['47'],
+                        'alu_semestre' => $datos['51'],
                         'alu_pagare' => $datos['49'],
                         'alu_cupones' => $datos['48'],
                             );
                 
                  $alumno = $this->alum->create($usualum);
-                 $alumno->save();
-                  //var_dump($usualum);
-                }
-             
-              //  var_dump($coun);
-               
+                 $alumno->saveAlu();
+                
                 }
                  $coun = $coun + 1 ;
             }
@@ -120,8 +120,7 @@ public function UsuarioUploader(){
             }
         }
 
- 
-    }
+ }
    public function UsuarioTutoriaPermanente(){
          
         if (isset($_FILES['file'])) {
@@ -132,21 +131,46 @@ public function UsuarioUploader(){
                 while (($datos = fgetcsv($gestor, 1000, ";")) !== FALSE) {
                
                     if ($coun!=0) {
-                    $dato = explode('-',$datos['0']);
 
+
+                    $dato = explode('-',$datos['1']);
                     $rut = $dato['0'];
                     $dv = $dato['1'];
-                    $nombre=$datos['1'];
-                    $area=$datos['2'];
-                    $carrera=$datos['3']; 
-                    $tutor=$datos['4']; 
-              
+                    $nombre=$datos['0'];
+                    $mail=$datos['2'];
+                    $arid = $this->datos->Miareaacademica($datos['3']);
+
+                    $tutor=array(
+                        'usu_nombre' => $nombre,
+                        'usu_correo' => $mail,
+                        'usu_pass' => '123456',
+                        'usu_estado' => 1,
+                        'usu_are_id' => $arid,
+                        'usu_rut' => $rut,
+                        'usu_dv' => $dv
+                        );
+
+                    $usuario = $this->usuario->create($tutor);
+                    $ret=$usuario->saveusu(); 
+                    
+
+                     if ($ret=='perfil') {
+                       $usuario->setPermisos(array(
+                        'per_usu_id' => $usuario->get('usu_id'),
+                        'perf_id' => 7
+                        ));  
+                       $usuario->insertperusu();
+                       $ret=$usuario->get('usu_id');
+                       }
+
                     }
                     $coun= $coun + 1;
-                fclose($gestor);
 
             }
-            $user = $this->session->userdata('logged_in');
+                fclose($gestor);
+        
+        }
+        $user = $this->session->userdata('logged_in');
                 if(count($user['permisos']) > 0){
                     if (in_array(1, $user['permisos'])) {
                         redirect('Asesor_Controller/importar','refresh');
@@ -154,12 +178,72 @@ public function UsuarioUploader(){
                         redirect('Asistente_Controller/importar','refresh');
                     }
                 }
-        }
-
-
- 
     }
 }
+
+
+ public function UsuarioTutoria(){
+        if (isset($_FILES['file'])) {
+            if (($gestor = fopen($_FILES['file']['tmp_name'], "r")) !== FALSE) {
+                $coun = 0 ;
+                while (($datos = fgetcsv($gestor, 1000, ";")) !== FALSE) {
+                    if ($coun!=0) {
+                    $dato = explode('-',$datos['0']);
+                    $rut = $dato['0'];
+                    $dv = $dato['1'];
+                    $nombre=$datos['1'];
+                    $asig=$datos['2'];
+                    $mail='';
+                    //$arid = $this->datos->Miareaacademica($datos['2']);
+                    $tutor=array(
+                        'usu_nombre' => $nombre,
+                        'usu_correo' => $mail,
+                        'usu_pass' => '123456',
+                        'usu_estado' => 1,
+                        'usu_are_id' => 8,
+                        'usu_rut' => $rut,
+                        'usu_dv' => $dv
+                        );
+                    $usuario = $this->usuario->create($tutor);
+                    $ret=$usuario->saveusu(); 
+                     if ($ret=='perfil') {
+                       $usuario->setPermisos(array(
+                        'per_usu_id' => $usuario->get('usu_id'),
+                        'perf_id' => 3
+                        ));  
+                       $usuario->insertperusu();
+                       $ret=$usuario->get('usu_id');
+                       $asig=array('asig_nombre' =>$asig,
+                                'asig_car_id'=>1);   
+                        $asigna=$this->asignatura->create($asig);
+                        $idAsi=$asigna->save();
+                        $prof=array(
+                            'prof_asig_id'=>$idAsi,
+                            'prof_usu_id'=>$ret
+                            );
+                        $profe=$this->usuario->createAsig($prof);
+                        $profe->saveProfAsig();
+                       }
+                    
+                    }
+                    $coun= $coun + 1;
+
+            }
+                fclose($gestor);
+        
+        }
+        $user = $this->session->userdata('logged_in');
+                if(count($user['permisos']) > 0){
+                    if (in_array(1, $user['permisos'])) {
+                        redirect('Asesor_Controller/importar','refresh');
+                    }elseif (in_array(2, $user['permisos'])) {
+                        redirect('Asistente_Controller/importar','refresh');
+                    }
+                }
+    }
+}
+
+
     public function TutoresPermanentes(){
          //listado de tutores progresion
         if (isset($_FILES['file'])) {
@@ -222,7 +306,7 @@ public function UsuarioUploader(){
         }
     }
 
-    public function downloadUsu(){
+    public function downloadAlum(){
         $this->usuario->downloadAlum('usuarios');
         if(count($user['permisos']) > 0){
                     if (in_array(1, $user['permisos'])) {
@@ -233,6 +317,26 @@ public function UsuarioUploader(){
                 }    
             }
 
+    public function downloadTutorias(){
+        $this->usuario->downloadTutorias('tutorias_realizadas');
+        if(count($user['permisos']) > 0){
+                    if (in_array(1, $user['permisos'])) {
+                        redirect('Asesor_Controller/importar','refresh');
+                    }elseif (in_array(2, $user['permisos'])) {
+                        redirect('Asistente_Controller/importar','refresh');
+                    }
+                }    
+            }
+    public function downloadTutores(){
+        $this->usuario->downloadTutorias('tutores');
+        if(count($user['permisos']) > 0){
+                    if (in_array(1, $user['permisos'])) {
+                        redirect('Asesor_Controller/importar','refresh');
+                    }elseif (in_array(2, $user['permisos'])) {
+                        redirect('Asistente_Controller/importar','refresh');
+                    }
+                }    
+            }
 }
 
 /* End of file Excel_Controller.php */
