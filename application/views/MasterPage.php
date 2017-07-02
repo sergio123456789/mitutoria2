@@ -231,8 +231,8 @@
                   </a>
                   <ul class="treeview-menu">
                     <li><a href="<?=site_url()?>/Asistente_Controller/verProfesor"><i class="fa fa-book"></i>Tutorías</a></li>
-                    <li><a href="<?=site_url()?>/Asistente_Controller/verTutor"><i class="fa fa-graduation-cap"></i>Reforzamientos</a></li>
-                    <li><a href="<?=site_url()?>/Asistente_Controller/verTutorProgresion"><i class="fa fa-line-chart"></i>Ayudantías</a></li>
+                    <li><a href="<?=site_url()?>/Asistente_Controller/verTutor"><i class="fa  fa-shield"></i>Reforzamientos</a></li>
+                    <li><a href="<?=site_url()?>/Asistente_Controller/verTutorProgresion"><i class="fa  fa-thumb-tack"></i>Ayudantías</a></li>
                   </ul>
                 </li>
                  <li class="treeview">
