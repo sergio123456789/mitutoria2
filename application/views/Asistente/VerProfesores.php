@@ -1,3 +1,4 @@
+
 <link rel="stylesheet" href="<?=base_url('resources/bootstrap/css/style.css')?>">
               
         <div class="container-fluid">
@@ -25,6 +26,7 @@
                                         <th style="text-align: center;">Rut</th>
                                         <th style="text-align: center;">Ver Asignaturas</th>
                                         <th style="text-align: center;">Ver Horario</th>
+                                        <th style="text-align: center;">Crear Tutoria </th>
                                         <th style="text-align: center;">Detalle Notas</th>
                                         <th style="text-align: center;">Editar</th>
                                         <th style="text-align: center;">Eliminar</th>
@@ -41,6 +43,9 @@
                                                 <center>
                                                 <td><a type='button' fakeid="<?=$profe->get('usu_id')?>" fakenombre="<?=$profe->get('usu_nombre')?>" class='btn btn-default editasig'><i class="fa fa-book"></i></a></td>
                                                 <td><a type='button' fakeid="<?=$profe->get('usu_id')?>" fakenombre="<?=$profe->get('usu_nombre')?>" class='btn btn-default editcalendario' ><i class="fa fa-calendar"></i></a></td>
+
+                                                <td><a type='button' target="_blank" href="<?=site_url('Asistente_Controller/createTutoria/'.$profe->get('usu_id'))?>" class='btn btn-default crearTutoria' ><i class="fa fa-file"></i></a></td>
+                                                
                                                 <td><a type='button' fakeid="<?=$profe->get('usu_id')?>" fakenombre="<?=$profe->get('usu_nombre')?>" class='btn btn-default editdetalle'><i class="fa fa-eye"></i></a></td>
                                                 <td><a type='button' fakeid="<?=$profe->get('usu_id')?>" fakenombre="<?=$profe->get('usu_nombre')?>" class='btn btn-default edittutor'><i class="fa fa-pencil"></i></a></td>
                                                  <td style="width: 4px;"><a type='button' fakeid="<?=$profe->get('usu_id')?>" class='btn btn-danger deleteUsr pull-right deleteUsr' data-toggle='modal' data-target='#delete_modal'> <i class="fa fa-user-times" ></i></a></td>
