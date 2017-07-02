@@ -42,7 +42,7 @@
                                                 <td><a type='button' fakeid="<?=$profe->get('usu_id')?>" fakenombre="<?=$profe->get('usu_nombre')?>" class='btn btn-default editasig'><i class="fa fa-book"></i></a></td>
                                                 <td><a type='button' fakeid="<?=$profe->get('usu_id')?>" fakenombre="<?=$profe->get('usu_nombre')?>" class='btn btn-default editcalendario' ><i class="fa fa-calendar"></i></a></td>
                                                 <td><a type='button' fakeid="<?=$profe->get('usu_id')?>" fakenombre="<?=$profe->get('usu_nombre')?>" class='btn btn-default editdetalle'><i class="fa fa-eye"></i></a></td>
-                                                <td><a type='button' fakeid="<?=$profe->get('usu_id')?>" fakenombre="<?=$profe->get('usu_nombre')?>" class='btn btn-default edittutor'><i class="fa fa-pencil"></i></a></td>
+                                                <td><a type='button' fakeid="<?=$profe->get('usu_id')?>" fakenombre="<?=$profe->get('usu_nombre')?>" class='btn btn-default edittutor' data-toggle='modal' data-target='#edittutor_modal' ><i class="fa fa-pencil"></i></a></td>
                                                  <td style="width: 4px;"><a type='button' fakeid="<?=$profe->get('usu_id')?>" class='btn btn-danger deleteUsr pull-right deleteUsr' data-toggle='modal' data-target='#delete_modal'> <i class="fa fa-user-times" ></i></a></td>
                                                 </center>
                                           </tr>
@@ -252,6 +252,103 @@
 <!-- /modal agregar -->
     <!--==== fin modal añadir profe =====-->
 
+ <!--==== modal editar tutor progresión ====-->
+<!-- modal agregar -->
+<div id="edittutor_modal" class="modal fade " role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title" >Editar Profesor</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal form-label-left" enctype="multipart/form-data" action="<?=site_url('Asistente_Controller/editarProfesor')?>" method="POST">
+                    <div class="col-lg-12">
+                          <div class="col-lg-6">
+                            <label >Nombre Completo<span class="required">*</span>
+                            </label>
+                            <input type="text" id="editname" name="editname"  required="required" class="form-control col-md-7 col-xs-12">
+                        </div>
+                        <div class="col-lg-6">
+                            <label >Correo Electrónico
+                            </label>
+                            <input type="email" id="editemail" name="editemail" class="form-control col-md-7 col-xs-12">
+                        </div>
+                    </div>
+                      <div class="col-lg-12">
+                          <div class="col-lg-4">
+                            <label >Rut<span class="required">*</span>
+                            </label>
+                            <input type="text" id="editrut" name="editrut"  required="required" class="form-control col-md-7 col-xs-12">
+                        </div>
+                        <div class="col-lg-2">
+                            <label >Digito V.<span class="required">*</span>
+                            </label>
+                            <input type="text" id="editdv" name="editdv" required="required" class="form-control col-md-7 col-xs-12">
+                        </div>
+                        <div class="col-lg-6">
+                            <label >Foto Perfil
+                            </label>
+                            <input type="file" accept="image/*" id="photo" name="photo" class="form-control col-md-7 col-xs-12">
+                            <input type="text" hidden="hidden" id="oldphoto" name="oldphoto">
+                            <input type="text" hidden="hidden" name="editid" id="editid">
+                        </div>
+                       <div class="col-lg-6">
+                            <label>Área</label>
+                            <select name="editarea" id="editarea"  class="js-example-tokenizer form-control select2"  style="width: 100%">
+                                        <?php foreach ($area as $ar){?>
+                                        <option value="<?=$ar->get('ar_id')?>"><?=$ar->get('ar_nombre')?></option>
+                                                <?php } ?> 
+                            </select>
+                        </div>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <div class="col-md-8">
+                <br>
+                    <button type="button" id="modal_cancel" class="btn btn-default pull-right" data-dismiss="modal">Cancelar</button>
+                </div>
+                <div class="col-md-2">
+                <br>
+                    <button id="btnAdd" type="submit" class="btn btn-success">Guardar</button>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- /modal agregar -->
+    <!--==== fin modal editar tutor progresión =====-->        
+
+
+ <!-- modal eliminar Tutor-->
+<div id="delete_modal" class="modal fade " role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title">Eliminar al Profesor</h4>
+            </div>
+            <div class="modal-body">
+                <h4 style="text-align: center;">¿Seguro/a que desea eliminar al Profesor?</h4><h3 id="modal_name"></h3>
+                <div class="modal-footer">
+                    <div class="col-md-4">
+
+                        <button id="btnDel" type="button" class="btn btn-danger">Eliminar</button>
+                    </div>
+                    <div class="col-md-8">
+                        <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /modal eliminar Tutor -->
+
 
 
                   </div>
@@ -357,12 +454,9 @@
     $(".edittutor").click(function () {
             var id = $(this).attr('fakeid');
             var nombre = $(this).attr('fakenombre');
-            var myarr = new Array();
-            var select1 = document.getElementById("editasignaturas");
-
             $.ajax({
                 type: "POST",
-                url: "<?=site_url('Asistente_Controller/detalleTutorProgresion')?>",
+                url: "<?=site_url('Asistente_Controller/detalleProfesor')?>",
                 dataType: "json",
                 data:{"idusu" : id},
                  beforeSend:function () {
@@ -386,7 +480,7 @@
                     $("#editid").val(id);
                   
                     $('#carga_modal').modal('hide');
-                    $('#edit_modal').modal('show').fadeIn(800);
+                    $('#edittutor_modal').modal('show').fadeIn(800);
                     
                  },
                    error:function (data) {
@@ -400,6 +494,40 @@
             });
         });
      // <==== botón editar tutor ====>
+
+
+      // <==== Eliminar Botón ===>
+        var iddelete = 0;
+        $(".deleteUsr").click(function () {
+            iddelete = $(this).attr('fakeid');
+            console.log(iddelete);
+        });
+
+        $('#btnDel').click(function () {
+            if (iddelete != 0) {
+                $('#delete_modal').modal('hide');
+                console.log(iddelete);
+                $.ajax({
+                    type: "POST",
+                    url: "<?=site_url('Asistente_Controller/eliminarProfesor')?>",
+                    dataType: "json",
+                    data: {"idusu": iddelete},
+                    beforeSend: function () {
+                        $('#carga_modal').modal('show');
+                    },
+                    success: function (data) {
+                        $('#carga_modal').modal('hide');
+                    },
+                    complete: function (xhr, status) {
+                        $('#carga_modal').modal('hide');
+                        location.reload();
+                    }
+                });
+            }else{
+                alert("No se ha seleccionado ningun usuario a eliminar");
+            }
+        });
+  // <==== Fin Eliminar Botón ===>
 
  $(function () {
         setTimeout(function() {
