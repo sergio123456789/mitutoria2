@@ -39,7 +39,9 @@ public function __construct()
 		$this->layout->view('/Asistente/VerAlumno.php');
 	}
 	public function verTutorias(){
-		$this->layout->view('/Asistente/tutorias.php');
+		$tutoria =$this->tutoria->getTutoria();
+		$datitos['tutorias'] = $tutoria;
+		$this->layout->view('/Asistente/tutorias.php',$datitos,false);
 	}
 	
 	public function verAyudantia(){
