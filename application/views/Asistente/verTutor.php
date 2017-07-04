@@ -89,7 +89,7 @@
                                     <div class="box-body no-padding">
                                       <table class="table table-striped" style="text-align: center;">
                                         <tr>
-                                           <th style="text-align: center;"><i class="fa fa-book margin-r-5"></i>Código-Asignatura</th>
+                                           <th style="text-align: center;"><i class="fa fa-book margin-r-5"></i>Asignaturas</th>
                                         </tr>
                                        <tr>
                                         <td id="asignaprof"></td>
@@ -388,7 +388,7 @@
                     $("#nombreprofe").html(nombre);
                   $.each(data.asignatura, function(key, value) {
                     var JSONVAL =  JSON.parse(value);
-                    $("#asignaprof").append(JSONVAL.asig_cod+' - '+JSONVAL.asig_nombre+'<br>');
+                    $("#asignaprof").append(JSONVAL.asig_nombre+'<br>');
                     console.log(JSONVAL.asig_nombre);
                  });
 

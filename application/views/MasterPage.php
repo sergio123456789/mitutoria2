@@ -232,8 +232,17 @@
                   <ul class="treeview-menu">
                     <li><a href="<?=site_url()?>/Asistente_Controller/verTutorias"><i class="fa fa-book"></i>Tutorías</a></li>
                     <li><a href="<?=site_url()?>/Asistente_Controller/verReforzamientos"><i class="fa  fa-shield"></i>Reforzamientos</a></li>
-                    <li><a href="<?=site_url()?>/Asistente_Controller/verTutorProgresion"><i class="fa  fa-thumb-tack"></i>Ayudantías</a></li>
+                    <li><a href="<?=site_url()?>/Asistente_Controller/verAyudantia"><i class="fa  fa-thumb-tack"></i>Ayudantías</a></li>
                   </ul>
+                </li>
+                 <li class="treeview">
+                  <a href="<?=site_url()?>/Asistente_Controller/verAsignaturas">
+                    <i class="fa fa-list-alt"></i>
+                    <span>Asignaturas</span>
+                    <span class="pull-right-container">
+                      <span class="label label-primary pull-right"></span>
+                    </span>
+                  </a>
                 </li>
                  <li class="treeview">
                   <a href="<?=site_url()?>/Asistente_Controller/Importar">

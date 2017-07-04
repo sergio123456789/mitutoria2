@@ -14,6 +14,8 @@ public function __construct()
 		$this->load->model('Horario_model','horario',true);
 		$this->load->model('Asignatura_model','asignatura',true);
 		$this->load->model('Profesor_model','profesor',true);
+		$this->load->model('Datos_model','datos',true);
+
         $this->load->library('upload');
 
 		$config['upload_path']          = './resources/images/profilephotos/';
@@ -36,7 +38,6 @@ public function __construct()
 		$countareacinco     = $this->usuario->CountAreaUser(5);
 		$countareaseis     = $this->usuario->CountAreaUser(6);
 		$countareasiete     = $this->usuario->CountAreaUser(7);
-		$countareaocho     = $this->usuario->CountAreaUser(8);
 
 		$datitos['tutoriarealizada'] = $tutoriarealizada;
 		$datitos['tutoriacancelada'] = $tutoriacancelada;
@@ -49,7 +50,6 @@ public function __construct()
 		$datitos['areacinco']=$countareacinco;
 		$datitos['areaseis']=$countareaseis;
 		$datitos['areasiete']=$countareasiete;
-		$datitos['areaocho']=$countareaocho;
 
 		$this->layout->view('/Asistente/index.php',$datitos,false);	}
 
@@ -63,7 +63,9 @@ public function __construct()
 	}
 	
 	public function verAyudantia(){
-		$this->layout->view('/Asistente/ayudantia.php');
+		$ayudantes = $this->usuario->getAlumAyudantes();
+		$datitos['ayudantes'] = $ayudantes;
+		$this->layout->view('/Asistente/ayudantia.php',$datitos,false);
 	}
 	public function Importar(){
 		$this->layout->view('/Asistente/importar.php');
@@ -682,6 +684,90 @@ public function verReforzamientos(){
     	$this->session->set_flashdata('notice', 'Disponibilidad desactivada exitósamente');
     	redirect('Asistente_Controller/verProfesor','refresh');
     }
+
+
+     public function verAsignaturas(){
+
+    	 	$asignaturas = $this->asignatura->findAll();
+    	 	$carrera = $this->datos->findAll();
+    	 	$datitos['carrera'] = $carrera;
+    	 	$datitos['asignaturas'] = $asignaturas;
+			$this->layout->view('/Asistente/verAsignaturas',$datitos,false);
+
+    	 }
+    	 public function agregarAsig(){
+
+    	 	$datos=$this->input->post();
+    	 	$nombre=$datos['nombre'];
+    	 	$codigo=$datos['codigo'];
+    	 	$carrera=$datos['car'];
+    	 	$asig=array('asig_cod'=>$codigo,
+    	 				 'asig_nombre' =>$nombre,		
+                         'asig_car_id'=>$carrera,
+                         'asig_estado' =>1);   
+                        $asigna=$this->asignatura->create($asig);
+                        $idAsi=$asigna->save();
+            redirect('Asistente_Controller/verAsignaturas');
+
+    	 }
+    	 public function detalleAsig(){
+
+
+    	 	$idAsig=$this->input->post('idusu');
+
+    	 	if(isset($idAsig)){
+    	 	$arrayasignaturas = array();
+			$idusu = $this->input->post('idusu');
+			$confid  = intval($idusu);
+			$asig = $this->asignatura->findById($confid);
+			
+
+			$data =  array(
+			'nombre' => $asig->get('asig_nombre'),
+			'cod' => $asig->get('asig_cod'),
+			'car' =>	$asig->get('asig_car_id'),
+			'est'=> $asig->get('asig_estado'));
+			echo json_encode($data);
+		
+		 }else{
+            return "existen campos vacíos";
+
+        }
+
+    }
+    	 public function editAsig(){
+
+    	 	$datos=$this->input->post();
+    	 	$nombre=$datos['editnombre'];
+    	 	$codigo=$datos['editcodigo'];
+    	 	$carrera=$datos['editcar']; 
+    	 	$esta=$datos['editest'];
+    	 	$asig=array('asig_cod'=>$codigo,
+    	 				 'asig_nombre' =>$nombre,		
+                         'asig_car_id'=>$carrera,
+                         'asig_estado'=>$esta);   
+                        $asigna=$this->asignatura->create($asig);
+                        $idAsi=$asigna->save();
+            redirect('Asistente_Controller/verAsignaturas');
+
+    	 }
+
+    	 public function eliminarAsig(){
+			
+			$idusu = $this->input->post('idusu');
+			$confid  = intval($idusu);
+			$asigna = $this->asignatura->findById($confid);
+			$asig=array('asig_cod'=>$asigna->get('asig_cod'),
+			    	 	'asig_nombre' =>$asigna->get('asig_nombre'),		
+			            'asig_car_id'=>$asigna->get('asig_car_id'),
+			            'asig_estado' =>0); 
+			 $asignatu=$this->asignatura->create($asig);
+             $asignatu->save();            
+             //redirect('Asistente_Controller/verAsignaturas');
+
+
+    	 }
+
 
 
     }

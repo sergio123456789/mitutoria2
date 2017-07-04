@@ -28,7 +28,6 @@ class Asesor_Controller extends CI_Controller {
 		$countareacinco     = $this->usuario->CountAreaUser(5);
 		$countareaseis     = $this->usuario->CountAreaUser(6);
 		$countareasiete     = $this->usuario->CountAreaUser(7);
-		$countareaocho     = $this->usuario->CountAreaUser(8);
 
 		$datitos['tutoriarealizada'] = $tutoriarealizada;
 		$datitos['tutoriacancelada'] = $tutoriacancelada;
@@ -41,7 +40,6 @@ class Asesor_Controller extends CI_Controller {
 		$datitos['areacinco']=$countareacinco;
 		$datitos['areaseis']=$countareaseis;
 		$datitos['areasiete']=$countareasiete;
-		$datitos['areaocho']=$countareaocho;
 		$datitos['tutoriarealizada'] = $tutoriarealizada;
 		$datitos['tutoriacancelada'] = $tutoriacancelada;
 		$datitos['counttutores'] = $counttutores;

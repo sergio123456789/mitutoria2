@@ -13,8 +13,7 @@
       		$areacuatro != null && !empty($areacuatro) && isset($areacuatro) &&
       		$areacinco != null && !empty($areacinco) && isset($areacinco) &&
       		$areaseis != null && !empty($areaseis) && isset($areaseis) &&
-      		$areasiete != null && !empty($areasiete) && isset($areasiete) &&
-      		$areaocho != null && !empty($areaocho) && isset($areaocho) 
+      		$areasiete != null && !empty($areasiete) && isset($areasiete)
 
       	 ){ ?>
         var data = google.visualization.arrayToDataTable([
@@ -25,8 +24,7 @@
           ['<?=$areacuatro->get('ar_nombre')?>',<?=$areacuatro->get('total')?>],
           ['<?=$areacinco->get('ar_nombre')?>',<?=$areacinco->get('total')?>],
           ['<?=$areaseis->get('ar_nombre')?>',<?=$areaseis->get('total')?>],
-          ['<?=$areasiete->get('ar_nombre')?>',<?=$areasiete->get('total')?>],
-          ['<?=$areaocho->get('ar_nombre')?>',<?=$areaocho->get('total')?>]
+          ['<?=$areasiete->get('ar_nombre')?>',<?=$areasiete->get('total')?>]
         ]);
 
         <?php }else{?>

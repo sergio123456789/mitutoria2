@@ -235,6 +235,30 @@ function insertperusu(){
 	}
 
 
+	public function getAlumAyudantes(){
+		$perfil = 6;
+		$result = null;
+		$this->load->database();
+		$this->db->select('*');
+		$this->db->from('usuario');
+		$this->db->join('permisos',  'usuario.usu_id = permisos.per_usu_id');
+		$this->db->join('ayudante',  'ayudante.ayu_usu_id = usuario.usu_id');
+		$this->db->join('asignatura',  'asignatura.asig_id = ayudante.ayu_asig_id');
+		$this->db->join('area',  'area.ar_id = usuario.usu_are_id');
+		$this->db->where_in('permisos.perf_id', $perfil);
+		
+		$consulta = $this->db->get();
+		foreach ($consulta->result() as $row) {
+			$result[] = $this->create($row);
+		}
+		return $result;
+	}
+
+
+
+	
+
+
 	 public function findByRut($rut){
     $query = $this ->db-> get_where('usuario',array('usu_rut'=>$rut));
    if($query -> num_rows() >= 1)

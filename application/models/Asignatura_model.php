@@ -13,6 +13,7 @@ class Asignatura_model extends CI_Model {
      'asig_cod' =>'',
      'asig_nombre' =>'',
      'asig_car_id' =>0,
+     'asig_situacion'=>'',
      'asig_estado' =>0
 	);
 
@@ -44,36 +45,7 @@ class Asignatura_model extends CI_Model {
 	public function get($key){
 		return $this->columns[$key];
 	}
-    public function save(){
-		try {
-		$this->load->database();
-		$query=$this->db->get_where('asignatura',array('asig_nombre'=>$this->columns['asig_nombre']));
-		$aux='';	
-		$auxDos='';
-			if($query->num_rows() > 0){
-				$row = $query->row_object();
-				$asignatura=$this->create($row);
-				$aux=$asignatura->get('asig_nombre');
-				$auxDos=$asignatura->get('asig_id');
-			
-			}
-			if ($this->columns['asig_nombre']!=$aux) {
-			$this->db->insert("asignatura",$this->columns);
-			$this->columns['asig'] = $this->db->insert_id();
-			return $this->db->insert_id();
-			}else{
-			$this->columns['asig_id']=$auxDos;
-			$this->db->where('asig_id',$this->columns['asig_id']);
-			$this->db->update('asignatura',$this->columns);
-			return $auxDos;
-		}
-			
-		} catch (Exception $e) {
-			echo"se produjo una excepcion del tipo".$e->getMessage() ;
-		}
-
-	}
-
+  
 	public function findByName($column = null, $value = ''){
 		$this->load->database();
 		$res = $this->db->get_where('asignatura',array($column =>$value));
@@ -180,6 +152,35 @@ class Asignatura_model extends CI_Model {
 	return $result;
 
 	}
+
+	public function save()
+	{
+		$this->load->database();
+		$query=$this->db->get_where('asignatura',array('asig_nombre'=>$this->columns['asig_nombre']));
+		$aux='';	
+		$auxDos='';
+			if($query->num_rows() > 0){
+				$row = $query->row_object();
+				$usuario=$this->create($row);
+				$aux=$usuario->get('asig_nombre');
+				$auxDos=$usuario->get('asig_id');
+
+			}
+			if ($this->columns['asig_nombre']!=$aux) {
+			$this->db->insert("asignatura",$this->columns);
+			$this->columns['asig_id'] = $this->db->insert_id();
+			
+			return 'perfil';
+		}else{
+
+			$this->columns['asig_id']=$auxDos;
+			$this->db->where('asig_id',$this->columns['asig_id']);
+			$this->db->update('asignatura',$this->columns);
+			return $auxDos;
+
+		}
+	}
+
 }
 
 
