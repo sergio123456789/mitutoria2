@@ -87,7 +87,8 @@ class Login_Controller extends CI_Controller {
 	         'correo' => $user->get('usu_correo'),    
 	         'nombre' => $nombres[2]." ".$nombres[0],
 	         'permisos' =>$user->getPermisos(),//retorna array
-	         'area' => $user->getArea()
+	         'area' => $user->getArea(),
+	         'dispo' => $user->get('usu_dispo_estado')
 	       );
 	       $this->session->set_userdata('logged_in', $sess_array); //almacena el array $sess_array en array de sesión logged_in
 	       $existe = true;

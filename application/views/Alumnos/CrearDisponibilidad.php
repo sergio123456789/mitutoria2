@@ -17,7 +17,7 @@
 <script src="<?=base_url('resources/plugins/datatables/dataTables.bootstrap.min.js')?>"></script>
 </head>
 <body>
-
+    <?php $user = $this->session->userdata('logged_in');?>
 <style>
 
   body {
@@ -68,7 +68,7 @@
 
       });
     }); 
-
+    <?php if ($user["dispo"] == 0): ?>
     $(document).on('click','#delete',function(){
       var id = $(this).prop('name');
       $('#confirm').modal({
@@ -76,7 +76,8 @@
         });
       var link2 = "<?=site_url('Alumno_Controller/borrarEvento')?>"+"/"+id;
       $('#deleteRoute').attr("href",link2);
-    });  
+    });
+    <?php endif ?>
   });
 
 </script>
@@ -97,6 +98,8 @@
 <div class="container-fluid">
   <div class="row">
      <div class="col-xs-12 col-md-3">
+     <?php if ($user["dispo"] == 0): ?>
+       
        <div class="col-md-3 col-xs-12" >
         <?php if (isset($error) ){ ?>
            <h4 style="color: red;"> <?=$error?></h4>
@@ -125,8 +128,6 @@
                 Hasta <input type="time" placeholder="10:00" style="width:100px " name="fin" >
              </div>
            </div>
-             
-             
             </td>
          </tr>
       </tbody>
@@ -141,6 +142,7 @@
      </div>
 </div>
 </div>
+     <?php endif ?>
      </div>
   <div class="col-xs-12 col-md-9">
             <div id="calendar"></div>

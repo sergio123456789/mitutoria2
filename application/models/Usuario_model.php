@@ -396,8 +396,14 @@ function insertperusu(){
     }
     return false;
 	}	
+	
+	public function cambiarDispo($estado){
+		$this->db->query('update usuario set usu_dispo_estado ='.$estado);
+	}
 
-}
+	}
+
+
 
 
 

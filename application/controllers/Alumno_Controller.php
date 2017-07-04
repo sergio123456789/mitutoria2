@@ -33,7 +33,7 @@ class Alumno_Controller extends CI_Controller {
 		$datos['usuario'] = $usuario;
 		$datos['alumno'] = $alumno;
 		$datos['area'] = $area;
-		$this->layout->view('/Alumnos/mannuevo.php',$datos,false);
+		$this->layout->view('/Alumnos/index.php',$datos,false);
 	}
 	public function eliminar($id_user)
 	{

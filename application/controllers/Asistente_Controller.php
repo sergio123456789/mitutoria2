@@ -95,11 +95,13 @@ public function verReforzamientos(){
 
 
 	public function verProfesor(){
-
+		$user=$this->session->userdata('logged_in');
+		$usuario = $this->usuario->findById($user['id']);
 		$profe =$this->usuario->getUserByPerfil(4);
 		$area = $this->usuario->getAreaUser();
 		$datitos['profesores'] = $profe;
 		$datitos['area'] = $area;
+		$datitos['usuario'] = $usuario;	
 		$this->layout->view('/Asistente/VerProfesores',$datitos,false);
 	}
 
@@ -601,7 +603,7 @@ public function verReforzamientos(){
     	 	}
     	 }
 
-<<<<<<< HEAD
+
     	  public function eliminarProfesor(){
 
     	 	$id = $this->input->post('idusu');
@@ -613,7 +615,7 @@ public function verReforzamientos(){
     	 		return "ha ocurrido un problema al eliminar al usuario";
     	 	}
     	 }
-=======
+
     	 public function createTutoria($id){
     	$profe = $this->profesor->findByIdUsu($id);
     	$usuario = $this->usuario->findById($id);
@@ -650,9 +652,22 @@ public function verReforzamientos(){
     	$this->session->set_flashdata('notice', 'Tutoría creada exitósamente');
     	redirect('/Asistente_Controller/createTutoria/'.$usu_id,'refresh');
     }
->>>>>>> 868d745017d12829b22a2c9e5b99a517d230d656
+
+    function activarDispo(){
+    	$this->usuario->cambiarDispo(0);
+    	$this->session->set_flashdata('notice', 'Disponibilidad activada exitósamente');
+    	redirect('Asistente_Controller/verProfesor','refresh');
+    }
+
+    function desactivarDispo(){
+    	$this->usuario->cambiarDispo(1);
+    	$this->session->set_flashdata('notice', 'Disponibilidad desactivada exitósamente');
+    	redirect('Asistente_Controller/verProfesor','refresh');
+    }
 
     }
+
+    
 
 
 
