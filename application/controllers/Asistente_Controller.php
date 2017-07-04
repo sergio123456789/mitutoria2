@@ -621,10 +621,7 @@ public function verReforzamientos(){
     	 	}
     	 }
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 6d2588f2bef92083aa398fd035ea9c9502f2fec5
     	  public function eliminarProfesor(){
 
     	 	$id = $this->input->post('idusu');
@@ -674,8 +671,6 @@ public function verReforzamientos(){
     	redirect('/Asistente_Controller/createTutoria/'.$usu_id,'refresh');
     }
 
-<<<<<<< HEAD
-=======
     function activarDispo(){
     	$this->usuario->cambiarDispo(0);
     	$this->session->set_flashdata('notice', 'Disponibilidad activada exitósamente');
@@ -687,7 +682,7 @@ public function verReforzamientos(){
     	$this->session->set_flashdata('notice', 'Disponibilidad desactivada exitósamente');
     	redirect('Asistente_Controller/verProfesor','refresh');
     }
->>>>>>> 6d2588f2bef92083aa398fd035ea9c9502f2fec5
+
 
     }
 
