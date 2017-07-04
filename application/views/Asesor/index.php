@@ -1,26 +1,49 @@
 <link rel="stylesheet" href="<?=base_url('resources/bootstrap/css/style.css')?>">
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>	
-                <script>
-function myFunction() {
-  var input, filter, table, tr, td, i;
-  input = document.getElementById("myInput");
-  filter = input.value.toUpperCase();
-  table = document.getElementById("tblGrid");
-  tr = table.getElementsByTagName("tr");
-  for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[0];
-    if (td) {
-      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
-      }
-    }       
-  }
-}
-</script>
 
     <script type="text/javascript">
+
+    	google.charts.load('current', {packages: ['corechart', 'bar']});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+      	<?php if(
+      		$areauno != null && !empty($areauno) && isset($areauno) &&
+      		$areados != null && !empty($areados) && isset($areados) &&
+      		$areatres != null && !empty($areatres) && isset($areatres) &&
+      		$areacuatro != null && !empty($areacuatro) && isset($areacuatro) &&
+      		$areacinco != null && !empty($areacinco) && isset($areacinco) &&
+      		$areaseis != null && !empty($areaseis) && isset($areaseis) &&
+      		$areasiete != null && !empty($areasiete) && isset($areasiete) &&
+      		$areaocho != null && !empty($areaocho) && isset($areaocho) 
+
+      	 ){ ?>
+        var data = google.visualization.arrayToDataTable([
+          ['Alumnos', 'Cantidad de alumnos por área'],
+          ['<?=$areauno->get('ar_nombre')?>', <?=$areauno->get('total')?>],
+          ['<?=$areados->get('ar_nombre')?>', <?=$areados->get('total')?>],
+          ['<?=$areatres->get('ar_nombre')?>',<?=$areatres->get('total')?>],
+          ['<?=$areacuatro->get('ar_nombre')?>',<?=$areacuatro->get('total')?>],
+          ['<?=$areacinco->get('ar_nombre')?>',<?=$areacinco->get('total')?>],
+          ['<?=$areaseis->get('ar_nombre')?>',<?=$areaseis->get('total')?>],
+          ['<?=$areasiete->get('ar_nombre')?>',<?=$areasiete->get('total')?>],
+          ['<?=$areaocho->get('ar_nombre')?>',<?=$areaocho->get('total')?>]
+        ]);
+
+        <?php }else{?>
+        	 var data = google.visualization.arrayToDataTable([
+          ['Alumnos', 'Cantidad de alumnos por área'],
+          ['no hay datos existentes', 1]
+        ]);
+        	<?php } ?>
+
+        var options = {
+        	chartArea:{left:30,top:20,bottom:20,width:"100%",height:"100%"},
+         
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+        chart.draw(data, options);
+      }
 			google.charts.load('current', {packages: ['corechart', 'bar']});
 			google.charts.setOnLoadCallback(drawRightY);
 			function drawRightY() {
@@ -137,7 +160,16 @@ function myFunction() {
       </div>
       <!-- /.row -->
 
-     
+     <div class="col-md-6">
+						<div class="card">
+							<div class="card-header" data-background-color="purple">
+	                                <h4 class="title">Alumnos</h4>
+	                                <p class="category">Cantidad de alumnos por área </p>
+	                            </div>
+	                       <p> <div id="donutchart" style="width: 400px; height: 300px;"></div></p>
+	                      
+	                    </div>
+	                    </div>
 
 
     <div class="container-fluid">

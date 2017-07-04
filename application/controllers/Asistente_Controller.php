@@ -29,10 +29,28 @@ public function __construct()
 		$tutoriacancelada = $this->horario->getCountTutorias(2);
 		$counttutores     = $this->usuario->getCountPerfiles(4);
 		$countalumnos     = $this->usuario->getCountPerfiles(6);
+		$countareauno     = $this->usuario->CountAreaUser(1);
+		$countareados     = $this->usuario->CountAreaUser(2);
+		$countareatres     = $this->usuario->CountAreaUser(3);
+		$countareacuatro     = $this->usuario->CountAreaUser(4);
+		$countareacinco     = $this->usuario->CountAreaUser(5);
+		$countareaseis     = $this->usuario->CountAreaUser(6);
+		$countareasiete     = $this->usuario->CountAreaUser(7);
+		$countareaocho     = $this->usuario->CountAreaUser(8);
+
 		$datitos['tutoriarealizada'] = $tutoriarealizada;
 		$datitos['tutoriacancelada'] = $tutoriacancelada;
 		$datitos['counttutores'] = $counttutores;
 		$datitos['countalumnos'] = $countalumnos;
+		$datitos['areauno']=$countareauno;
+		$datitos['areados']=$countareados;
+		$datitos['areatres']=$countareatres;
+		$datitos['areacuatro']=$countareacuatro;
+		$datitos['areacinco']=$countareacinco;
+		$datitos['areaseis']=$countareaseis;
+		$datitos['areasiete']=$countareasiete;
+		$datitos['areaocho']=$countareaocho;
+
 		$this->layout->view('/Asistente/index.php',$datitos,false);	}
 
 	public function verAlumnos(){
@@ -603,7 +621,10 @@ public function verReforzamientos(){
     	 	}
     	 }
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> 6d2588f2bef92083aa398fd035ea9c9502f2fec5
     	  public function eliminarProfesor(){
 
     	 	$id = $this->input->post('idusu');
@@ -653,6 +674,8 @@ public function verReforzamientos(){
     	redirect('/Asistente_Controller/createTutoria/'.$usu_id,'refresh');
     }
 
+<<<<<<< HEAD
+=======
     function activarDispo(){
     	$this->usuario->cambiarDispo(0);
     	$this->session->set_flashdata('notice', 'Disponibilidad activada exitósamente');
@@ -664,6 +687,7 @@ public function verReforzamientos(){
     	$this->session->set_flashdata('notice', 'Disponibilidad desactivada exitósamente');
     	redirect('Asistente_Controller/verProfesor','refresh');
     }
+>>>>>>> 6d2588f2bef92083aa398fd035ea9c9502f2fec5
 
     }
 

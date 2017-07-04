@@ -395,7 +395,25 @@ function insertperusu(){
 		return $result;
     }
     return false;
+	}
+
+
+	public function CountAreaUser($id =null){
+		$result = null;
+		$this->load->database();
+		$query ="SELECT COUNT(*) as total, ar_nombre FROM usuario 
+			INNER JOIN area ON usu_are_id = area.ar_id
+			WHERE ar_id=".$id;
+		$consulta = $this->db->query($query);
+	 	if($consulta -> num_rows() >= 1)
+         {
+         	$row = $consulta->row_object();
+            $result = $this->create($row);
+            return $result; 
+		}
+		return false;
 	}	
+		
 	
 	public function cambiarDispo($estado){
 		$this->db->query('update usuario set usu_dispo_estado ='.$estado);
