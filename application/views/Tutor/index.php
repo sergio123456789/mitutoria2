@@ -23,8 +23,8 @@
 	                                       <?php foreach ($alumnos as $value) { ?>
 	                                        <tr>
 	                                           <td><?=$value->get('asig_nombre')  ?></td>	                                               	
-	                                           <td rowspan="2"><a href="#pablo">
-    									<img class="img" src="../../resources/images/marc.jpg" style="width: 42px  ; height: 42px; border-radius: 50%;" />
+	                                           <td><a >
+    									
     								</a><?=$value->get('usu_nombre') ?>    								
     								           </td>   								
     								           <td><?=$value->get('hor_fechasis') ?></td>

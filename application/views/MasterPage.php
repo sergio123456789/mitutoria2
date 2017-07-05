@@ -280,7 +280,7 @@
                     <span class="pull-right-container">
                       <span class="label label-primary pull-right"></span>
                     </span>
-                  </a>ss
+                  </a>
                 </li>
                      <li class="treeview">
                   <a  onclick="abrir()" >

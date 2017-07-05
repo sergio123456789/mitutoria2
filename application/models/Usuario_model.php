@@ -339,6 +339,19 @@ function insertperusu(){
     $consulta = $this->db->get();
     return $consulta->result_array();
 }
+public function findByProfesor($id=null){
+		$this->load->database();
+		$this->db->join('area','area.ar_id=usuario.usu_are_id');
+		$this->db->where('usuario.usu_id',$id);
+		$res=$this->db->get('usuario');
+		$result=null;
+		if($res->num_rows()==1){
+			foreach ($res->result() as $row) {
+			$result=$this->create($row);
+		}
+		}
+		return $result;
+	}
 
 	public function getAsigProfById($id=null){
     $result = null;

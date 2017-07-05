@@ -116,6 +116,33 @@ class Asignatura_model extends CI_Model {
 		}
 	return $result;
 	}
+	public function misasignaturas2($id_usu){
+		/*SELECT c.asig_cod,c.asig_nombre,e.ar_nombre  FROM usuario a 
+          INNER JOIN horario b on b.hor_usu_id= a.usu_id
+           INNER JOIN asignatura c on c.asig_id = b.hor_asig_id
+           INNER JOIN carrera d on d.car_id = c.asig_car_id
+           INNER JOIN area e on e.ar_id = d.car_id
+           WHERE b.hor_usu_id=5630; */
+		$result = null;
+		$this->load->database();
+		$this->db->select('*');
+		$this->db->from('usuario');
+		$this->db->join('horario ','horario.hor_usu_id=usuario.usu_id');
+		$this->db->join('asignatura','asignatura.asig_id =horario.hor_asig_id');
+		$this->db->join('carrera', 'carrera.car_id = asignatura.asig_car_id');
+		$this->db->join('area ','area.ar_id=carrera.car_id');
+		$this->db->where('horario.hor_usu_id', $id_usu);
+
+
+
+		$res= $this->db->get();
+			if ($res->num_rows() > 0) {
+			foreach ($res->result() as $value) {
+				$result[] = $this->create($value);
+			}
+		}
+	return $result;
+	}
 		public function miasignaturasproarea($id_usu,$id_area){
 		$result = null;
 		$this->load->database();
