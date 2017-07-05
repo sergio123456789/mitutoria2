@@ -11,9 +11,12 @@
 	                            <div class="card-content table-responsive">
 	                              <div id="links" class="section scrollspy">
            						 <div class="collection">
+           						 <?php if (!is_null($asignaturas)): ?>
+           						 	
            						  <?php foreach ($asignaturas as $key => $value) { ?>
            						   <a href="#myModal" id="<?=$value->get('asig_id') ?>" data-toggle="modal" class="Mostrar collection-item"><?=$value->get('asig_nombre') ?></a>
            						   <?php } ?>
+           						 <?php endif ?>
            						 </div>
 	                            </div>
 	                        </div>

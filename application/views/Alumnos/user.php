@@ -160,7 +160,9 @@
 	                                    	<th>Nota Acumulado</th>
 	                                    	<th>Situación</th>
 	                                    </thead>
-	                                    <tbody>
+	                                    <tbody> 
+	                                    <?php if (!isset($asignatura)): ?>
+	                                    	
 	                                    <?php foreach ($asignaturas as $value): ?>
 	                                        <tr>
 	                                        	<td><?=$value->get('asig_cod') ?> <br> <?=$value->get('asig_nombre') ?></td>
@@ -176,6 +178,7 @@
 											</td>
 	                                        </tr>
 	                                         <?php endforeach ?>
+	                                    <?php endif ?>
 	                                       
 	                                    </tbody>
 	                                </table>
