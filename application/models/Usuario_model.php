@@ -443,6 +443,48 @@ function insertperusu(){
 		$this->db->query('update usuario set usu_dispo_estado ='.$estado);
 	}
 
+		public function savePermiso($usuid,$perfid){
+					$this->load->database();		
+					$permisos = array(
+					'per_usu_id' => $usuid,
+					'perf_id'=> $perfid
+					);
+			$this->db->insert('permisos', $permisos);	
+	}
+
+		public function saveAyudante($asigid,$usuid){
+					$this->load->database();		
+					$ayudante = array(
+					'ayu_asig_id' => $asigid,
+					'ayu_usu_id'=> $usuid
+					);
+			$this->db->insert('ayudante', $ayudante);	
+	}
+
+
+		public function findAyudante($usuid){
+		$result = null;
+		$this->load->database();
+		$query ="SELECT *  FROM ayudante 
+			INNER JOIN usuario ON usuario.usu_id = ayudante.ayu_usu_id
+			WHERE usuario.usu_id=".$usuid;
+		$consulta = $this->db->query($query);
+	 	if($consulta -> num_rows() >= 1)
+         {
+         	$row = $consulta->row_object();
+            $result = $this->create($row);
+            return $result; 
+		}
+		return false;
+	}
+
+	function deleteAyudante($id)
+	{
+		$this->db->where('ayu_usu_id',$id);
+		return $this->db->delete('ayudante');
+	}
+
+
 	}
 
 
