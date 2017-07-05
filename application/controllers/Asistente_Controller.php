@@ -117,21 +117,23 @@ public function verReforzamientos(){
 
 
 	public function verProfesor(){
-		$user=$this->session->userdata('logged_in');
-		$usuario = $this->usuario->findById($user['id']);
+		
 		$profe =$this->usuario->getUserByPerfil(4);
 		$area = $this->usuario->getAreaUser();
 		$datitos['profesores'] = $profe;
 		$datitos['area'] = $area;
-		$datitos['usuario'] = $usuario;	
+	
 		$this->layout->view('/Asistente/VerProfesores',$datitos,false);
 	}
 
 		public function verTutor(){
+		$user=$this->session->userdata('logged_in');
+		$usuario = $this->usuario->findById($user['id']);
 		$profe =$this->usuario->getUserByPerfil(3);
 		$asignaturas = $this->asignatura->findAll();
 		$datitos['asignaturas'] = $asignaturas;
 		$datitos['profesores'] = $profe;
+		$datitos['usuario'] = $usuario;	
 		$this->layout->view('/Asistente/VerTutor',$datitos,false);
 	}
 	
@@ -675,17 +677,29 @@ public function verReforzamientos(){
     	redirect('/Asistente_Controller/createTutoria/'.$usu_id,'refresh');
     }
 
+    
     function activarDispo(){
     	$this->usuario->cambiarDispo(0);
     	$this->session->set_flashdata('notice', 'Disponibilidad activada exitósamente');
-    	redirect('Asistente_Controller/verProfesor','refresh');
+    	redirect('Asistente_Controller/verTutorias','refresh');
     }
 
     function desactivarDispo(){
     	$this->usuario->cambiarDispo(1);
     	$this->session->set_flashdata('notice', 'Disponibilidad desactivada exitósamente');
-    	redirect('Asistente_Controller/verProfesor','refresh');
+    	redirect('Asistente_Controller/verTutorias','refresh');
     }
+
+    function activarDispoUsu($usu_id){
+    	$this->usuario->cambiarDispoUsu(0,$usu_id);
+    	$this->session->set_flashdata('notice', 'Disponibilidad activada exitósamente');
+    	redirect('Asistente_Controller/createTutoria/'.$usu_id,'refresh');
+    }
+
+    function desactivarDispoUsu($usu_id){
+    	$this->usuario->cambiarDispoUsu(1,$usu_id);
+    	$this->session->set_flashdata('notice', 'Disponibilidad desactivada exitósamente');
+    	redirect('Asistente_Controller/createTutoria/'.$usu_id,'refresh');    }
 
 
      public function verAsignaturas(){

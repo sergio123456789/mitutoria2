@@ -40,31 +40,7 @@
                               </div>
                               <br>
                                <center>
-                               <script>
-$(function(){
-$("#flip-1").on("change", function(){
-if ($(this).val() == "off")
-{
-$('#dispodel').modal('show');
-}
-else
-{
-$('#dispoactiv').modal('show');
-}
-});
-});
-</script>
-
-<label for="flip-1">Disponibilidad:</label>
-<select name="flip-1" id="flip-1" data-role="slider">
-<option>-----</option>
-<?php if ($usuario->get('usu_dispo_estado') == 1): ?>
-  <option value="on">Activar</option>
-<?php endif ?>
-<?php if ($usuario->get('usu_dispo_estado') == 0): ?>
-<option value="off">Desactivar</option>  
-<?php endif ?>
-</select>
+                             
                                 <button class="btn btn-success" data-toggle="modal" data-target="#new_modal"><i class="fa fa-plus"></i> Añadir Profesor</button>
                               </center>
 
@@ -79,9 +55,6 @@ $('#dispoactiv').modal('show');
                                         <th style="text-align: center;">Correo</th>
                                         <th style="text-align: center;">Rut</th>
                                         <th style="text-align: center;">Ver Asignaturas</th>
-                                        <th style="text-align: center;">Ver Horario</th>
-                                        <th style="text-align: center;">Crear Tutoria </th>
-                                        <th style="text-align: center;">Detalle Notas</th>
                                         <th style="text-align: center;">Editar</th>
                                         <th style="text-align: center;">Eliminar</th>
                                       </thead>  
@@ -97,12 +70,6 @@ $('#dispoactiv').modal('show');
                                                 <center>
                                                 
                                                 <td><a type='button' fakeid="<?=$profe->get('usu_id')?>" fakenombre="<?=$profe->get('usu_nombre')?>" class='btn btn-default editasig'><i class="fa fa-book"></i></a></td>
-                                                
-                                                <td><a type='button' fakeid="<?=$profe->get('usu_id')?>" fakenombre="<?=$profe->get('usu_nombre')?>" class='btn btn-default editcalendario' ><i class="fa fa-calendar"></i></a></td>
-
-                                                <td><a type='button' target="_blank" href="<?=site_url('Asistente_Controller/createTutoria/'.$profe->get('usu_id'))?>" class='btn btn-default crearTutoria' ><i class="fa fa-file"></i></a></td>
-                                                
-                                                <td><a type='button' fakeid="<?=$profe->get('usu_id')?>" fakenombre="<?=$profe->get('usu_nombre')?>" class='btn btn-default editdetalle'><i class="fa fa-eye"></i></a></td>
 
                                                 <td><a type='button' fakeid="<?=$profe->get('usu_id')?>" fakenombre="<?=$profe->get('usu_nombre')?>" class='btn btn-default edittutor' data-toggle='modal' data-target='#edittutor_modal' ><i class="fa fa-pencil"></i></a></td>
                                                  <td style="width: 4px;"><a type='button' fakeid="<?=$profe->get('usu_id')?>" class='btn btn-danger deleteUsr pull-right deleteUsr' data-toggle='modal' data-target='#delete_modal'> <i class="fa fa-user-times" ></i></a></td>
@@ -411,55 +378,7 @@ $('#dispoactiv').modal('show');
 </div>
 <!-- /modal eliminar Tutor -->
 
-<div id="dispodel" class="modal fade " role="dialog" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
 
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
-                </button>
-                <h4 class="modal-title">Desactivar disponibilidad</h4>
-            </div>
-            <div class="modal-body">
-                <h4 style="text-align: center;">¿Seguro/a que desea desactivar la opcion de ingregar disponibilidad en los profesores?</h4><h3 id="modal_name"></h3>
-                <div class="modal-footer">
-                    <div class="col-md-4">
-
-                         <a href="<?=site_url('Asistente_Controller/desactivarDispo')?>"><button id="btnDel" type="button" class="btn btn-danger">Desactivar</button></a>
-                    </div>
-                    <div class="col-md-8">
-                        <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Cancelar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div id="dispoactiv" class="modal fade " role="dialog" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
-                </button>
-                <h4 class="modal-title">Activar disponibilidad</h4>
-            </div>
-            <div class="modal-body">
-                <h4 style="text-align: center;">¿Seguro/a que desea activar la opcion de ingregar disponibilidad en los profesores?</h4><h3 id="modal_name"></h3>
-                <div class="modal-footer">
-                    <div class="col-md-4">
-
-                        <a href="<?=site_url('Asistente_Controller/activarDispo')?>"><button id="btnDel" type="button" class="btn btn-success">Activar</button></a>
-                    </div>
-                    <div class="col-md-8">
-                        <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Cancelar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 
 

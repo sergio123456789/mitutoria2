@@ -116,6 +116,32 @@
                                   <h4 class="title">Disponibilidad del profesor</h4>
                                   <p class="category"><?=$usu->get('usu_nombre')?></p>
                               </div>
+<script>
+$(function(){
+$("#flip-1").on("change", function(){
+if ($(this).val() == "off")
+{
+$('#dispodel').modal('show');
+}
+else
+{
+$('#dispoactiv').modal('show');
+}
+});
+});
+</script>
+                               <center>
+<label for="flip-1">Disponibilidad:
+<select class="form-control" name="flip-1" id="flip-1" data-role="slider">
+<option>-----</option>
+<?php if ($usu->get('usu_dispo_estado') == 1): ?>
+  <option value="on">Activar</option>
+<?php endif ?>
+<?php if ($usu->get('usu_dispo_estado') == 0): ?>
+<option value="off">Desactivar</option>  
+<?php endif ?>
+</select></label>
+</center>
 <style>
 
   #calendar {
@@ -183,5 +209,55 @@
 </div>
 </div>
 </div>
+<div id="dispodel" class="modal fade " role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title">Desactivar disponibilidad</h4>
+            </div>
+            <div class="modal-body">
+                <h4 style="text-align: center;">¿Seguro/a que desea desactivar la opcion de ingregar disponibilidad en los profesores?</h4><h3 id="modal_name"></h3>
+                <div class="modal-footer">
+                    <div class="col-md-4">
+
+                         <a href="<?=site_url('Asistente_Controller/desactivarDispoUsu/'.$usu->get('usu_id'))?>"><button id="btnDel" type="button" class="btn btn-danger">Desactivar</button></a>
+                    </div>
+                    <div class="col-md-8">
+                        <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="dispoactiv" class="modal fade " role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title">Activar disponibilidad</h4>
+            </div>
+            <div class="modal-body">
+                <h4 style="text-align: center;">¿Seguro/a que desea activar la opcion de ingregar disponibilidad en los profesores?</h4><h3 id="modal_name"></h3>
+                <div class="modal-footer">
+                    <div class="col-md-4">
+
+                        <a href="<?=site_url('Asistente_Controller/activarDispoUsu/'.$usu->get('usu_id'))?>"><button id="btnDel" type="button" class="btn btn-success">Activar</button></a>
+                    </div>
+                    <div class="col-md-8">
+                        <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 </div>
 </div>
