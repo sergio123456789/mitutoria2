@@ -48,7 +48,9 @@
 
                                                 <center>
                                                 <td><a type='button' fakeid="<?=$asig->get('asig_id')?>" fakenombre="<?=$asig->get('asig_nombre')?>" class='btn btn-default editAsig'><i class="fa fa-pencil"></i></a></td>
+
                                                  <td style="width: 4px;"><a type='button' fakeid="<?=$asig->get('asig_id')?>" class='btn btn-danger deleteUsr pull-right deleteUsr' data-toggle='modal' data-target='#delete_modal'> <i class="fa fa-user-times" ></i></a></td>
+                                                 
                                                 </center>
                                           </tr>
                                           <?php endforeach; ?>
