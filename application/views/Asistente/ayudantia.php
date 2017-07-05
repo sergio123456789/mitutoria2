@@ -14,9 +14,7 @@
 	                                    	<h3 style="text-align: center;">No hay alumnos ayudantes</h3>
 	                                    <?php }else{?>
 	                                    <button class="btn btn-success pull-right" data-toggle="modal" data-target="#new_modal"><i class="fa fa-plus"></i> Agregar Ayudante</button>
-	                                    <center>
-                                <button class="btn btn-danger" data-toggle="modal" data-target="#new_modal"><i class="fa fa-remove"></i> Deshabilitar Todos los Ayudantes</button>
-                              </center>
+                              <br>
                               <br>
 	                                <table class="table" id="example1" style="text-align: center;">
 	                                    <thead class="text-primary">
@@ -132,9 +130,6 @@
 </div>
 <!-- /modal eliminar Ayudante -->
 
-
-
-
     </div>
     </div>
 
@@ -180,7 +175,5 @@ $("#editasignatura").select2();
             }
         });
   // <==== Fin Eliminar Botón ===>
-
-
 
     </script>

@@ -456,7 +456,8 @@ function insertperusu(){
 					$this->load->database();		
 					$ayudante = array(
 					'ayu_asig_id' => $asigid,
-					'ayu_usu_id'=> $usuid
+					'ayu_usu_id'=> $usuid,
+					'ayu_estado'=>1
 					);
 			$this->db->insert('ayudante', $ayudante);	
 	}

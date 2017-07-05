@@ -181,7 +181,7 @@ public function verReforzamientos(){
     	$imagen='';
 
     	if (isset($nombre)&&isset($rut)&&isset($correo)&&isset($dv)) {
-				
+
 				if($_FILES["photo"]["type"] == 'image/png' || $_FILES["photo"]["type"] == 'image/jpeg' || $_FILES["photo"]["type"] == 'image/jpg'){
 
 						$tmp_name  = $_FILES["photo"]["tmp_name"];
@@ -798,7 +798,9 @@ public function verReforzamientos(){
     	 	}
     	 }
 
-    	 
+    	 public function eliminarAllAyudante(){
+    	 	$this->usuario->deleteAllAyudante();
+    	 }    	 
 
     }
 
