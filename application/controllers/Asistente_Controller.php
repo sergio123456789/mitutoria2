@@ -64,8 +64,9 @@ public function __construct()
 	
 	public function verAyudantia(){
 		$ayudantes = $this->usuario->getAlumAyudantes();
-		$asignaturas = $this->usuario->findAll();
+		$asignaturas = $this->asignatura->findAll();
 		$datitos['ayudantes'] = $ayudantes;
+		$datitos['asignaturas'] = $asignaturas;
 		$this->layout->view('/Asistente/ayudantia.php',$datitos,false);
 	}
 	public function Importar(){
@@ -766,10 +767,38 @@ public function verReforzamientos(){
              $asignatu->save();            
              //redirect('Asistente_Controller/verAsignaturas');
 
-
     	 }
 
+    	 public function agregarAyudante(){
 
+    	 	$rut = $this->input->post('rut');
+    	 	$dv  = $this->input->post('dv');
+    	 	$asignatura = $this->input->post('asignatura');
+    	 	if (isset($rut) && isset($dv) && isset($asignatura)) {
+
+    	 		$usuario = $this->usuario->findByRut($rut);
+    	 		$existe = $this->usuario->getByRutAndPerf(6,$rut);
+    	 		if ($existe == false) {
+                  $this->usuario->savePermiso($usuario->get('usu_id'),6);
+                  $this->usuario->saveAyudante($asignatura,$usuario->get('usu_id'));
+                  redirect('Asistente_Controller/verAyudantia');
+    	 		}else{
+    	 			$this->usuario->saveAyudante($asignatura,$usuario->get('usu_id'));
+    	 		  redirect('Asistente_Controller/verAyudantia');
+    	 		}
+
+    	 	}
+    	 }
+
+    	 public function eliminarAyudante(){
+    	 	$id = $this->input->post('idusu');
+    	 	if (isset($id)) {
+    	 	$this->usuario->deletePermiso($id);
+    	 	$this->usuario->deleteAyudante($id);
+    	 	}
+    	 }
+
+    	 
 
     }
 
