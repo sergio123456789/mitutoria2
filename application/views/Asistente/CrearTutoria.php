@@ -90,7 +90,7 @@
                        <div class="col-lg-12">
                             <label >Asignatura<span class="required">*</span>
                             </label>
-                            <select class="form-control col-md-7 col-xs-12" name="asig">
+                            <select class="form-control col-md-7 col-xs-12" required="required" name="asig">
                             <?php foreach ($asigxprofe as $value) { ?>
                                 <option value="<?=$value->get('asig_id')?>"><?=$value->get('asig_nombre')?></option>
                             <?php } ?>
