@@ -64,6 +64,7 @@ public function __construct()
 	
 	public function verAyudantia(){
 		$ayudantes = $this->usuario->getAlumAyudantes();
+		$asignaturas = $this->usuario->findAll();
 		$datitos['ayudantes'] = $ayudantes;
 		$this->layout->view('/Asistente/ayudantia.php',$datitos,false);
 	}
