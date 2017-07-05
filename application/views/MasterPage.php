@@ -144,6 +144,15 @@
                     </span>
                   </a>
                 </li>
+                 <li class="treeview">
+                  <a href="<?=site_url()?>/Asesor_Controller/miPerfil">
+                    <i class="fa fa-child"></i>
+                    <span>Mi Perfil</span>
+                    <span class="pull-right-container">
+                      <span class="label label-primary pull-right"></span>
+                    </span>
+                  </a>
+                </li>
                   <li class="treeview">
                   <a href="<?=site_url()?>/Asesor_Controller/verAlumnos">
                     <i class="fa fa-user"></i>
@@ -166,6 +175,28 @@
                     <li><a href="<?=site_url()?>/Asesor_Controller/verTutor"><i class="fa fa-graduation-cap"></i>Tutores</a></li>
                     <li><a href="<?=site_url()?>/Asesor_Controller/verTutorProgresion"><i class="fa fa-line-chart"></i>Tutores Progresión</a></li>
                   </ul>
+                </li>
+                 <li class="treeview">
+                  <a href="#">
+                    <i class="fa fa-bookmark-o"></i>
+                    <span>Ayudas</span>
+                    <span class="pull-right-container">
+                      <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                  </a>
+                  <ul class="treeview-menu">
+                    <li><a href="<?=site_url()?>/Asesor_Controller/verTutorias"><i class="fa fa-book"></i>Tutorías</a></li>
+                    <li><a href="<?=site_url()?>/Asesor_Controller/verReforzamientos"><i class="fa  fa-shield"></i>Reforzamientos</a></li>
+                  </ul>
+                </li>
+                 <li class="treeview">
+                  <a href="<?=site_url()?>/Asesor_Controller/verAsignaturas">
+                    <i class="fa fa-list-alt"></i>
+                    <span>Asignaturas</span>
+                    <span class="pull-right-container">
+                      <span class="label label-primary pull-right"></span>
+                    </span>
+                  </a>
                 </li>
                  <li class="treeview">
                   <a href="<?=site_url()?>/Asesor_Controller/Importar">
@@ -191,6 +222,15 @@
                   <a href="<?=site_url()?>/Asistente_Controller/index">
                     <i class="fa fa-home"></i>
                     <span>Inicio</span>
+                    <span class="pull-right-container">
+                      <span class="label label-primary pull-right"></span>
+                    </span>
+                  </a>
+                </li>
+                 <li class="treeview">
+                  <a href="<?=site_url()?>/Asistente_Controller/miPerfil">
+                    <i class="fa fa-child"></i>
+                    <span>Mi Perfil</span>
                     <span class="pull-right-container">
                       <span class="label label-primary pull-right"></span>
                     </span>

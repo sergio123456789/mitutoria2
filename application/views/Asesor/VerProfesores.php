@@ -15,13 +15,12 @@
                                              <div class="card-content table-responsive">
                                   <table id="example1" class="table" style="text-align: center;">
                                       <thead class="text-primary" >
+                                        <th style="text-align: center;">Foto</th>
                                         <th style="text-align: center;">Profesor</th>
                                         <th style="text-align: center;">Correo</th>
                                         <th style="text-align: center;">Rut</th>
                                         <th style="text-align: center;">Ver Asignaturas</th>
                                         <th style="text-align: center;">Ver Horario</th>
-                                        <th style="text-align: center;">Nota Acumulada</th>
-                                        <th style="text-align: center;">Detalle N. Acumulada</th>
 
                                       </thead>  
                                       <tbody>
@@ -29,15 +28,13 @@
                                       <?php foreach ($profesores as $profe) :?>
                                           <tr>
                                             <td rowspan="1"><a href="#pablo">
-                                              <img class="img" src="../../resources/images/marc.jpg" style="width: 42px; height: 42px; border-radius: 50%;" />
-                                               <?=$profe->get('usu_nombre')?></a></td>
+                                              <img class="img" src="../../resources/images/marc.jpg" style="width: 42px; height: 42px; border-radius: 50%;" /></a></td>
+                                               <td><?=$profe->get('usu_nombre')?></td>
                                                 <td><?=$profe->get('usu_correo')?></td>
                                                 <td><?=$profe->get('usu_rut')?>-<?=$profe->get('usu_dv')?></td>
                                                 <center>
                                                 <td><a type='button' fakeid="<?=$profe->get('usu_id')?>" fakenombre="<?=$profe->get('usu_nombre')?>" class='btn btn-default editasig'><i class="fa fa-book"></i></a></td>
                                                 <td><a type='button' fakeid="<?=$profe->get('usu_id')?>" fakenombre="<?=$profe->get('usu_nombre')?>" class='btn btn-default editcalendario' ><i class="fa fa-calendar"></i></a></td>
-                                                <td>70</td>
-                                                <td><a type='button' fakeid="<?=$profe->get('usu_id')?>" fakenombre="<?=$profe->get('usu_nombre')?>" class='btn btn-default editdetalle'><i class="fa fa-eye"></i></a></td>
                                                 </center>
                                           </tr>
                                           <?php endforeach; ?>

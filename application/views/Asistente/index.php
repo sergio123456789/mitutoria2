@@ -40,43 +40,6 @@
         var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
         chart.draw(data, options);
       }
-			google.charts.setOnLoadCallback(drawRightY);
-
-			function drawRightY() {
-			      var data = google.visualization.arrayToDataTable([
-			        ['Área', 'Con Ayudantía', 'Sin Ayudantía'],
-			        ['Informática y Telecomunicaciones', 6754000, 6008000],
-			        ['Construcción', 3792000, 3694000],
-			        ['Mecánica', 2695000, 2896000],
-			        ['Minería y Metalurgia', 2099000, 1953000],
-			        ['Procesos Industriales', 1526000, 1517000]
-			      ]);
-
-			      var materialOptions = {
-			        chart: {
-			          title: '',
-			          subtitle: ''
-			        },
-
-			        chartArea:{left:30,top:20,bottom:20,width:"100%",height:"100%"},
-
-			        hAxis: {
-			          title: 'Total Population',
-			          minValue: 0,
-			        },
-			        vAxis: {
-			          title: 'City'
-			        },
-			        bars: 'vertical',
-			        axes: {
-			          y: {
-			            0: {side: 'left'}
-			          }
-			        }
-			      };
-			      var materialChart = new google.charts.Bar(document.getElementById('chart_div'));
-			      materialChart.draw(data, materialOptions);
-			    }
     </script>	
 
 <br>
@@ -159,11 +122,8 @@
 
 
 
-
-    	<div class="container-fluid">
-
- <center>		
-<div class="col-md-6">
+<center>
+	  <div style=" display: flex; justify-content: center; align-items: center;">
 						<div class="card">
 							<div class="card-header" data-background-color="purple">
 	                                <h4 class="title">Alumnos</h4>
@@ -173,119 +133,4 @@
 	                      
 	                    </div>
 	                    </div>
-	                    </center>
-	                    	
-
-
-	                    	<!-- Modal de eliminar la tutoría-->
-
-	                    		<div class="modal fade" id="deleteModal">
-								<div class="modal-dialog">
-								      <div class="modal-content">
-								        <div class="modal-header">
-								          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-								          <h3 class="modal-title">¿Estas seguro que quieres cancelar tu tutoría?</h3>
-								        </div>
-								        <div class="modal-body">
-										  <h5 class="text-center">Ingresa el motivo</h5>
-										  <textarea class="form-control" rows="5"></textarea>
-										</div>
-								        <div class="modal-footer">
-								        <button type="button" class="btn btn-primary">Enviar</button>
-								        <button type="button" class="btn btn-default " data-dismiss="modal">Cancelar</button>  
-								        </div>
-												
-
-								      </div><!-- /.modal-content -->
-								    </div><!-- /.modal-dialog -->
-								  </div><!-- /.modal -->	
-
-								  <!-- fin Modal de eliminar la tutoría-->
-								  <!-- MODAL AYUDANTÍA COMÚN -->
-						<div class="col-lg-3 col-md-6 col-sm-6">
-								<div class="modal fade" id="myModal">
-								<div class="modal-dialog">
-								      <div class="modal-content">
-								        <div class="modal-header">
-								          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-								          <h3 class="modal-title text-center"> Horarios de Matemática</h3>
-								        </div>
-								        <div class="modal-body">
-										  <div class="navbar-form navbar-right">
-													<i class="material-icons btn btn-white btn-round btn-just-icon">search</i>
-													<input type="text" class="form-control" id="myInput" onkeyup="myFunction()" placeholder="Buscar">
-													<span class="material-input"></span>
-													
-													<div class="ripple-container"></div>
-													
-												</div>
-								          <table class="table table-striped" id="tblGrid">
-								            <thead id="tblHead">
-								              <tr>
-								                <th>Profesor</th>
-								                <th>Sala</th>
-								                <th>Fecha</th>
-								                <th>Inicio</th>
-								                <th>Término</th>
-								              </tr>
-								            </thead>
-								            <tbody>
-
-								              <tr>
-								              <td>
-								              <img class="img" src="../../assets/img/faces/marc.jpg" style="width: 42px; height: 42px; border-radius: 50%;" /> Raúl Silva </td> 
-								              <td>A213</td> 
-								              <td>29/05/17</td> 
-								              <td>10:15</td> <td>12:30</td>
-								              <td><input type="button" class="btn btn-warning btn-sm pull-right" value="Solicitar"></td>
-								              </tr>
-
-								              <tr>
-								              <td><img class="img" src="../../assets/img/faces/marc.jpg" style="width: 42px; height: 42px; border-radius: 50%;" /> Javier Miles</td>
-								              <td>A315</td>
-								              <td>29/05/17</td>
-								              <td>15:15</td> <td>16:30</td> 
-								              <td><input type="button" class="btn btn-warning btn-sm pull-right" value="Solicitar"></td>
-								              </tr>
-                                                <tr>
-								               <td><img class="img" src="../../assets/img/faces/marc.jpg" style="width: 42px; height: 42px; border-radius: 50%;" /> Américo Peréz</td>
-								              <td>B303</td>
-								              <td>03/06/17</td>
-								              <td>10:15</td> <td>12:30</td> 
-								              <td><input type="button" class="btn btn-warning btn-sm pull-right" value="Solicitar"></td>
-								              </tr>
-								            </tbody>
-								          </table>
-								          <div class="form-group">
-								            
-								          </div>
-										</div>
-								        <div class="modal-footer">
-								          <button type="button" class="btn btn-default " data-dismiss="modal">Cancelar</button>
-								        </div>
-												
-
-								      </div><!-- /.modal-content -->
-								    </div><!-- /.modal-dialog -->
-								  </div><!-- /.modal -->
-						</div>
-						<!-- FIN MODAL AYUDANTÍA COMÚN-->
-
-						<div class="col-lg-3 col-md-6 col-sm-6">
-							<div class="card card-stats">
-								
-							</div>
-						</div>
-						<div class="col-lg-3 col-md-6 col-sm-6">
-							<div class="card card-stats">
-								
-							</div>
-						</div>
-
-						<div class="col-lg-3 col-md-6 col-sm-6">
-							<div class="card card-stats">
-								
-								</div>
-							</div>
-						
-
+</center>

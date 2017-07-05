@@ -53,6 +53,22 @@ public function __construct()
 
 		$this->layout->view('/Asistente/index.php',$datitos,false);	}
 
+
+	public function miPerfil()
+	{
+		$user=$this->session->userdata('logged_in');
+		$usuario = $this->usuario->findById($user['id']);
+		$alumno = $this->alumno->findByName('alu_usu_id',$user['id']);
+		$asignaturas = $this->asignatura->miasignaturas($user['id']);
+		
+		$datos['usuario'] = $usuario;
+		$datos['alumno'] = $alumno;
+		$datos['asignaturas'] = $asignaturas;
+
+		$this->layout->view('/Asistente/user.php',$datos,false);
+	}
+
+
 	public function verAlumnos(){
 		$this->layout->view('/Asistente/VerAlumno.php');
 	}
@@ -814,7 +830,28 @@ public function verReforzamientos(){
 
     	 public function eliminarAllAyudante(){
     	 	$this->usuario->deleteAllAyudante();
-    	 }    	 
+    	 }
+
+
+
+    	public function cambiarContra()
+	{
+		if ((!empty($_POST['pass']))|| (!empty($_POST['cpass'])) ) {
+		
+			if ($_POST['pass'] == $_POST['cpass']) {
+				$pass = $_POST['pass'];
+				$user=$this->session->userdata('logged_in');
+				$this->usuario->cambiarcontra($user['id'],sha1($pass));
+
+				$this->session->set_flashdata('notice', 'contraseña actualizada');
+				redirect('/Asistente_Controller/miPerfil','refresh');
+			}
+			$this->session->set_flashdata('alert', 'contraseña no coinciden');
+			redirect('/Asistente_Controller/miPerfil','refresh');
+		}
+		$this->session->set_flashdata('alert', 'Los campos están vacíos');
+		redirect('/Asistente_Controller/miPerfil','refresh');
+	}    	 
 
     }
 

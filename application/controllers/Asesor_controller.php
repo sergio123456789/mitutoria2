@@ -7,12 +7,15 @@ class Asesor_Controller extends CI_Controller {
 	{
 		parent::__construct();
 		$this->layout->setLayout('/MasterPage',false);
-		$this->load->model('Usuario_model','usuario',true);
+		$this->load->model('Usuario_model','usuario',true);		
 		$this->load->model('Alumno_model','alumno',true);
 		$this->load->model('Calificacion_model','calificacion',true);
 		$this->load->model('Tutoria_model','tutoria',true);
 		$this->load->model('Disponibilidad_model','disponibilidad',true);
 		$this->load->model('Horario_model','horario',true);
+		$this->load->model('Asignatura_model','asignatura',true);
+		$this->load->model('Profesor_model','profesor',true);
+		$this->load->model('Datos_model','datos',true);
 	}
 	public function index()
 	{
@@ -46,6 +49,23 @@ class Asesor_Controller extends CI_Controller {
 		$datitos['countalumnos'] = $countalumnos;
 		$this->layout->view('/Asesor/index.php',$datitos,false);
 	}
+
+		public function miPerfil()
+	{
+		$user=$this->session->userdata('logged_in');
+		$usuario = $this->usuario->findById($user['id']);
+		$alumno = $this->alumno->findByName('alu_usu_id',$user['id']);
+		$asignaturas = $this->asignatura->miasignaturas($user['id']);
+		
+		$datos['usuario'] = $usuario;
+		$datos['alumno'] = $alumno;
+		$datos['asignaturas'] = $asignaturas;
+
+		$this->layout->view('/Asesor/user.php',$datos,false);
+	}
+
+
+
 
 	public function verAlumnos(){
 		$this->layout->view('/Asesor/VerAlumno.php');
@@ -117,10 +137,21 @@ public function verReforzamientos(){
 		$this->layout->view('/Asesor/VerTutores.php',$datitos,false);
 	}
 	
+	  public function verAsignaturas(){
+
+    	 	$asignaturas = $this->asignatura->findAll();
+    	 	$carrera = $this->datos->findAll();
+    	 	$datitos['carrera'] = $carrera;
+    	 	$datitos['asignaturas'] = $asignaturas;
+			$this->layout->view('/Asesor/verAsignaturas',$datitos,false);
+
+    	 }
 	
 	public function verTutorProgresion(){
 		$profe =$this->usuario->getUserByPerfil(7);
+		$area = $this->usuario->getAreaUser();
 		$datitos['profesores'] = $profe;
+		$datitos['area'] = $area;
 		
 		$this->layout->view('/Asesor/VerTutoresProgresion.php',$datitos,false);
 	}	
@@ -152,6 +183,29 @@ public function verReforzamientos(){
     	$datosDis = $this->disponibilidad->findByIdUsu($id);
     	echo json_encode($datosDis);
     }
+
+
+    	public function cambiarContra()
+	{
+		if ((!empty($_POST['pass']))|| (!empty($_POST['cpass'])) ) {
+		
+			if ($_POST['pass'] == $_POST['cpass']) {
+				$pass = $_POST['pass'];
+				$user=$this->session->userdata('logged_in');
+				$this->usuario->cambiarcontra($user['id'],sha1($pass));
+
+				$this->session->set_flashdata('notice', 'contraseña actualizada');
+				redirect('/Asesor_Controller/miPerfil','refresh');
+			}
+			$this->session->set_flashdata('alert', 'contraseña no coinciden');
+			redirect('/Asesor_Controller/miPerfil','refresh');
+		}
+		$this->session->set_flashdata('alert', 'Los campos están vacíos');
+		redirect('/Asesor_Controller/miPerfil','refresh');
+	}
+
+
+
 
 }
 
