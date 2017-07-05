@@ -157,6 +157,12 @@
       </div>
       <!-- /.row -->
 
+
+
+
+    	<div class="container-fluid">
+
+ <center>		
 <div class="col-md-6">
 						<div class="card">
 							<div class="card-header" data-background-color="purple">
@@ -167,64 +173,8 @@
 	                      
 	                    </div>
 	                    </div>
-
-
-
-    	<div class="container-fluid">
-					<div class="row">
-					 <div class="col-md-12">
-						<div class="card">
-							<div class="card-header" data-background-color="purple">
-	                                <h4 class="title">Rendimiento ayudantías</h4>
-	                                <p class="category">Acá puedes visualizar el rendimiento por área </p>
-	                            </div>	
-									<p> <div id="chart_div" style="width: 90%; height: 400px;"></div> </p>
-	                    </div>
-	                    </div>
-	                    	<div class="card">
-	                            <div class="card-header" data-background-color="purple">
-	                                <h4 class="title"> Profesores con más tutorías </h4>
-	                            </div>
-	                            <div class="card-content table-responsive">
-	                                <table class="table table-hover" style="text-align: center;">
-	                                    <thead class="text-warning">
-	                                        <th style="text-align: center;">Profesor</th>
-	                                    	<th style="text-align: center;">Rut</th>
-	                                    	<th style="text-align: center;">Tutorías</th>
-	                                    	<th style="text-align: center;">Meta</th>
-	                                    </thead>
-	                                    <tbody>
-	                                        <tr>
-	                                        	<td>Pedro Fuenzalida</td>
-	                                        	<td>19546366-2</td>
-	                                        	<td>120</td>
-	                                        	<td> <div class="progress">
-                    <div class="progress-bar" style="width: 80%"></div>
-                  </div>80%
-
-	                                        	</td>
-	                                        	</tr>
-	                                   <tr>
-	                                        	<td>Javier Miles</td>
-	                                        	<td>19229705-2</td>
-	                                        	<td>60</td>
-	                                        	<td><div class="progress">
-                    <div class="progress-bar" style="width: 51%"></div>
-                  </div>51%</td>
-	                                        </tr>
-	                                        <tr>
-	                                        	<td>Américo Pérez</td>
-	                                        	<td>10324967-K</td>
-	                                        	<td>20</td>
-	                                        	<td><div class="progress">
-                    <div class="progress-bar" style="width: 13%"></div>
-                  </div>13%</td>
-	                                        </tr>
-	                               
-	                                    </tbody>
-	                                </table>
-	                            </div>
-	                        </div>
+	                    </center>
+	                    	
 
 
 	                    	<!-- Modal de eliminar la tutoría-->
