@@ -7,8 +7,7 @@
 									<p class="category">Recuerda sólo puedes cambiar tu clave</p>
 	                            </div>
 	                            <div class="card-content">
-	                            <?php foreach ($usuario as $usu){ ?>
-	                            	<?php if ($usu->get('usu_id')==$user['id']){ ?>
+	                  
 	                            		
 	                            	<form>
 	                                    <div class="row">
@@ -82,8 +81,7 @@
 	                                    <button type="submit" class="btn btn-primary pull-right">Cambiar contraseña</button>
 	                                    <div class="clearfix"></div>
 	                                </form>
-	                                <?php } ?>
-	                                <?php } ?>
+	                             
 	                           
 	                            </div>
 	                        </div>

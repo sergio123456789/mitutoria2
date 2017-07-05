@@ -24,10 +24,12 @@ class Profesor_Controller extends CI_Controller {
 
 	}
     public function miPerfil()
-	{  $datitos["profesor"]=$this->profesor->findAll();
+	{  
+		$usua =$this->session->userdata('logged_in');
+		$datitos["profesor"]=$this->profesor->findAll();
 	   $datitos['horario']=$this->horario->findAll();
 	   $datitos["asignatura"]=$this->asignatura->findAll();
-	   $datitos["usuario"]=$this->usuario->findAll();
+	   $datitos["usu"]=$this->usuario->findById($usua['id']);
 	   $datitos["area"]=$this->area->findAll();
 	   $datitos["user"]=$this->session->userdata('logged_in');
 		$this->layout->view('/Profesor/perfil.php',$datitos,false);
