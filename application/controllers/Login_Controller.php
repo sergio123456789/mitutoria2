@@ -122,6 +122,27 @@ class Login_Controller extends CI_Controller {
 	    else
 	        return false;
 	}
+	public function Reiniciarclave()
+	{
+
+		if(isset($_REQUEST['rut']) && isset($_REQUEST['Correo']))
+		{
+			$correo = $_REQUEST['Correo'];
+			$rut = explode("-", $_REQUEST['rut']);
+			$rut1 =$rut[0];
+			$rut2 =$rut[1];
+			$usuario = $this->usuario->ValidasionfindAllBy($rut1,$rut2,$correo);
+			
+			if (!is_null($usuario) && isset($usuario) ) {
+				$this->usuario->cambiarcontra($usuario->get('usu_id'),"123456");
+				$datos['error']="contraseña Reiniciada";
+					$this->load->view('login',$datos);
+			}
+		}else{
+				$datos['error']="Datos incorrectos";
+					$this->load->view('login',$datos);
+	}
+}
 }
 
 /* End of file Login.php */

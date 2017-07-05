@@ -1,11 +1,11 @@
-	<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <!--================================================================================
-	Item Name: Materialize - Material Design Admin Template
-	Version: 3.1
-	Author: GeeksLabs
-	Author URL: http://www.themeforest.net/user/geekslabs
+  Item Name: Materialize - Material Design Admin Template
+  Version: 3.1
+  Author: GeeksLabs
+  Author URL: http://www.themeforest.net/user/geekslabs
 ================================================================================ -->
 
 
@@ -40,7 +40,13 @@
   <!-- INCLUDED PLUGIN CSS ON THIS PAGE -->
   <link href="<?=base_url()?>resources/js/plugins/prism/prism.css" type="text/css" rel="stylesheet" media="screen,projection">
   <link href="<?=base_url()?>resources/js/plugins/perfect-scrollbar/perfect-scrollbar.css" type="text/css" rel="stylesheet" media="screen,projection">
-  
+  <script>
+      $(document).ready(function(){
+    // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+    $('.modal-trigger').leanModal();
+  });
+
+  </script>
 </head>
 
 <body class="cyan">
@@ -66,7 +72,7 @@
         <form action="<?=site_url('Login_Controller/login')?>" method="post" class="login-form">
         <div class="row margin">
           <div class="input-field col s12">
-            <input name="user" type="text">
+            <input maxlength="10"  name="user" type="text" autofocus>
             <label for="Usuario" class="center-align">Usuario </label>
           </div>
         </div>
@@ -78,12 +84,56 @@
         </div>
         <div class="row">
           <div class="input-field col s12">
+          <?php if (isset($error)): ?>
+            <?=$error ?>
+          <?php endif ?>
             <input type="submit" class="btn waves-effect waves-light col s12" velue="Entrar">
             
           </div>
           </div>
           </form>
+<?php if (isset($error) ): ?>
+      <div class="row section">
+            <div class="col input-field col s12">
+ 
+    <a class="waves-effect waves-light col s12 btn modal-trigger" href="#modal1">Recuperar Contraseña</a>
+    
+     </div>
+      </div>
+
+<?php endif ?>
+      
+<div id="modal1" class="modal " style="max-width: 360px; max-height:100% ">
+  <div class="modal-content"  >
+    <h4>Reiniciar contraseña </h4>
+    
+   <form action="<?=site_url('Login_Controller/Reiniciarclave')?>" method="post" class="login-form">
+        <div class="row margin">
+          <div class="input-field ">
+            <input   name="Correo" required="required" type="text" autofocus>
+            <label for="Usuario" class="center-align">Correo institucional </label>
+          </div>
+        </div>
+        <div class="row margin">
+          <div class="input-field ">
+            <input maxlength="10"  name="rut" required="required" type="text" autofocus>
+            <label for="Usuario" class="center-align">Rut </label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12  ">
+         
+            <input type="submit" class="btn waves-effect waves-light col s12" velue="Entrar">
+            
+          </div>
+          </div>
+          </form>
+  </div>
+  <div class="modal-footer">
+  </div>
+</div>
     </div>
+
   </div>
 
 

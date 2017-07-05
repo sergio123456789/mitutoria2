@@ -28,7 +28,32 @@ class Usuario_model extends CI_Model {
 			'prof_usu_id' =>0
 		);
 
-
+	public function findAllBy($column = null, $value =""){
+		$this->load->database();
+		$res = $this->db->get_where('usuario',array($_column =>$value));
+		if ($res->num_rows() > 0) {
+			foreach ($res->result() as $value) {
+				$result[] = $this->create($value);
+			}
+		}
+		return $result;
+    }	
+    public function ValidasionfindAllBy($rut,$dv,$correo){
+    
+    	$result = null ;
+		$this->load->database();
+		$this->db->select('*');
+		$this->db->from('usuario');
+		$this->db->where('usu_rut', $rut);
+		$this->db->where('usu_dv', $dv);
+		$this->db->where('usu_correo', $correo);
+		$res=$this->db->get('');
+		if ($res->num_rows() == 1) {
+				$result = $this->create($res->row_object());
+			}
+			
+			return $result;
+    }
 	public function createper($row){
 		$per =  new Usuario_model();
 		foreach ($row as $key => $value) {

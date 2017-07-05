@@ -51,7 +51,7 @@ class Alumno_Controller extends CI_Controller {
 	//ESTA MIERDA GUARDA UNA NUEVA LISTA A CADA RATO 
 	  $row = array( 
 	 'lis_id' => 0,
-     'lis_fecha' =>'',
+     'lis_fecha' => date('Y/m/d') ,
      'lis_usu_id' =>$user["id"],
      'lis_usu_asistido' =>1,
      'lis_estado' =>1,
@@ -81,7 +81,6 @@ class Alumno_Controller extends CI_Controller {
     	$motivo = $_POST["motivo"];
     	$row = array(
 		 'lis_id' =>$id,
-	     'lis_fecha' =>'',
 	     'lis_usu_id' =>$user["id"],
 	     'lis_usu_asistido' =>0,
 	     'lis_estado' =>3,
