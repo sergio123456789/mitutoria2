@@ -74,7 +74,7 @@ class Login_Controller extends CI_Controller {
 	   //query the database
 	   if($this->valida_rut($user)){
 		   	$rut = explode("-",$user);
-		   	$user = $this->usuario->login($rut[0], $pass); // trae verdadero si encuentra los datos user y pass en la bd
+		   	$user = $this->usuario->login($rut[0], sha1($pass)); // trae verdadero si encuentra los datos user y pass en la bd
 	   }else{
 	   		$user = null;
 	   }

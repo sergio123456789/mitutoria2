@@ -113,7 +113,7 @@ class Alumno_Controller extends CI_Controller {
 
 	public function cambiarContra()
 	{
-		if ((!empty($_POST['pass']))|| (!empty($_POST['pass'])) ) {
+		if ((!empty($_POST['pass']))|| (!empty($_POST['cpass'])) ) {
 		
 			if ($_POST['pass'] == $_POST['cpass']) {
 				$pass = $_POST['pass'];
