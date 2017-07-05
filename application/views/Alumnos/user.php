@@ -157,7 +157,6 @@
 	                                <table class="table table-hover">
 	                                    <thead>
 	                                        <th>Asignatura</th>
-	                                    	<th>Nota Acumulado</th>
 	                                    	<th>Situación</th>
 	                                    </thead>
 	                                    <tbody> 
@@ -166,7 +165,6 @@
 	                                    <?php foreach ($asignaturas as $value): ?>
 	                                        <tr>
 	                                        	<td><?=$value->get('asig_cod') ?> <br> <?=$value->get('asig_nombre') ?></td>
-	                                        	<td>6.6</td>
 	                                        	<td>
 											<?php if ($value->get('asig_situacion') == 0 ){ ?>
 												Reprobado

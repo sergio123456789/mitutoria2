@@ -451,9 +451,12 @@ public function findByProfesor($id=null){
 		return false;
 	}	
 		
-	
 	public function cambiarDispo($estado){
 		$this->db->query('update usuario set usu_dispo_estado ='.$estado);
+	}
+
+	public function cambiarDispoUsu($estado,$usu_id){
+		$this->db->query('update usuario set usu_dispo_estado ='.$estado.' where usu_id='.$usu_id);
 	}
 
 		public function savePermiso($usuid,$perfid){
