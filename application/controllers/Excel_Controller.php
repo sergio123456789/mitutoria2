@@ -32,7 +32,7 @@ public function UsuarioUploader(){
                     $usu = array(
                     'usu_nombre' => $datos['13'],
                     'usu_correo' => $datos['15'],
-                    'usu_pass' => '123456',
+                    'usu_pass' => sha1('123456'),
                     'usu_estado' => '1',
                     'usu_are_id' => $arid,
                     'usu_rut' => $rut,

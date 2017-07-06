@@ -118,7 +118,7 @@ class Alumno_Controller extends CI_Controller {
 			if ($_POST['pass'] == $_POST['cpass']) {
 				$pass = $_POST['pass'];
 				$user=$this->session->userdata('logged_in');
-				$this->usuario->cambiarcontra($user['id'],$pass);
+				$this->usuario->cambiarcontra($user['id'], sha1($pass));
 
 				echo "contraseña actualizada";
 				$this->session->set_flashdata('notice', 'contraseña actualizada');
