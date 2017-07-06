@@ -31,6 +31,48 @@ class Tutor_Controller extends CI_Controller {
 		
 		$this->layout->view('/Tutor/user.php',$datos,false);
 	}
+	public function test()
+    {
+    	$user = $this->session->userdata('logged_in');
+    	$datosDis = $this->disponibilidad->findByIdUsu($user['id']);
+    	echo json_encode($datosDis);
+    }
+	 function deleteevento($id = null)
+    { if(!is_null($id)){
+            $route = $this->disponibilidad->findById($id);
+            if($route){
+                $route->delete();
+            }
+        }
+        $this->load->view('/Tutor/mihorario');
+    }
+	 public function insertDispo(){
+        $user = $this->session->userdata('logged_in');
+        $data["error"] = "";
+        if ((isset($_POST['inicio']) && isset($_POST['fin'])) || isset($_POST['dia'])) {
+           if (!empty($_POST['inicio']) && !empty($_POST['fin'])) {
+ 
+            if ($_POST['inicio'] >= '08:00' && $_POST['fin'] <= '23:00' && $_POST['inicio'] < $_POST['fin'] ) {
+          $row = array(
+            'dis_dia' =>  $_POST['dia'],
+            'dis_hi' => '2018/01/'.$_POST['dia'].' '.$_POST['inicio'],
+            'dis_ht' => '2018/01/'.$_POST['dia'].' '.$_POST['fin'],
+            'dis_usu_id' => $user['id']
+                );
+               $datos = $this->disponibilidad->create($row);
+               $datos->insert(); 
+
+        }else{
+            $data["error"] = "Horario no Admitido";
+           }
+        }
+
+      $this->load->view('/Tutor/mihorario.php',$data,false);
+        }else {
+        $data["error"] = "Porfavor seleccione almenos un horario de disponibilidad";
+    }
+    }
+	
 	public function cambiarContra()
 	{
 		if ((!empty($_POST['pass']))|| (!empty($_POST['pass'])) ) {
@@ -52,26 +94,16 @@ class Tutor_Controller extends CI_Controller {
 	}
 	public function cancelar(){
     	$user=$this->session->userdata('logged_in');
-    	$alu=$this->alumno->findAlumnsBytutor($user['id']);
-    	
     	$id = $_POST["id"];
     	$motivo = $_POST["motivo"];
-    	var_dump($alu);
-//si el metodo entrega un array siempre manipular los datos con foreach dentro del controller
-foreach ($alu as $value) {
-	
-
     	$row = array(
 		 'lis_id' =>$id,
-	     'lis_fecha' =>$value->get('hor_fechasis'),
-	     'lis_usu_id'=>$value->get('alu_id'),
-	     'lis_usu_cancelado'=>$user['id'],
+	     'lis_fecha' =>'',
+	     'lis_usu_id' =>$user["id"],
 	     'lis_usu_asistido' =>0,
 	     'lis_estado' =>3,
 	     'lis_comentario' =>$motivo
 	     );
-
-}
      $id_lista = $this->lista->findhorarioByIdLista($id);	    	
 	 $horario = $this->horario->findById($id_lista->get("hor_id"));
 	 $horario->set('hor_estado' , 0);
@@ -86,59 +118,50 @@ foreach ($alu as $value) {
 	{
 		$this->load->view('/Tutor/mihorario.php','datos',false);
 	}
-	public function test()
-    {
-    	$user = $this->session->userdata('logged_in');
-    	$datosDis = $this->disponibilidad->findByIdUsu($user['id']);
-    	echo json_encode($datosDis);
-    }
-    function deleteevento($id = null)
-    { if(!is_null($id)){
-            $route = $this->disponibilidad->findById($id);
-            if($route){
-                $route->delete();
-            }
-        }
-        $this->load->view('/Tutor/mihorario');
-    }
-    public function insertDispo(){
-        $user = $this->session->userdata('logged_in');
-        $data["error"] = "";
-        if ((isset($_POST['inicio']) && isset($_POST['fin'])) || isset($_POST['dia'])) {
-           if (!empty($_POST['inicio']) && !empty($_POST['fin'])) {
-        
-            if ($_POST['inicio'] >= '08:00' && $_POST['fin'] <= '23:00' && $_POST['inicio'] < $_POST['fin'] ) {
-          $row = array(
-            'dis_dia' =>  $_POST['dia'],
-            'dis_hi' => '2018/01/'.$_POST['dia'].' '.$_POST['inicio'],
-            'dis_ht' => '2018/01/'.$_POST['dia'].' '.$_POST['fin'],
-            'dis_usu_id' => $user['id']
-                );
-               $datos = $this->disponibilidad->create($row);
-               $datos->insert(); 
-
-        }else{
-            $data["error"] = "Horario no Admitido";
-           }
-        }
-
-      $this->load->view('/Tutor/mihorario.php',$data,false);
-        }else {
-        $data["error"] = "Porfavor seleccione almenos un horario de disponibilidad";
-    }
-    }
      public function misRamos()
 	{
 		$user=$this->session->userdata('logged_in');
 		$asignatura=$this->asignatura->misasignaturas2($user['id']);
         $datos['profesor']=$asignatura;
-        
-		$this->layout->view('/Tutor/misramos.php',$datos,false);
-
+		$this->layout->view('/Tutor/misramos.php','datos',false);
 	}
       public function solReforzamientos()
 	{
 		$this->layout->view('/Tutor/solreforzamiento.php','datos',false);
+	}
+
+	function lista(){
+		$rutA = $_POST["rut"];
+		$rut = substr($rutA, 0, 8);
+		$usu = $this->tutor->findByRutJSON($rut);
+		$newJSON = array();
+	   	foreach ($usu as $key => $value) {
+	   		$newJSON [] = json_encode($usu[$key]);
+	   	}
+	   	header('Content-Type: application/json');
+	    echo json_encode(array("estado" =>true,"mensaje"=>"Se ha actualizado correctamente","equipo" => $newJSON ),true);
+	}
+	function createLista(){
+		$datos=$this->input-post();
+		$alumnos=$datos['alumnos'];
+		foreach ($alumnos as $key => $value) {
+
+			$row = array(
+			 'lis_id' =>$id,
+		     'lis_fecha' =>'',
+		     'lis_usu_id' =>$value,
+		     'lis_usu_asistido' =>1,
+		     'lis_estado' =>1,
+		     'lis_comentario' =>$motivo
+		     );
+
+			 $id_lista = $this->lista->findhorarioByIdLista($id);	    	
+			 $horario = $this->horario->findById($id_lista->get("hor_id"));
+			 $horario->set('hor_estado' , 0);
+			 $horario->save();
+
+
+		}
 	}
 }
 

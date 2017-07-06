@@ -24,12 +24,10 @@ class Profesor_Controller extends CI_Controller {
 
 	}
     public function miPerfil()
-	{  
-		$usua =$this->session->userdata('logged_in');
-		$datitos["profesor"]=$this->profesor->findAll();
+	{  $datitos["profesor"]=$this->profesor->findAll();
 	   $datitos['horario']=$this->horario->findAll();
 	   $datitos["asignatura"]=$this->asignatura->findAll();
-	   $datitos["usu"]=$this->usuario->findById($usua['id']);
+	   $datitos["usuario"]=$this->usuario->findAll();
 	   $datitos["area"]=$this->area->findAll();
 	   $datitos["user"]=$this->session->userdata('logged_in');
 		$this->layout->view('/Profesor/perfil.php',$datitos,false);
@@ -40,9 +38,43 @@ class Profesor_Controller extends CI_Controller {
 	   $datitos["user"]=$this->session->userdata('logged_in');
 		$this->layout->view('/Profesor/historial.php',$datitos,false);
 	}
+	public function SolicitudReforzamiento(){
+     $user = $this->session->userdata('logged_in');
+     //$hor=$this->horario->findHorarioByProfesor($user['id']);
+		if((!empty($_POST['dia']))||(!empty($_POST['inicio']))||(!empty($_POST['termino']))||
+		      (!empty($_POST['sala']))||(!empty($_POST['fecha']))||(!empty($_POST['elegirAsig']))){
+			$dia=$_POST['dia'];
+			$inicio=$_POST['inicio'];
+			$termino=$_POST['termino'];
+			$sala=$_POST["sala"];
+			$fecha=$_POST["fecha"];
+			$asig=$_POST["elegirAsig"];
+
+			//foreach ($hor as $value) {
+				$row=array(
+				'hor_id' =>'',
+                'hor_dia' =>$dia,
+                'hor_inicio' =>$inicio,
+                'hor_termino' =>$termino,
+			    'hor_fechasis' =>$fecha,
+			    'hor_usu_id' =>$user['id'],
+			    'hor_sala' =>$sala,
+			    'hor_asig_id' =>$asig,
+			    'hor_estado' =>0,
+			    'hor_tipo' =>2
+			    );
+			//}
+
+			$horario=$this->horario->create($row);
+			$horario->save();
+			redirect('Profesor_Controller/refor');
+			
+
+		}
+	}
   
       public function refor()
-	{$datitos["asignatura"]=$this->asignatura->findAll();
+	{ $datitos["asignatura"]=$this->asignatura->findAll();
 		$this->layout->view('/Profesor/reforzamiento.php',$datitos,false);
 	}
 	  public function hcancelar(){
@@ -53,30 +85,22 @@ class Profesor_Controller extends CI_Controller {
 		$horid  = intval($idhor);
 		$datos = $this->horario->cancelar($horid);
 		redirect('Profesor_Controller/index');
-		
-		
-
 	}
-	public function haceptar(){
-
-		
-
+	public function haceptar(){	
 		$idhor 	= $this->input->post('idhor');
 		$horid  = intval($idhor);
 		$datos = $this->horario->aceptar($horid);
 		redirect('Profesor_Controller/index');
-		
-		
-
 	}
+
 	public function cambiarcon(){
 		$idusu 	= $this->input->post('conid');
 		$usuid  = intval($idusu);
 		$newcon = $this->input->post('nuecon');
 		 $datos = $this->usuario->cambiarcontra($usuid,$newcon);
 		redirect('Profesor_Controller/miPerfil');
-
 	}
+
 	public function createdispo()
     {
 	$this->layout->view('/Profesor/CrearDisponibilidad.php',"cscs",false);
@@ -95,7 +119,6 @@ public function test()
         
             if ($_POST['inicio'] >= '08:00' && $_POST['fin'] <= '23:00' && $_POST['inicio'] < $_POST['fin'] ) {
           $row = array(
-            'dis_nombre' => "Disponibilidad",
             'dis_dia' =>  $_POST['dia'],
             'dis_hi' => '2018/01/'.$_POST['dia'].' '.$_POST['inicio'],
             'dis_ht' => '2018/01/'.$_POST['dia'].' '.$_POST['fin'],
@@ -109,9 +132,9 @@ public function test()
            }
         }
 
-      $this->load->view('/Alumnos/CrearDisponibilidad.php',$data,false);
+      $this->layout->view('/Profesor/CrearDisponibilidad.php',$data,false);
         }else {
-        $data["error"] = "Porfavor seleccione almenos un horario de disponibilidad";
+        $data["error"] = "Porfavor seleccione un horario de disponibilidad";
     }
     }
 
@@ -122,7 +145,8 @@ public function test()
                 $route->delete();
             }
         }
-        $this->load->view('/Alumnos/CrearDisponibilidad');
+        $this->layout->view('/Profesor/CrearDisponibilidad');
     }
+    
 
 }?>

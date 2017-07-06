@@ -65,7 +65,7 @@
 
       });
     }); 
-    <?php if ($user["dispo"] == 0): ?>
+
     $(document).on('click','#delete',function(){
       var id = $(this).prop('name');
       $('#confirm').modal({
@@ -74,7 +74,6 @@
       var link2 = "<?=site_url('Profesoe_Controller/borrarEvento')?>"+"/"+id;
       $('#deleteRoute').attr("href",link2);
     });  
-    <?php endif ?>
   });
 
 </script>
@@ -94,7 +93,6 @@
 
 <div class="container-fluid">
   <div class="row">
-     <?php if ($user["dispo"] == 0): ?>
      <div class="col-xs-12 col-md-3">
        <div class="col-md-3 col-xs-12" >
         <?php if (isset($error) ){ ?>
@@ -141,7 +139,6 @@
 </div>
 </div>
      </div>
-   <?php endif ?>
   <div class="col-xs-12 col-md-9">
             <div id="calendar"></div>
         <div class="form-footer">

@@ -209,6 +209,12 @@ function insertperusu(){
 			}
 			return $result;
 	}
+	public function findByRutJSON($rut = null){
+		$this->load->database();
+		$this->db->where('usu_rut',$rut);
+		$res = $this->db->get('usuario');
+		return $res->result_array();
+	}
 	public function cambiarcontra($id,$usu_pass){
         $data  =  array(
 			'usu_pass' => $usu_pass

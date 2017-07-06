@@ -349,15 +349,7 @@
                   </a>
                 </li>
 
-                <li class="treeview">
-                  <a href="<?=site_url()?>/Tutor_Controller/solReforzamientos">
-                    <i class="fa fa-graduation-cap"></i>
-                    <span>Solicitar Reforzamientos</span>
-                    <span class="pull-right-container">
-                      <span class="label label-primary pull-right"></span>
-                    </span>
-                  </a>
-                </li>                  
+                                 
                     <?php } ?>
                     <?php if ((in_array(4, $user['permisos'])) ) { ?>
                          <li class="treeview">
@@ -396,7 +388,7 @@
                     </span>
                   </a>
                 </li>
-                <li class="treeview">
+               <!-- <li class="treeview">
                   <a href="<?=site_url()?>/Profesor_Controller/refor">
                     <i class="fa fa-list-alt"></i>
                     <span>Solicitar Reforzamiento</span>
@@ -404,7 +396,7 @@
                       <span class="label label-primary pull-right"></span>
                     </span>
                   </a>
-                </li>
+                </li>-->
                     <?php } ?>
                     <?php if ((in_array(5, $user['permisos']))|| in_array(6, $user['permisos']))  { ?>
                               <li class="treeview">

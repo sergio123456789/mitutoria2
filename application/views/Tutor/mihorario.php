@@ -35,7 +35,7 @@
 </style>
 <script>
   $(document).ready(function() {
-    $.post('<?php echo site_url('Alumno_Controller/test');?>',
+    $.post('<?php echo site_url('Tutor_Controller/test');?>',
       function(data){
     $('#calendar').fullCalendar({
       locale:'es',
@@ -62,7 +62,7 @@
       eventClick: function(event) {
         var aceptar = confirm("¿ Está seguro de quitar esta Disponibilidad ?");
         if(aceptar){
-          location.href="<?=site_url('Alumno_Controller/deleteevento')?>"+"/"+event.id;
+          location.href="<?=site_url('Tutor_Controller/deleteevento')?>"+"/"+event.id;
         }
       }
 
@@ -85,7 +85,7 @@
 <div class="card-body">
         <div class="section">
           <div class="section-body">
-          <form class="form form-horizontal" action="<?=site_url('Alumno_Controller/insertDispo')?>" method="post" id="remind">
+          <form class="form form-horizontal" action="<?=site_url('Tutor_Controller/insertDispo')?>" method="post" id="remind">
          <div class="section">
 
           <div class="section-title">Definir Disponibilidad</div>

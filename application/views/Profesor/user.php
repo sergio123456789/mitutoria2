@@ -1,5 +1,34 @@
 <link rel="stylesheet" href="<?=base_url('resources/bootstrap/css/style.css')?>"><div class="container-fluid">
 	                <div class="row">
+	                 <!-- MENSAJES DE OPERACIONES -->
+                              <div class="messages">
+                 <?php $notice = $this->session->flashdata('notice');
+                       $alert = $this->session->flashdata('alert'); 
+                       $info = $this->session->flashdata('info'); 
+                  ?>
+                    <?php if($notice){?>
+                <div class="alert alert-success alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <h4><i class="icon fa fa-check"></i> Éxito!</h4>
+                  <?=$notice?>
+                </div>
+                     <?php } ?>
+                      <?php if($alert){ ?>
+                        <div class="alert alert-danger alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <h4><i class="icon fa fa-ban"></i> Error!</h4>
+                            <?=$alert?>
+                        </div> 
+                     <?php } ?>
+                      <?php if($info){ ?>
+                        <div class="alert alert-info alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <h4><i class="icon fa fa-info"></i> Información!</h4>
+                            <?=$info?>
+                        </div>
+                     <?php } ?>
+
+                </div>
 	                    <div class="col-md-8">
 	                        <div class="card">
 	                            <div class="card-header" data-background-color="purple">
