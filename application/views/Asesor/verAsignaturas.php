@@ -20,7 +20,9 @@
                                         <th style="text-align: center;">Estado</th>
                                       </thead>  
                                       <tbody>
-
+                                      <?php if (is_null($asignaturas)): ?>
+                                        <h3 style="text-align: center;">No existe registros de asignaturas</h3>
+                                    <?php else: ?>
                                       <?php foreach ($asignaturas as $asig) :?>
                                           <tr>
                                             <td>
@@ -44,6 +46,7 @@
                                           <?php endforeach; ?>
                                       </tbody>
                                   </table>
+                                   <?php endif ?>
                               </div>
                                           </div>
                                       </div>
