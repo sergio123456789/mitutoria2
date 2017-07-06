@@ -1,9 +1,3 @@
-<!--A Design by W3layouts
-Author: W3layout
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -15,7 +9,7 @@ body{
 	font-family: 'Capriola', sans-serif;
 }
 body{
-	background:#DAD6CC;
+	background:white;
 }	
 .wrap{
 	margin:0 auto;
@@ -23,13 +17,13 @@ body{
 }
 .logo h1{
 	font-size:200px;
-	color:#FF7A00;
+	color:red;
 	text-align:center;
 	margin-bottom:1px;
 	text-shadow:4px 4px 1px white;
 }	
 .logo p{
-	color:#B1A18D;;
+	color:gray;
 	font-size:20px;
 	margin-top:1px;
 	text-align:center;
@@ -38,7 +32,7 @@ body{
 	color:lightgreen;
 }	
 .sub a{
-	color:#ff7a00;
+	color:red;
 	text-decoration:none;
 	padding:5px;
 	font-size:13px;
@@ -57,14 +51,13 @@ body{
 </style>
 </head>
 
-
 <body>
 	<div class="wrap">
 		<div class="logo">
-			<h1>404</h1>
+			<h1>404 :(</h1>
 			<p> Lo sentimos , pagina no encontrada!</p>
 			<div class="sub">
-			   <p><a href="#">Regresar a inicio</a></p>
+			   <p><a href="javascript:history.back(-1);">Regresar a la pagina anterior</a></p>
 			</div>
 		</div>
 	</div>
