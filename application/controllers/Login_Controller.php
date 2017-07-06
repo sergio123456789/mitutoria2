@@ -134,7 +134,7 @@ class Login_Controller extends CI_Controller {
 			$usuario = $this->usuario->ValidasionfindAllBy($rut1,$rut2,$correo);
 			
 			if (!is_null($usuario) && isset($usuario) ) {
-				$this->usuario->cambiarcontra($usuario->get('usu_id'),"123456");
+				$this->usuario->cambiarcontra($usuario->get('usu_id'),sha1("123456"));
 				$datos['error']="contraseña Reiniciada";
 					$this->load->view('login',$datos);
 			}
