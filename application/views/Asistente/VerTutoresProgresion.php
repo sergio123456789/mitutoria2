@@ -33,12 +33,12 @@
 
                                       <?php foreach ($profesores as $profe) :?>
                                           <tr>
-                                                 <?php if($profe->get('user_foto') == null || $profe->get('user_foto') == ''){?>
+                                                 <?php if($profe->get('usu_foto') == null || $profe->get('usu_foto') == ''){?>
                                                  <td><a href="#pablo">
                                               <img class="img" src="../../resources/images/marc.jpg" style="width: 42px; height: 42px; border-radius: 50%;" /></a></td>
                                               <?php }else{?>
                                               <td><a href="#pablo">
-                                              <img class="img" src="../../resources/images/TutorProgresion/<?=$profe->get('user_foto')?>" style="width: 42px; height: 42px; border-radius: 50%;" /></a></td>
+                                              <img class="img" src="../../resources/images/TutorProgresion/<?=$profe->get('usu_foto')?>" style="width: 42px; height: 42px; border-radius: 50%;" /></a></td>
                                               <?php } ?>
                                                 <td><?=$profe->get('usu_nombre')?></td>
                                                 <td><?=$profe->get('usu_correo')?></td>
