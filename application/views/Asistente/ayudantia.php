@@ -35,7 +35,7 @@
                                               <img class="img" src="../../resources/images/marc.jpg" style="width: 42px; height: 42px; border-radius: 50%;" /></td>
 	                                        	<?php }else{?>
 	                                        	  <td>
-                                              <img class="img" src="../../resources/images/<?=$ayu->get('usu_foto')?>" style="width: 42px; height: 42px; border-radius: 50%;" /></td>
+                                              <img class="img" src="../../resources/images/Alumnos/<?=$ayu->get('usu_foto')?>" style="width: 42px; height: 42px; border-radius: 50%;" /></td>
 	                                        	<?php } ?>
 	                                        	<td><?=$ayu->get('usu_nombre')?></td>
 	                                        	<td><?=$ayu->get('usu_rut').'-'.$ayu->get('usu_dv')?></td>
