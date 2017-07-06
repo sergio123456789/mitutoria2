@@ -24,7 +24,7 @@
 	                                     <?php if (!empty($horario)): ?>
 	                                    <?php foreach ($horario as $hor){ ?>
 	                                        <?php if ($hor->get('hor_usu_id')==$user['id']){ ?>
-	                                        <?php if ($hor->get('hor_estado')<2){ ?>
+	                                        <?php if ($hor->get('hor_estado')<2){ ?>   <!--hora if -->
                                                     <tr>
                                                
 	                                        
@@ -37,7 +37,7 @@
     								        <td><?=$asi->get('asig_nombre')?></td>		
     								        	<?php } ?>	
     								        <?php } ?>
-    								        <?php if ($hor->get('hor_estado')==0){ ?>
+    								        <?php if ($hor->get('hor_estado')==0){ ?><!--acaaaa-->
     								        <td>pendiente</td>
     								        <td>
 												<button type="button" id="btnAce" fakeid="<?=$hor->get('hor_id')?>" class="btn btn-success btn-simple btn-xs aceptarhor">
@@ -56,13 +56,13 @@
 												 <td></td>
 												 <td></td>
 
-												 	<?php }?>
+												 	<?php }?><!-- aqui esta -->
 												 	
 												 <?php }?>
     								       
 												
 </tr>
-	     <?php } ?> 
+	     <?php } ?> <!--aqui esta if hora estado -->
           <?php } ?>  
 
  <?php } ?>

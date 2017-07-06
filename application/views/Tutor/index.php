@@ -15,7 +15,8 @@
 	                                    	<th style="text-align: center;">Alumno</th>
 	                                    	<th style="text-align: center;">Fecha</th>
 	                                    	<th style="text-align: center;">Inicio</th>
-	                                    	<th style="text-align: center;">Término</th>											
+	                                    	<th style="text-align: center;">Término</th>
+	                                    	<th style="text-align: center;">Estado</th>											
 											<th style="text-align: center;">Confirmar</th>
 											<th style="text-align: center;">Cancelar</th>
 
@@ -23,20 +24,27 @@
 	                                    <tbody>
 	                                  <?php if (!empty($alumnos)): ?>
 	                                       <?php foreach ($alumnos as $value) { ?>
+	                                       <?php if ($value->get('hor_estado')<3){ ?>
 	                                        <tr>
 	                                           <td><?=$value->get('asig_nombre')  ?></td>	                                               	
 	                                           <td ><a>
     									
-    								</a><?=$value->get('usu_nombre') ?>    								
+    								         </a><?=$value->get('usu_nombre') ?>    								
     								           </td>   								
     								           <td><?=$value->get('hor_fechasis') ?></td>
     								           <td><?=$value->get('hor_inicio')?></td>
     								           <td><?=$value->get('hor_termino')?></td>
+    								           <?php if ($value->get('hor_estado')==0){ ?>
+    								           <td>pendiente</td>
+    								           <?php }else if($value->get('hor_estado')==1){?>
+    								           <td>confirmado</td>
+                                               <?php }?>
     								           <td>
-		                   <button type="button" rel="tooltip" title="Confirmar" id="<?=$value->get('lis_id')?>" href="#acceptModal" data-toggle="modal" class="btn btn-success btn-simple btn-xs cancelar">
+		                  <button type="button" rel="tooltip" title="Confirmar" id="<?=$value->get('lis_id')?>" href="#acceptModal" data-toggle="modal" class="btn btn-success btn-simple btn-xs cancelar">
                     							<i class="fa fa-check-circle"></i>
                     							</button>
-												</td>	
+												</td>
+
 												<td>
 		                   <button type="button" rel="tooltip" title="Cancelar" id="<?=$value->get('lis_id')?>" href="#deleteModal" data-toggle="modal" class="btn btn-danger btn-simple btn-xs cancelar">
                     							<i class="fa fa-times"></i>
@@ -45,6 +53,7 @@
 												
 
 	                                        </tr>
+	                                        <?php } ?>
 	                                        <?php } ?>
 										<?php endif ?>
 
@@ -56,7 +65,7 @@
 								      <div class="modal-content">
 								        <div class="modal-header">
 								          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-								          <h3 class="modal-title" style="text-align:center;" >¿Estas seguro que quieres cancelar tu tutoría?</h3>
+								         <h3 class="modal-title" style="text-align:center;" >¿Estas seguro que quieres cancelar tu tutoría?</h3>
 								        </div>
 								        <div class="modal-body">
 								         <form method="post" action="<?=site_url('Tutor_Controller/cancelar')?>">
@@ -83,7 +92,8 @@
 								          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 								          <h3 class="modal-title" style="text-align:center;" >Ingrese Rut de alumnos asistentes</h3>
 								        </div>
-								    <form method="post" action="<?=site_url('Tutor_Controller/cancelar')?>">
+								    <form method="post" action="<?=site_url('Tutor_Controller/createlista')?>">
+								    <input type="text" name="id" hidden="visible"  id="agregar_empresa" value="agregar_empresa">
 								        <div class="modal-body"
 								         <label>Rut: 
 								         <input type="rutAlum" placeholder="Ingrese rut de alumnos" name="rutAl" class="form-control" id="rut">
@@ -92,7 +102,7 @@
 								   	<div class="modal-footer" id="cansel">
 								        <button type="button" class="btn btn-info" id="validar" > <i class="fa fa-check-square"></i> Validar</button>
 								        
-								        <button type="button" class="btn btn-success" id="guardar"><i class="fa fa-save"></i> Guardar</button>
+								        <button type="submit" class="btn btn-success" id="guardar"><i class="fa fa-save"></i> Guardar</button>
 								   </div>
 								    <select locked="locked" name="alumnos[]" id="alumnos" class="js-example-tokenizer form-control select2-hidden-accessible"  multiple="" tabindex="-1" aria-hidden="true" style="width: 100%">
 								     </select>
@@ -119,7 +129,12 @@
     	$(".cancelar").click(function(){
 					var id = $(this).attr('id');
 					$("#eliminar_empresa").val(id);
+					$("#agregar_empresa").val(id);
 				});
+    	
+
+
+
     	var myarr = new Array();
     	var myarrDos = new Array();
   

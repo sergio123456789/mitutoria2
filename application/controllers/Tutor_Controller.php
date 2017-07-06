@@ -94,19 +94,28 @@ class Tutor_Controller extends CI_Controller {
 	}
 	public function cancelar(){
     	$user=$this->session->userdata('logged_in');
+    	$alu=$this->alumno->findAlumnsBytutor($user['id']);
+    	
     	$id = $_POST["id"];
     	$motivo = $_POST["motivo"];
+//si el metodo entrega un array siempre manipular los datos con foreach dentro del controller
+foreach ($alu as $value) {
+	
+
     	$row = array(
 		 'lis_id' =>$id,
-	     'lis_fecha' =>'',
-	     'lis_usu_id' =>$user["id"],
+	     'lis_fecha' =>$value->get('hor_fechasis'),
+	     'lis_usu_id'=>$value->get('alu_id'),
+	     'lis_usu_cancelado'=>$user['id'],
 	     'lis_usu_asistido' =>0,
 	     'lis_estado' =>3,
 	     'lis_comentario' =>$motivo
 	     );
+
+}
      $id_lista = $this->lista->findhorarioByIdLista($id);	    	
 	 $horario = $this->horario->findById($id_lista->get("hor_id"));
-	 $horario->set('hor_estado' , 0);
+	 $horario->set('hor_estado' , 3);
 	 $horario->save();
 
     	$lista = $this->lista->create($row);
@@ -142,8 +151,9 @@ class Tutor_Controller extends CI_Controller {
 	    echo json_encode(array("estado" =>true,"mensaje"=>"Se ha actualizado correctamente","equipo" => $newJSON ),true);
 	}
 	function createLista(){
-		$datos=$this->input-post();
-		$alumnos=$datos['alumnos'];
+		$datos=$_POST['alumnos'];
+		$id=$_POST['id'];
+		$alumnos=$datos;
 		foreach ($alumnos as $key => $value) {
 
 			$row = array(
@@ -152,13 +162,14 @@ class Tutor_Controller extends CI_Controller {
 		     'lis_usu_id' =>$value,
 		     'lis_usu_asistido' =>1,
 		     'lis_estado' =>1,
-		     'lis_comentario' =>$motivo
+		     'lis_comentario' =>'clase realizada'
 		     );
 
 			 $id_lista = $this->lista->findhorarioByIdLista($id);	    	
 			 $horario = $this->horario->findById($id_lista->get("hor_id"));
-			 $horario->set('hor_estado' , 0);
+			 $horario->set('hor_estado' , 1);
 			 $horario->save();
+			 redirect('Tutor_Controller/index');
 
 
 		}

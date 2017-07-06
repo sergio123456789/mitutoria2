@@ -1,4 +1,6 @@
-<link rel="stylesheet" href="<?=base_url('resources/bootstrap/css/style.css')?>"><div class="container-fluid">
+<link rel="stylesheet" href="<?=base_url('resources/bootstrap/css/style.css')?>">
+<div class="container-fluid">
+	
 	                <div class="row">
 	                 <!-- MENSAJES DE OPERACIONES -->
                               <div class="messages">
@@ -96,24 +98,31 @@
 						<div class="col-md-4" style="margin-top:5%;">
     						<div class="card card-profile">
     							<div class="card-avatar">
-    								<a href="#pablo">
-    									<img class="img" src="../../resources/images/marc.jpg" />
-    								</a>
+    							<?php if($tutores->get('usu_foto') == null || $tutores->get('usu_foto') == ''){?>
+                                <a href="#">
+								<img class="img" src="../../resources/images/marc.jpg">
+								</a>  	
+								<?php }else{?>
+								<a href="#" >
+								<img class="img" src="<?=site_url().RUTA_FOTO_TUTOR.$tutores->get('usu_foto')?>">
+								</a>  
+								<?php } ?>
+    								
     							</div>
 
     							<div class="content">
     								
-    								<h4 class="card-title">Gabriel Vega</h4>
+    								<h4 class="card-title"><?=$tutores->get('usu_nombre') ?></h4>
     								<p class="card-content">
     									 <div class="card-content table-responsive">
 	                                <table class="table table-hover">
 	                                    <thead>
-	                                        <th>Asignaturas</th>
+	                                        <th>TUTORIAS</th>
 	                                    	
 	                                    </thead>
 	                                    <tbody>
 	                                        <tr>
-	                                        	<td>ZC0207-Contabilidad, Costos y Presupuestos(61)</td>
+	                                        	<td></td>
 	                                        </tr>
 	                                        
 	                                    </tbody>
