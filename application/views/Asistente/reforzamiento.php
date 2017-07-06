@@ -18,6 +18,10 @@
 	                                    	<th style="text-align: center;">Estado</th>
 	                                    </thead>
 	                                    <tbody>
+
+	                                    <?php if($reforzamientos == null || $reforzamientos == ''){?>
+	                                    	<h3 style="text-align: center;">No hay registro de reforzamientos</h3>
+	                                    <?php }else{?>
 	                                    <?php foreach ($reforzamientos as $refor) { ?>	
 	                                        <tr>
 
@@ -38,6 +42,7 @@
     							                <td><span class="label label-success">Realizada</span></td>
     							                <?php } ?>
 	                                        </tr>
+	                                   <?php } ?>
 	                                   <?php } ?>
 	                                    </tbody>
 	                                </table>

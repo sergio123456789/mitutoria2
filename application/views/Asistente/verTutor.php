@@ -84,7 +84,9 @@ $('#dispoactiv').modal('show');
                                         <th style="text-align: center;">Eliminar</th>
                                       </thead>  
                                       <tbody>
-
+                                        <?php if (is_null($profesores)) {?>
+                                      <h3 style="text-align: center;">No hay registros de Profesores</h3>
+                                      <?php }else{ ?>
                                       <?php foreach ($profesores as $profe) :?>
                                           <tr>
                                                  <?php if($profe->get('usu_foto') == null || $profe->get('usu_foto') == ''){?>
@@ -113,6 +115,7 @@ $('#dispoactiv').modal('show');
                                           <?php endforeach; ?>
                                       </tbody>
                                   </table>
+                                  <?php } ?>
                               </div>
                                           </div>
                                       </div>
@@ -275,12 +278,12 @@ $('#dispoactiv').modal('show');
                           <div class="col-lg-4">
                             <label >Rut<span class="required">*</span>
                             </label>
-                            <input type="text" id="rut" name="rut"  required="required" class="form-control col-md-7 col-xs-12">
+                            <input type="text" id="rut" name="rut"  maxlength="9" required="required" class="form-control col-md-7 col-xs-12">
                         </div>
                         <div class="col-lg-2">
                             <label >Digito V.<span class="required">*</span>
                             </label>
-                            <input type="text" id="dv" name="dv"  required="required" class="form-control col-md-7 col-xs-12">
+                            <input type="text" id="dv" name="dv" maxlength="1" required="required" class="form-control col-md-7 col-xs-12">
                         </div>
 
                         <div class="col-lg-6">
@@ -351,12 +354,12 @@ $('#dispoactiv').modal('show');
                           <div class="col-lg-4">
                             <label >Rut<span class="required">*</span>
                             </label>
-                            <input type="text" id="editrut" name="editrut"  required="required" class="form-control col-md-7 col-xs-12">
+                            <input type="text" id="editrut" name="editrut" maxlength="9" required="required" class="form-control col-md-7 col-xs-12">
                         </div>
                         <div class="col-lg-2">
                             <label >Digito V.<span class="required">*</span>
                             </label>
-                            <input type="text" id="editdv" name="editdv"  required="required" class="form-control col-md-7 col-xs-12">
+                            <input type="text" id="editdv" name="editdv" maxlength="1" required="required" class="form-control col-md-7 col-xs-12">
                         </div>
 
                        

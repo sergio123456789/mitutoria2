@@ -59,7 +59,9 @@
                                         <th style="text-align: center;">Eliminar</th>
                                       </thead>  
                                       <tbody>
-
+                                      <?php if (is_null($profesores)) {?>
+                                      <h3 style="text-align: center;">No hay registros de Profesores</h3>
+                                      <?php }else{ ?>
                                       <?php foreach ($profesores as $profe) :?>
                                           <tr>
                                                
@@ -84,6 +86,7 @@
                                           <?php endforeach; ?>
                                       </tbody>
                                   </table>
+                                  <?php } ?>
                               </div>
                                           </div>
                                       </div>

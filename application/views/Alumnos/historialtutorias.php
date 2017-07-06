@@ -6,7 +6,7 @@
 	                        <div class="card" style="margin-top:5%;">
 	                            <div class="card-header" data-background-color="purple">
 	                                <h4 class="title">Historial de Tutorías</h4>
-	                                <p class="category">Acá puedes ver tu historial completo de tutorías</p>
+	                                <p class="category">Acá puedes ver tu historial completo de tutorías asistidas</p>
 	                            </div>
 	                            <div class="card-content table-responsive">
 	                                <table class="table" style="text-align: center;">

@@ -18,6 +18,10 @@
 	                                    	<th style="text-align: center;">Estado</th>
 	                                    </thead>
 	                                    <tbody>
+	                                   <?php if (is_null($tutorias)){?>
+	                                   <h3 style="text-align: center;">No hay registros de tutorías</h3>
+	                                   <?php }else{ ?>
+
 	                                    <?php foreach ($tutorias as $tur) { ?>	
 	                                        <tr>
 
@@ -41,6 +45,8 @@
 	                                   <?php } ?>
 	                                    </tbody>
 	                                </table>
+
+	                                   <?php } ?>
 
 	                            </div>
 	                        </div>

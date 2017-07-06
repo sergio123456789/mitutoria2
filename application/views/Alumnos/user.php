@@ -167,8 +167,10 @@
 							          	
 	                                <table class="table table-hover">
 	                                    <thead>
-	                                        <th>Asignatura</th>
-	                                    	<th>Situación</th>
+	                                        	
+	                                        <th style="text-align: center;">Asignatura</th>
+
+	                                    
 	                                    </thead>
 	                                    <tbody> 
 	                                    <?php if (!isset($asignatura)): ?>
@@ -176,15 +178,7 @@
 	                                    <?php foreach ($asignaturas as $value): ?>
 	                                        <tr>
 	                                        	<td><?=$value->get('asig_cod') ?> <br> <?=$value->get('asig_nombre') ?></td>
-	                                        	<td>
-											<?php if ($value->get('asig_situacion') == 0 ){ ?>
-												Reprobado
-											<?php } elseif ($value->get('asig_situacion') == 1) { ?>
-												En riesgo
-											<?php }elseif ($value->get('asig_situacion')== 2) {?>
-											Sin riesgos
-											<?php } ?> 
-											</td>
+	                                     
 	                                        </tr>
 	                                         <?php endforeach ?>
 	                                    <?php endif ?>

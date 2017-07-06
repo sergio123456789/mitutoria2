@@ -56,7 +56,13 @@
 	                                       <?php foreach ($tutoria as $key => $value) { ?>
 	                                        <tr>
 	                                        	<td><?=$value->get('asig_nombre')?></td>
-<td><a target="_blank" href="<?=site_url('/Alumno_Controller/mostrarProfe/'.$value->get('usu_id'))?>"><img class="img" src="<?=$value->get('usu_foto')?>" style="width: 42px; height: 42px;border-radius: 50%;" /> </a> <?=$value->get('usu_nombre')?> </td>
+	                                        	<?php if ($value->get('usu_foto') == null || $value->get('usu_foto') == '') { ?>
+	                                        	 <td><a href="#pablo">
+                                              <img class="img" src="../../resources/images/marc.jpg" style="width: 42px; height: 42px; border-radius: 50%;" /></a></td>
+	                                        	<?php }else{?>
+<td><a target="_blank" href="<?=site_url('/Alumno_Controller/mostrarProfe/'.$value->get('usu_id'))?>"><img class="img" src="../../resources/images/Profesor/<?=$value->get('usu_foto')?>" style="width: 42px; height: 42px;border-radius: 50%;" /> </a> <?=$value->get('usu_nombre')?> </td>
+	                                        	<?php } ?>
+
 	                                        	<td><?=$value->get('lis_fecha')?></td>
 	                                        	<td><?=$value->get('hor_inicio')?></td>
 	                                        	<td><?=$value->get('hor_termino')?></td>
@@ -232,4 +238,12 @@
 					var id = $(this).attr('id');
 					$("#eliminar_empresa").val(id);
 				});
+
+				  $(function () {
+        setTimeout(function() {
+            $(".messages").fadeOut(3000);
+        },3000);
+
+    });
+
 			</script>

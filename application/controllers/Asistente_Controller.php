@@ -248,6 +248,7 @@ public function verReforzamientos(){
 	                        $profe->saveProfAsig();
 							}
 						}
+						 redirect('Asistente_Controller/verTutor','refresh');
                        
 					}
 

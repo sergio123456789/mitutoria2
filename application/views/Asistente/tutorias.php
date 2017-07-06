@@ -18,6 +18,9 @@
 	                                    	<th style="text-align: center;">Estado</th>
 	                                    </thead>
 	                                    <tbody>
+	                                    <?php if($tutorias == null || $tutorias == ''){?>
+	                                    	<h3 style="text-align: center;">No hay registro de tutorías</h3>
+	                                    <?php }else{?>
 	                                    <?php foreach ($tutorias as $tur) { ?>	
 	                                        <tr>
 
@@ -38,6 +41,7 @@
     							                <td><span class="label label-success">Realizada</span></td>
     							                <?php } ?>
 	                                        </tr>
+	                                   <?php } ?>
 	                                   <?php } ?>
 	                                    </tbody>
 	                                </table>
