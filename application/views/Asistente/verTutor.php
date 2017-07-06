@@ -87,8 +87,13 @@ $('#dispoactiv').modal('show');
 
                                       <?php foreach ($profesores as $profe) :?>
                                           <tr>
-                                                <td><a href="#pablo">
+                                                 <?php if($profe->get('user_foto') == null || $profe->get('user_foto') == ''){?>
+                                                 <td><a href="#pablo">
                                               <img class="img" src="../../resources/images/marc.jpg" style="width: 42px; height: 42px; border-radius: 50%;" /></a></td>
+                                              <?php }else{?>
+                                              <td><a href="#pablo">
+                                              <img class="img" src="../../resources/images/Tutor/<?=$profe->get('user_foto')?>" style="width: 42px; height: 42px; border-radius: 50%;" /></a></td>
+                                              <?php } ?>
                                                 <td><?=$profe->get('usu_nombre')?></td>
                                                 <td><?=$profe->get('usu_correo')?></td>
                                                 <td><?=$profe->get('usu_rut')?>-<?=$profe->get('usu_dv')?></td>

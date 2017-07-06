@@ -6,7 +6,7 @@
 </a>  	
 <?php }else{?>
 <a href="#_" class="lightbox" id="pablo">
-<img src="<?=$usuario->get('usu_foto')?>">
+<img src="../../resources/images/Asesor/<?=$usuario->get('usu_foto')?>">
 </a>  
 <?php } ?>	
     <?php $user=$this->session->userdata('logged_in'); ?>
@@ -147,13 +147,12 @@
 									</a>  	
 									<?php }else{?>
 									<a href="#">
-									<img src="../../resources/images/<?=$usuario->get('usu_foto')?>">
+									<img src="../../resources/images/Asesor/<?=$usuario->get('usu_foto')?>">
 									</a>  
 									<?php } ?>	
     							</div>
 
     							<div class="content">
-    								<h6 class="category text-gray">Semestre <?=$alumno->get('alu_semestre') ?></h6>
     								<h4 class="card-title"><?=$usuario->get('usu_nombre') ?></h4>
     								<p class="card-content">
     							</div>

@@ -209,7 +209,7 @@ public function verReforzamientos(){
 						$punto = ".";
 						$img =  $rut;
 						$imagen = $img.$punto.$extension;
-						$ruta = "./resources/images/profilephotos/{$imagen}";
+						$ruta = "./resources/images/Tutor/{$imagen}";
 						move_uploaded_file($tmp_name, $ruta);
 
 					}else{
@@ -277,7 +277,7 @@ public function verReforzamientos(){
 						$punto = ".";
 						$img =  $rut;
 						$imagen = $img.$punto.$extension;
-						$ruta = "./resources/images/profilephotos/Profesor/{$imagen}";
+						$ruta = "./resources/images/Profesor/{$imagen}";
 						move_uploaded_file($tmp_name, $ruta);
 
 					}else{
@@ -331,7 +331,7 @@ public function verReforzamientos(){
 						$punto = ".";
 						$img =  $rut;
 						$imagen = $img.$punto.$extension;
-						$ruta = "./resources/images/profilephotos/TutorProgresion/{$imagen}";
+						$ruta = "./resources/images/TutorProgresion/{$imagen}";
 						move_uploaded_file($tmp_name, $ruta);
 
 					}else{
@@ -359,7 +359,7 @@ public function verReforzamientos(){
                        $usuario->insertperusu();
                        $ret=$usuario->get('usu_id'); 
 					}
-					redirect('Asistente_Controller/verTutor','refresh');
+					redirect('Asistente_Controller/verTutorProgresion','refresh');
 
     		}
     	}
@@ -384,8 +384,8 @@ public function verReforzamientos(){
 						$punto = ".";
 						$img =  $rut;
 						$imagen = $img.$punto.$extension;
-						$ruta = "./resources/images/profilephotos/Tutor/{$imagen}";
-						unlink("./resources/images/profilephotos/Tutor/{$imagen}"); 
+						$ruta = "./resources/images/Tutor/{$imagen}";
+						unlink("./resources/images/Tutor/{$imagen}"); 
 						clearstatcache(); 	
 						move_uploaded_file($tmp_name, $ruta);
 
@@ -418,7 +418,7 @@ public function verReforzamientos(){
 							}
                 }
 
-                redirect('Asistente_Controller/verTutorProgresion','refresh');
+                redirect('Asistente_Controller/verTutor','refresh');
 
 				}else{
 					return "revisar campos requeridos";
@@ -446,8 +446,8 @@ public function verReforzamientos(){
 						$punto = ".";
 						$img =  $rut;
 						$imagen = $img.$punto.$extension;
-						$ruta = "./resources/images/profilephotos/TutorProgresion/{$imagen}";
-						unlink("./resources/images/profilephotos/TutorProgresion/{$imagen}"); 
+						$ruta = "./resources/images/TutorProgresion/{$imagen}";
+						unlink("./resources/images/TutorProgresion/{$imagen}"); 
 						clearstatcache(); 	
 						move_uploaded_file($tmp_name, $ruta);
 
@@ -499,8 +499,8 @@ public function verReforzamientos(){
 						$punto = ".";
 						$img =  $rut;
 						$imagen = $img.$punto.$extension;
-						$ruta = "./resources/images/profilephotos/TutorProgresion/{$imagen}";
-						unlink("./resources/images/profilephotos/TutorProgresion/{$imagen}"); 
+						$ruta = "./resources/images/Profesor/{$imagen}";
+						unlink("./resources/images/Profesor/{$imagen}"); 
 						clearstatcache(); 	
 						move_uploaded_file($tmp_name, $ruta);
 

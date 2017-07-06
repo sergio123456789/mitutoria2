@@ -1,8 +1,14 @@
 <link rel="stylesheet" href="<?=base_url('resources/bootstrap/css/style.css')?>">
 <div class="container-fluid">
+<?php if($usuario->get('usu_foto') == null || $usuario->get('usu_foto') == ''){?>
 <a href="#_" class="lightbox" id="pablo">
-<img src="<?=$usuario->get('usu_foto')?> ">
-</a> 
+<img src="../../resources/images/marc.jpg">
+</a>  	
+<?php }else{?>
+<a href="#_" class="lightbox" id="pablo">
+<img src="../../resources/images/Profesor/<?=$usuario->get('usu_foto')?>">
+</a>  
+<?php } ?>
 	                <div class="row">
 	                    <div class="col-md-8">
 	                        <div class="card">
@@ -43,9 +49,15 @@
 						<div class="col-md-4" style="margin-top:5%;">
     						<div class="card card-profile">
     							<div class="card-avatar">
-    								<a href="#pablo">
-    									<img class="img" src="<?=$usuario->get('usu_foto') ?>" />
-    								</a>
+    								<?php if($usuario->get('usu_foto') == null || $usuario->get('usu_foto') == ''){?>
+									<a href="#">
+									<img src="../../resources/images/marc.jpg">
+									</a>  	
+									<?php }else{?>
+									<a href="#">
+									<img src="../../resources/images/Profesor/<?=$usuario->get('usu_foto')?>">
+									</a>  
+									<?php } ?>	
     							</div>
 
     							<div class="content">
