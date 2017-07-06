@@ -55,7 +55,7 @@
 									</a>  	
 									<?php }else{?>
 									<a href="#">
-									<img src="../../resources/images/Profesor/<?=$usuario->get('usu_foto')?>">
+									<img src="<?=base_url().RUTA_FOTO_PROFE.$usuario->get('usu_foto')?>">
 									</a>  
 									<?php } ?>	
     							</div>

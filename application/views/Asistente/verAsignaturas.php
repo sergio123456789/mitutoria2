@@ -9,12 +9,16 @@
                                   <p class="category">Acá puedes buscar, editar y añadir Asignaturas</p>
                               </div>
                               <br>
-                              <button class="btn btn-success" style="margin-left:1%;" data-toggle="modal" data-target="#new_modal"><i class="fa fa-plus"></i> Añadir Asignatura </button>
+                              <center>
+                              <button class="btn btn-success" style="margin-left:1%;" data-toggle="modal" data-target="#new_modal"><i class="fa fa-plus"></i> Añadir Asignatura </button></center>
 
                               <div class="card-content table-responsive" style="float: center;">
                                       <div class="row">
                                           <div class="col-xs-12">
                                              <div class="card-content table-responsive">
+                                              <?php if (is_null($asignaturas)): ?>
+                                        <h3 style="text-align: center;">No existe registros de asignaturas</h3>
+                                    <?php else: ?>
                                   <table id="example1" class="table" style="text-align: center;">
                                       <thead class="text-primary" >
                                         <th style="text-align: center;">Nombre</th>
@@ -25,6 +29,7 @@
                                         <th style="text-align: center;">Eliminar</th>
                                       </thead>  
                                       <tbody>
+                                     
 
                                       <?php foreach ($asignaturas as $asig) :?>
                                           <tr>
@@ -56,6 +61,7 @@
                                           <?php endforeach; ?>
                                       </tbody>
                                   </table>
+                                <?php endif ?>
                               </div>
                                           </div>
                                       </div>

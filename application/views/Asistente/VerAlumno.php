@@ -17,7 +17,7 @@
                         <div class="col-lg-4">
                             <label>Rut<span class="required">*</span>
                             </label>
-                            <input type="text" id="rut" name="rut"  required="required" maxlength="8" class="form-control col-md-5 col-xs-12">
+                            <input type="text" id="rut" name="rut" required="required" maxlength="8" class="form-control col-md-5 col-xs-12">
                         </div>
                         <div class="col-md-3">
                             <label>Dv<span class="required">*</span>
